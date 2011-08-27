@@ -27,9 +27,9 @@ var chat = {
         var that = this;
         
         this.inputMessage.keydown(function ( event ) {
-            if (event.keyCode === 13) {
-                var message = $( this ).val();
-                
+            var message = $( this ).val();
+
+            if (event.keyCode === 13 && message) {
                 that.onMessageSent( message );
                 that.scrollToBottom();
                 that.clearInput();
@@ -37,8 +37,10 @@ var chat = {
         });
 
         this.inputUserName.keydown(function ( event ) {
-            if (event.keyCode === 13) {
-                that.onUserNameChanged( $( this ).val() );
+            var userName = $( this ).val();
+            
+            if (event.keyCode === 13 && userName) {
+                that.onUserNameChanged( userName );
             }
         });
     },
