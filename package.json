@@ -5,6 +5,8 @@
   "dependencies": {
     "nko": "*",
     "fakeweb": "*",
+    "nodeunit": "*",
+    "database-cleaner": "*",
     "socket.io": "*",
     "redis": "*",
     "hiredis": "*",
