@@ -10,7 +10,13 @@ var express = require('express');
 var app = express.createServer();
 var routes = require('./lib/routes');
 
-app.use(express.static(__dirname + '/public', { maxAge: 0 }));
+app.configure(function() {
+  app.use(app.router);
+  app.set('views', __dirname + '/views');
+  app.register('.html', require('ejs'));
+  app.set('view engine', 'html');
+  app.use(express.static(__dirname + '/public', { maxAge: 0 }));
+});
 
 app.io = require('socket.io').listen(app);
 
