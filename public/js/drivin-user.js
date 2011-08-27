@@ -22,7 +22,13 @@ User.prototype.send = function ( message ) {
 };
 
 User.prototype.speak = function ( message ) {
+    var that = this;
+
     if ( this.element ) {
-        this.element.find( 'span.user-ballon' ).html( message );
+        this.element.find( 'span.user-ballon' ).html( message ).show();
+
+        setTimeout( function () {
+            that.element.find( 'span.user-ballon' ).fadeOut( 'fast' );
+        }, 4000 );
     }
 };

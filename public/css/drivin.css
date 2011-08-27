@@ -83,6 +83,13 @@ div#video-audience div.user {
     text-align:center;
 }
 
+div#video-audience span.user-ballon {
+    position:relative;
+    display:block;
+    margin-bottom:10px;
+    background-color:red;
+}
+
 div#video-audience div#user-space {
     position:absolute;
     top:30px;
