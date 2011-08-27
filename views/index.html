@@ -145,8 +145,9 @@
             </footer>
 
             <script>
-                chat.init( { user: current });
-                video.init();
+                  var socket = io.connect();
+                  chat.init( { user: current });
+                  video.init();
             </script>
         </section>
     </aside>
