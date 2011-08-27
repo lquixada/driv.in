@@ -6,8 +6,10 @@
     "nko": "*",
     "fakeweb": "*",
     "socket.io": "*",
+    "redis": "*",
+    "hiredis": "*",
     "express": "~2.4.6",
-    "ejs": "*" 
+    "ejs": "*"
   },
   "private": "true"
 }
