@@ -1,7 +1,9 @@
-require('nko')('YJfSFoK4/CL4kLGY', function(err, res) {
-  if (err) throw err;
-  res.on('data', function(d) { console.log(d.toString()); });
-});
+if (process.env.NODE_ENV == 'production') {
+  require('nko')('YJfSFoK4/CL4kLGY', function(err, res) {
+    if (err) throw err;
+    res.on('data', function(d) { console.log(d.toString()); });
+  });
+}
 
 var express = require( 'express' ),
     app = express.createServer();
