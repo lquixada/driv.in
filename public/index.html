@@ -55,16 +55,20 @@
 
             <h3>Next</h3>
 
-            <ul id="playlist-next">
+            <ul id="playlist-queue">
                 <li>Lady Gaga - Poker Face</li>
                 <li>A Banda Mais Bonita da Cidade - Oração</li>
                 <li>Iron Maiden - Fear Of The Dark</li>
             </ul>
 
             <form>
-                <input type="text" name="video_url" value="" placeholder="Ex: http://www.youtube.com/watch?v=QW0i1U4u0KE">
-                <input type="button" value="add">
+                <input type="text" id="video-url" name="video_url" value="" placeholder="Ex: http://www.youtube.com/watch?v=QW0i1U4u0KE">
+                <button type="button" id="video-add">add</button>
             </form>
+
+            <script>
+                playlist.init();    
+            </script>
         </section>
 
         <section id="chat">
