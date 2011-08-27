@@ -24,6 +24,7 @@
     <script src="js/drivin-player.js"></script>
     <script src="js/drivin-playlist.js"></script>
     <script src="js/drivin-video.js"></script>
+    <script src="js/drivin-room.js"></script>
     <script src="js/drivin-user.js"></script>
 </head>
 
@@ -44,10 +45,13 @@
         <div id="video-audience"></div>
 
         <script>
-            driver1 = new User( {name:'lquixada', avatar:'img/driver03.png'} );
-            driver2 = new User( {name:'cainanunes', avatar:'img/driver02.png'} );
-            driver3 = new User( {name:'emerleite', avatar:'img/driver01.png'} );
-            driver4 = new User( {name:'everton', avatar:'img/driver01.png'} );
+            current = new User( {name:'lquixada', avatar:'img/driver03.png'} );
+
+            room.init();
+            room.add( current );
+            room.add( new User( {name:'cainanunes', avatar:'img/driver02.png'} ) );
+            room.add( new User( {name:'emerleite', avatar:'img/driver01.png'} ) );
+            room.add( new User( {name:'everton', avatar:'img/driver01.png'} ) );
         </script>
 
     </section>
@@ -139,7 +143,7 @@
             </footer>
 
             <script>
-                chat.init( { user: driver });
+                chat.init( { user: current });
                 video.init();
             </script>
         </section>
