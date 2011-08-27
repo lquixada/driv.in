@@ -47,10 +47,10 @@
         </div>
 
         <script>
-            current = new User( {name:'lquixada', avatar:'img/driver03.png'} );
+            currentUser = new User( {name:'lquixada', avatar:'img/driver03.png'} );
 
             room.init();
-            room.add( current );
+            room.add( currentUser );
             room.add( new User( {name:'cainanunes', avatar:'img/driver02.png'} ) );
             room.add( new User( {name:'emerleite', avatar:'img/driver01.png'} ) );
             room.add( new User( {name:'everton', avatar:'img/driver01.png'} ) );
@@ -155,7 +155,18 @@
                     console.log(video);
                   });
 
-                  chat.init( { user: current });
+                  chat.init( {
+                      onMessageSent: function ( message ) {
+                          this.addMessage( currentUser.name, message );
+
+                          currentUser.speak( message );
+                          /* insert here command for socket to broadcast the message */
+                      },
+                      onUserNameChanged: function ( userName ) {
+                          currentUser.name = userName;
+                      }
+                  });
+
                   video.init();
             </script>
         </section>

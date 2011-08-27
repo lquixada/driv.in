@@ -7,15 +7,16 @@ var chat = {
         this.inputMessage = this.section.find( 'input#message' );
         this.inputUserName = this.section.find( 'input#user-name' );
 
-        this.user = options.user;
+        this.onMessageSent = options.onMessageSent || $.noop();
+        this.onUserNameChanged = options.onUserNameChanged || $.noop();
        
-        this.setUserName( this.user.name );
         this.scrollToBottom();
         this.bindEvents();
     },
 
-    addMessage: function ( message ) {
-        this.ul.append( '<li><strong>'+this.user.name+'</strong> '+message+'</li>' ).scrollTop(100000);
+    addMessage: function ( userName, userMessage ) {
+        this.ul.append( '<li><strong>'+userName+'</strong> '+userMessage+'</li>' );
+        this.scrollToBottom();
     },
 
     clearInput: function () {
@@ -29,8 +30,7 @@ var chat = {
             if (event.keyCode === 13) {
                 var message = $( this ).val();
                 
-                that.user.send( message );
-                that.addMessage( message );
+                that.onMessageSent( message );
                 that.scrollToBottom();
                 that.clearInput();
             }
@@ -38,7 +38,7 @@ var chat = {
 
         this.inputUserName.keydown(function ( event ) {
             if (event.keyCode === 13) {
-                that.user.name = $( this ).val();
+                that.onUserNameChanged( $( this ).val() );
             }
         });
     },

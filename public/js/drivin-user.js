@@ -16,10 +16,6 @@ User.prototype.draw = function () {
     return this.element;
 }
 
-User.prototype.send = function ( message ) {
-    this.speak( message );
-    // Send message through socket
-};
 
 User.prototype.speak = function ( message ) {
     var element = this.element;
