@@ -22,6 +22,7 @@ aside#panels {
     font-size:11px;
     background-color:#fff;
     border-left:1px solid #ccc;
+    box-shadow: -1px 0 5px 0 #aaa;
 }
 
 aside#panels input {
@@ -100,7 +101,7 @@ h3 {
 
 header {
     position:relative;
-    padding:5px;
+    padding:5px 10px;
     background-image: -webkit-gradient(
         linear,
         left bottom,
@@ -124,7 +125,7 @@ header {
 section#chat div#user-info {
     position:absolute;
     top:15px;
-    right:5px;
+    right:10px;
 }
 
 section#chat footer {
@@ -168,6 +169,7 @@ section#playlist ul {
 section#playlist ul a {
     display:block;
     height:45px;
+    color:#666;
     font-size:12px;
     text-decoration:none;
     clear:both;

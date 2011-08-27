@@ -35,19 +35,23 @@ var playlist = {
                 id = matches[1];
                 
                 $.getJSON( 'http://gdata.youtube.com/feeds/api/videos/'+id+'?alt=json', function ( video ) {
-                    alert(2)
                     var link = video.entry.link[0].href,
                         thumb = video.entry.media$group.media$thumbnail[1].url,
-                        title = video.entry.title['$t'];
+                        title = video.entry.title.$t,
+                        ul;
+                    
+                    ul = $( 'section#playlist-queue ul');
+                    ul.append( [
+                            '<li>',
+                                '<a href="'+link+'">',
+                                    '<img src="'+thumb+'" width="60" height="45" />',
+                                    title,
+                                '</a>',
+                            '</li>'
+                        ].join(''))
+                        .animate( {scrollTop:ul.height()}, 900 );
 
-                    $( 'ul#playlist-queue').append( [
-                        '<li>',
-                            '<a href="'+link+'">',
-                                '<img src="'+thumb+'" width="80" height="60" />',
-                                title,
-                            '</a>',
-                        '</li>'
-                    ].join(''));
+
 
                     input.val('');
                 } );
