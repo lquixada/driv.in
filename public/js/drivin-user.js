@@ -22,15 +22,15 @@ User.prototype.send = function ( message ) {
 };
 
 User.prototype.speak = function ( message ) {
-    var that = this;
+    var element = this.element;
 
-    if ( this.element ) {
-        this.element.find( 'span.user-ballon' ).html( message ).show();
+    if ( element ) {
+        element.find( 'span.user-ballon' ).html( message ).show();
         
         clearTimeout( this.timerSpeak );
 
         this.timerSpeak = setTimeout( function () {
-            that.element.find( 'span.user-ballon' ).fadeOut( 'fast' );
+            element.find( 'span.user-ballon' ).fadeOut( 'fast' );
         }, 4000 );
     }
 };

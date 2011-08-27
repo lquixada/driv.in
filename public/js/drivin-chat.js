@@ -4,10 +4,12 @@ var chat = {
         this.section = $( 'section#chat' );
         this.sectionChatMessages = this.section.find( 'section#chat-messages' );
         this.ul = this.section.find( 'ul' );
-        this.input = this.section.find( 'input#message' );
+        this.inputMessage = this.section.find( 'input#message' );
+        this.inputUserName = this.section.find( 'input#user-name' );
 
         this.user = options.user;
-        
+       
+        this.setUserName( this.user.name );
         this.scrollToBottom();
         this.bindEvents();
     },
@@ -17,16 +19,15 @@ var chat = {
     },
 
     clearInput: function () {
-        this.input.val( '' );
+        this.inputMessage.val( '' );
     },
 
     bindEvents: function () {
         var that = this;
         
-        this.input.keydown(function ( event ) {
-            
+        this.inputMessage.keydown(function ( event ) {
             if (event.keyCode === 13) {
-                var message = that.input.val();
+                var message = $( this ).val();
                 
                 that.user.send( message );
                 that.addMessage( message );
@@ -34,6 +35,16 @@ var chat = {
                 that.clearInput();
             }
         });
+
+        this.inputUserName.keydown(function ( event ) {
+            if (event.keyCode === 13) {
+                that.user.name = $( this ).val();
+            }
+        });
+    },
+
+    setUserName: function ( name ) {
+        this.inputUserName.val( name );
     },
 
     scrollToBottom: function () {
