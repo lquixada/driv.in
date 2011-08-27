@@ -19,8 +19,36 @@ aside#panels {
     right:0;
     width:300px;
     height:100%;
+    font-size:11px;
     background-color:#fff;
     border-left:1px solid #ccc;
+}
+
+aside#panels input {
+    padding:5px;
+    border-width:1px;
+    border-style:inset;
+    border-radius: 3px;
+}
+
+button {
+    padding:6px 12px;
+    color:#bada55;
+    font-weight:bold;
+    border-radius: 3px;
+    border-width: 1px;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(217,217,217)),
+        color-stop(0.71, rgb(255,255,255))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(217,217,217) 0%,
+        rgb(255,255,255) 71%
+    );
 }
 
 div#drive-in {
@@ -46,35 +74,12 @@ div#video-audience {
     border:3px solid blue;
 }
 
-
-
-form {
+footer {
+    position:relative;
     text-align:center;
 }
 
-section#playlist {
-    font-size:11px;
-}
-
-section#playlist button {
-    padding:6px 5px;
-    border-radius: 3px;
-    border-width: 1px;
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, rgb(217,217,217)),
-        color-stop(0.71, rgb(255,255,255))
-    );
-    background-image: -moz-linear-gradient(
-        center bottom,
-        rgb(217,217,217) 0%,
-        rgb(255,255,255) 71%
-    );
-}
-
-section#playlist h3 {
+h3 {
     margin:0;
     padding:5px;
     font-size:11px;
@@ -93,17 +98,66 @@ section#playlist h3 {
     );    
 }
 
+header {
+    position:relative;
+    padding:5px;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(217,217,217)),
+        color-stop(0.71, rgb(255,255,255))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(217,217,217) 0%,
+        rgb(255,255,255) 71%
+    );
+    border-top:3px solid #bada55;
+    border-bottom:1px solid #aaa;
+}
+
+
+
+/* CHAT PANEL */
+
+section#chat div#user-info {
+    position:absolute;
+    top:15px;
+    right:5px;
+}
+
+section#chat footer {
+    padding:5px 0;
+    border-top:1px solid #ddd;
+}
+
+section#chat input#message {
+    width:93%;
+}
+
+section#chat li {
+    margin:10px 0;
+}
+
+section#chat ul {
+    padding:5px 5px 5px 10px;
+    height:200px;
+    font-size:12px;
+    overflow-y:scroll;
+}
+
+
+/* PLAYLIST PANEL */
+
+section#playlist footer {
+    padding:10px 0;
+}
+
 section#playlist img {
     margin:0 5px 0 0;
     isplay:block;
     vertical-align:middle;
-}
-
-section#playlist input {
-    padding:5px;
-    border-width:1px;
-    border-style:inset;
-    border-radius: 3px;
 }
 
 section#playlist ul {
@@ -121,17 +175,20 @@ section#playlist ul a {
 
 section#playlist ul li {
     background-color:#fff;
-    border-top:1px solid gray;
+    border-top:1px solid #ddd;
 }
 
 section#playlist ul li:first-child {
     border-top:0;
 }
 
-section#playlist-current ul {
+section#playlist-now ul {
     height:auto;
     overflow-y:visible;
 }
+
+
+/* STAGE */
 
 section#stage {
     position:relative;

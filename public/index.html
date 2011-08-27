@@ -37,7 +37,7 @@
             <div id="user-1">everton</div>
             <div id="user-2">lquixada</div>
             <div id="user-3">cainanunes</div>
-            <div id="user-3">emerson</div>
+            <div id="user-3">emerson leite</div>
 
         </div>
 
@@ -45,12 +45,12 @@
 
     <aside id="panels">
 
-        <h1>driv'in</h1>
-
         <section id="playlist">
-            <h2>Playlist</h2>
+            <header>
+                <h2>Playlist</h2>
+            </header>
 
-            <section id="playlist-current">
+            <section id="playlist-now">
                 <h3>Now</h3>
 
                 <ul>
@@ -73,15 +73,25 @@
                             Desfile Cívico - Banda João de Barro 1
                         </a>
                     </li>
-                    <li><a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank"><img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">Desfile Cívico - Banda João de Barro 1</a></li>
-                    <li><a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank"><img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">Desfile Cívico - Banda João de Barro 1</a></li>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            Desfile Cívico - Banda João de Barro 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            Desfile Cívico - Banda João de Barro 1
+                        </a>
+                    </li>
                 </ul>
-
-                <form>
-                    <input type="text" id="video-url" name="video_url" value="" placeholder="youtube url">
-                    <button type="button" id="video-add">add video</button>
-                </form>
             </section>
+
+            <footer>
+                <input type="text" id="video-url" name="video_url" value="" placeholder="youtube url">
+                <button type="button" id="video-add">add video</button>
+            </footer>
 
             <script>
                 playlist.init();    
@@ -89,24 +99,35 @@
         </section>
 
         <section id="chat">
-            <h2>Chat</h2>
+            <header>
+                <h2>Chat</h2>
 
-            <div>
-                <button type="button">avatar</button> 
-                <input type="text" name="user_name" value="" placeholder="Driver 1">
-            </div>
+                <div id="user-info">
+                    <input type="text" name="user_name" value="" placeholder="Driver 1">
+                    <button type="button">avatar</button> 
+                </div>
+            </header>
+             
+            <section>
+                <ul>
+                    <li><strong>emerson leite</strong> esse node...</li>
+                    <li><strong>everton</strong> eu sou lá de pelotas</li>
+                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
+                    <li><strong>cainanunes</strong> quixadáááááá</li>
+                    <li><strong>lquixada</strong> whazzzuuuuup</li>
+                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
+                    <li><strong>emerson leite</strong> esse node...</li>
+                    <li><strong>everton</strong> eu sou lá de pelotas</li>
+                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
+                    <li><strong>cainanunes</strong> quixadáááááá</li>
+                    <li><strong>lquixada</strong> whazzzuuuuup</li>
+                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
+                </ul>
+            </section>
 
-            <ul>
-                <li><strong>everton</strong> eu sou lá de pelotas</li>
-                <li><strong>lquixada</strong> hmmmm!!!!!</li>
-                <li><strong>cainanunes</strong> quixadáááááá</li>
-                <li><strong>lquixada</strong> whazzzuuuuup</li>
-            </ul>
-
-            <form>
-                <input type="text" name="message" value="">
-                <button type="button">send</button> 
-            </form>
+            <footer>
+                <input type="text" id="message" name="message" placeholder="send a message">
+            </footer>
 
             <script>
                 chat.init();
