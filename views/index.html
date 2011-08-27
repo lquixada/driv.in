@@ -13,10 +13,18 @@
     
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/drivin.css">
-    
+
+    <!-- libs -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/jquery-1.6.2.min.js"></script>
+
+    <!-- divin code -->
     <script src="js/drivin.js"></script>
+    <script src="js/drivin-chat.js"></script>
+    <script src="js/drivin-player.js"></script>
+    <script src="js/drivin-playlist.js"></script>
+    <script src="js/drivin-video.js"></script>
+    <script src="js/drivin-user.js"></script>
 </head>
 
 <body>
@@ -35,14 +43,13 @@
         
         <div id="video-audience">
 
-            <div id="user-3" style="position:absolute; top:0; left:500px;"><img src="img/driver03.png"></div>
-            <div id="user-1" style="position:absolute; top:0; left:250px;"><img src="img/driver01.png"></div>
-            <div id="user-2" style="position:absolute; top:40px; left:300px;"><img src="img/driver02.png"></div>
-            <div id="user-1" style="position:absolute; top:10px; left:385px;"><img src="img/driver01.png"></div>
+            <div style="position:absolute; top:0; left:250px;"><img src="img/driver01.png"></div>
+            <div style="position:absolute; top:40px; left:300px;"><img src="img/driver02.png"></div>
+            <div style="position:absolute; top:10px; left:385px;"><img src="img/driver01.png"></div>
 
         </div>
 
-        <script type="text/javascript" charset="utf-8">
+        <script>
             driver = new User( {name:'lquixada', avatar:'img/driver03.png'} );
         </script>
 
@@ -143,19 +150,19 @@
 
 </div>
 
-    <script type="text/javascript">
-     
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-25382569-1']);
-      _gaq.push(['_trackPageview']);
-     
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-     
-    </script>
+<script type="text/javascript">
+ 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25382569-1']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ 
+</script>
 
 </body>
 
