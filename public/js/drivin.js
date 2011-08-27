@@ -14,8 +14,16 @@ function pauseVideo() {
 
 function onYouTubePlayerReady(playerId) {
     player = document.getElementById("diplayer");
-    player.cueVideoById("5NYt1qirBWg");
+
+    player.addEventListener("onStateChange", "video.stateChanged");
+
+    player.cueVideoById(video.id);
+        
+    //Play and pause to force buffer
+    player.playVideo();
     player.pauseVideo();
+
+    video.readyToPlay();
 }
 
 var chat = {
