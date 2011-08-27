@@ -1,10 +1,11 @@
-{ 
-  "name" : "driv.in",
-  "description" : "Video Drive In",
-  "version" : "0.0.1",
+{
+  "name": "driv.in",
+  "description": "Video Drive In",
+  "version": "0.0.1",
   "dependencies": {
     "nko": "*",
-    "socket.io" : "*"
+    "socket.io": "*",
+    "express": "~2.4.6"
   },
-  "private":"true"
+  "private": "true"
 }
