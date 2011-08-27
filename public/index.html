@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/drivin.css">
     
     <script src="js/jquery-1.6.2.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
     <script src="js/drivin.js"></script>
 </head>
 
@@ -23,8 +22,9 @@
 
 <div id="drive-in">
     
-    <section>
-    
+    <section id="stage">
+        <h1>driv'in</h1>
+
         <div id="video-player">
             <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="540" height="332">
                 <param name="allowScriptAccess" value="always">
@@ -34,9 +34,9 @@
         
         <div id="video-audience">
 
-            <div id="user-1"></div>
-            <div id="user-2"></div>
-            <div id="user-3"></div>
+            <div id="user-1">usuário 1</div>
+            <div id="user-2">usuário 2</div>
+            <div id="user-3">usuário 4</div>
 
         </div>
 
@@ -44,28 +44,43 @@
 
     <aside id="control-bar">
 
-        <section>
+        <section id="playlist">
             <h2>Playlist</h2>
-            
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+
+            <h3>Now</h3>
+
+            <ul id="playlist-current">
+                <li>ACDC - Back In Black</li>
+            </ul>
+
+            <h3>Next</h3>
+
+            <ul id="playlist-next">
+                <li>Lady Gaga - Poker Face</li>
+                <li>A Banda Mais Bonita da Cidade - Oração</li>
+                <li>Iron Maiden - Fear Of The Dark</li>
             </ul>
 
             <form>
-                <input type="text" name="videourl" value="" placeholder="http://www.youtube.com/watch?v=QW0i1U4u0KE">
+                <input type="text" name="video_url" value="" placeholder="Ex: http://www.youtube.com/watch?v=QW0i1U4u0KE">
                 <input type="button" value="add">
             </form>
         </section>
 
-        <section>
+        <section id="chat">
             <h2>Chat</h2>
-            
-            <dl>
-                <dt></dt>
-                <dd></dd>
-            </dl>
+
+            <div>
+                <input type="button" value="avatar"> 
+                <input type="text" name="user_name" value="" placeholder="Driver 1">
+            </div>
+
+            <ul>
+                <li><strong>everton</strong>: eu sou lá de pelotas</li>
+                <li><strong>lquixada</strong>: hmmmm!!!!!</li>
+                <li><strong>cainanunes</strong>: quixadáááááá</li>
+                <li><strong>lquixada</strong>: whazzzuuuuup</li>
+            </ul>
 
             <form>
                 <input type="text" name="message" value="">
