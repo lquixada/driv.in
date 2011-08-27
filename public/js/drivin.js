@@ -15,6 +15,7 @@ function pauseVideo() {
 function onYouTubePlayerReady(playerId) {
     player = document.getElementById("diplayer");
     player.cueVideoById("5NYt1qirBWg");
+    player.pauseVideo();
 }
 
 var chat = {
