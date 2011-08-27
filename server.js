@@ -10,6 +10,8 @@ var express = require( 'express' ),
 
 app.use(express.static(__dirname + '/public', { maxAge: 0 }));
 
+app.io = require('socket.io').listen(app);
+
 app.get('/', function(req, res){
     res.send('Go Horse Brazil\n');
 });
