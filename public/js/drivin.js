@@ -71,3 +71,22 @@ var playlist = {
         });
     }
 }
+
+var video = {
+    id: "5NYt1qirBWg",
+    init: function( options ) {
+        var socket = io.connect();
+        socket.on('video started', function() {
+            console.log('video started');
+            playVideo();
+        });
+
+        socket.on('video ended', function() {
+            console.log('video ended');
+            pauseVideo();
+        });
+    },
+    stateChanged: function(newState) {
+      console.log(newState);
+    }
+}
