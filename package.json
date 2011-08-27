@@ -6,7 +6,8 @@
     "nko": "*",
     "fakeweb": "*",
     "socket.io": "*",
-    "express": "~2.4.6"
+    "express": "~2.4.6",
+    "ejs": "*" 
   },
   "private": "true"
 }
