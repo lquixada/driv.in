@@ -71,8 +71,8 @@ div#video-audience {
     left:0;
     bottom:20px;
     width:100%;
-    height:250px;
-    border:3px solid blue;
+    height:200px;
+    border:1px solid blue;
 }
 
 footer {
