@@ -4,4 +4,4 @@ var http = require('http');
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Go Horse Brazil\n');
-}).listen(env.NODE_PORT || '8001');
+}).listen(process.env.NODE_PORT || '8001');
