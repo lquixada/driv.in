@@ -1,7 +1,7 @@
 
 function onYouTubePlayerReady(playerId) {
-    player.init( { element: $( 'diplayer' ).get( 0 ) });
-    player.addEvent("onStateChange", "video.stateChanged");
+    player.init( { element: $( '#diplayer' ).get( 0 ) });
+    player.bindEvent("onStateChange", "video.stateChanged");
     player.loadId( video.id );
 
     //Play and pause to force buffer
