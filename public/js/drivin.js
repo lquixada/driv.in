@@ -6,12 +6,27 @@ function onYouTubePlayerReady() {
 }
 
 
+function onYouTubePlayerReady(playerId) {
+    player = document.getElementById("diplayer");
+
+    player.addEventListener("onStateChange", "video.stateChanged");
+
+    player.cueVideoById(video.id);
+        
+    //Play and pause to force buffer
+    player.playVideo();
+    player.pauseVideo();
+
+    video.readyToPlay();
+}
+
+
 var chat = {
     init: function ( options ) {
         this.section = $( 'section#chat' );
-        this.input = this.section.find( 'input#message' );
         this.ul = this.section.find( 'ul' );
-        
+        this.input = this.section.find( 'input#message' );
+
         this.user = options.user;
 
         this.bindEvents();
@@ -27,8 +42,9 @@ var chat = {
 
     bindEvents: function () {
         var that = this;
-
+        
         this.input.keydown(function ( event ) {
+            
             if (event.keyCode === 13) {
                 var message = that.input.val();
                 
@@ -88,10 +104,10 @@ var playlist = {
             var video = {},
                 url = that.input.val(),
                 matches = url.match(/v=(\w+)/);
-            alert(1);
+            
             if ( matches && matches[1] ) {
                 video.id = matches[1];
-                alert(2); 
+                
                 $.getJSON( 'http://gdata.youtube.com/feeds/api/videos/'+video.id+'?alt=json', function ( data ) {
                     video.link = data.entry.link[0].href;
                     video.thumb = data.entry.media$group.media$thumbnail[1].url;
@@ -115,6 +131,27 @@ var playlist = {
         });
     }
 };
+
+
+var video = {
+    id: "5NYt1qirBWg",
+    init: function( options ) {
+        var socket = io.connect();
+        socket.on('video started', function() {
+            console.log('video started');
+            playVideo();
+        });
+
+        socket.on('video ended', function() {
+            console.log('video ended');
+            pauseVideo();
+        });
+    },
+    stateChanged: function(newState) {
+      console.log(newState);
+    }
+};
+
 
 var User = function ( options ) {
     this.name = options.name || 'Driver';
