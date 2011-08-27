@@ -4,16 +4,17 @@
 
     <form action="/rooms" method="post">
       <p>
-        <label  for="name">Room's name</label>
-        <input name="name" id="name" type="text" />
+        <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
+        <input type="submit" value="Start now!" />
       </p>
-      <p><input type="submit" value="Create your room now!" />
     </form>
 
     <ul id="hot_rooms">
     <% for(var roomId in rooms){ %>
        <% var room = rooms[roomId]; %>
-       <li><%= room.name %> (<%= room.users.length %>)</li>
+       <li>
+         <a href="/<%= room.name %>"><%= room.name %> (<%= room.users.length %>)</a>
+       </li>
     <% } %>
     </ul>
   </body>
