@@ -143,12 +143,12 @@ var video = {
         var socket = io.connect();
         socket.on('video started', function() {
             console.log('video started');
-            playVideo();
+            player.play();
         });
 
         socket.on('video ended', function() {
             console.log('video ended');
-            pauseVideo();
+            player.pause();
         });
     },
     stateChanged: function(newState) {
