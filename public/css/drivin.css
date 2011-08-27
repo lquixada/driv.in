@@ -23,6 +23,7 @@ aside#panels {
     background-color:#fff;
     border-left:1px solid #ccc;
     box-shadow: -1px 0 5px 0 #aaa;
+    z-index:15;
 }
 
 aside#panels input {
@@ -64,6 +65,7 @@ div#video-player {
     left:200px;
     background-color:#000;
     border:3px solid red;
+    z-index:5;
 }
 
 div#video-audience {
@@ -73,6 +75,15 @@ div#video-audience {
     width:100%;
     height:200px;
     border:1px solid blue;
+    z-index:10;
+}
+
+div#video-audience div#user-space {
+    position:absolute;
+    top:30px;
+    bottom:30px;
+    left:30px;
+    right:330px;
 }
 
 footer {
