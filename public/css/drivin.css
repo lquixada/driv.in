@@ -1,4 +1,17 @@
-aside {
+
+div#drive-in {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+div#video-player {
+    position:absolute;
+    top:50px;
+    left:200px;
+}
+
+aside#control-bar {
 	position:fixed;
 	 top:0;
 	 right:0;

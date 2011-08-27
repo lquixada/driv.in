@@ -5,7 +5,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
     <title>driv'in - social video experience in a digital drive-in</title>
+
     <meta name="description" content="">
     <meta name="author" content="Go Horse Brazil">
     
@@ -17,9 +19,29 @@
 </head>
 
 <body>
-    
 
-    <aside>
+<div id="drive-in">
+    
+    <section>
+    
+        <div id="video-player">
+            <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="540" height="332">
+                <param name="allowScriptAccess" value="always">
+                <param name="wmode" value="transparent">
+            </object>
+        </div>
+        
+        <div id="video-audience">
+
+            <div id="user-1"></div>
+            <div id="user-2"></div>
+            <div id="user-3"></div>
+
+        </div>
+
+    </section>
+
+    <aside id="control-bar">
 
         <section>
             <h2>Playlist</h2>
@@ -31,7 +53,7 @@
             </ul>
 
             <form>
-                <input type="text" name="videourl" value="" placeholder="http://www.youtube.com/watch?v=QW0i1U4u0KE" />
+                <input type="text" name="videourl" value="" placeholder="http://www.youtube.com/watch?v=QW0i1U4u0KE">
                 <input type="button" value="add">
             </form>
         </section>
@@ -43,8 +65,15 @@
                 <dt></dt>
                 <dd></dd>
             </dl>
+
+            <form>
+                <input type="text" name="message" value="">
+                <input type="button" value="send">
+            </form>
         </section>
     </aside>
+
+</div>
 
 </body>
 
