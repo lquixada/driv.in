@@ -1,73 +1,126 @@
-var player;
 
-function playVideo() {
-    if (player) {
-        player.playVideo();
-    }
+function onYouTubePlayerReady() {
+    player.init( { element: $( 'diplayer' ).get( 0 ) });
+    player.loadId( '5NYt1qirBWg' );
+    player.pause();
 }
 
-function pauseVideo() {
-    if (player) {
-        player.pauseVideo();
-    }
-}
-
-function onYouTubePlayerReady(playerId) {
-    player = document.getElementById("diplayer");
-    player.cueVideoById("5NYt1qirBWg");
-    player.pauseVideo();
-}
 
 var chat = {
-    init: function () {
-        $( 'input#message' ).keydown(function ( event ) {
-            if (event.keyCode === 13) {
-                var message = $( this ).val();
-                
-                $( 'section#chat ul' ).append( '<li><strong>Driver 1</strong> '+message+'</li>' ).scrollTop(100000);
+    init: function ( options ) {
+        this.section = $( 'section#chat' );
+        this.input = this.section.find( 'input#message' );
+        this.ul = this.section.find( 'ul' );
+        
+        this.user = options.user;
 
-                $( this ).val( '' );
+        this.bindEvents();
+    },
+
+    addMessage: function ( message ) {
+        this.ul.append( '<li><strong>'+this.user.name+'</strong> '+message+'</li>' ).scrollTop(100000);
+    },
+
+    clearInput: function () {
+        this.input.val( '' );
+    },
+
+    bindEvents: function () {
+        var that = this;
+
+        this.input.keydown(function ( event ) {
+            if (event.keyCode === 13) {
+                var message = that.input.val();
+                
+                that.user.send( message );
+                that.addMessage( message );
+                that.clearInput();
+                
             }
         });
     }
 };
 
+
+var player = {
+    init: function ( options ) {
+        this.element = options.element || null;
+    },
+
+    loadId: function ( id ) {
+        if (this.element) {
+            this.element.cueVideoById( id );
+        }
+    },
+
+    play: function () {
+        if (this.element) {
+            this.element.playVideo();
+        }
+    },
+
+    pause: function () {
+        if (this.element) {
+            this.element.pauseVideo();
+        }
+    }
+};
+
+
 var playlist = {
     init: function ( options ) {
-        
-        $( 'button#video-add' ).click(function () {
-            var input = $( 'input#video-url' ),
-                id,
-                url = input.val(),
+        this.section = $( 'section#playlist' );
+        this.ulQueue = this.section.find( 'section#playlist-queue ul' );
+        this.input = this.section.find( 'input#video-url' ); 
+        this.button = this.section.find( 'button#video-add' );
+
+        this.bindEvents();
+    },
+
+    clearInput: function () {
+        this.input.val( '' );
+    },
+
+    bindEvents: function () {
+        var that = this;
+
+        this.button.click(function () {
+            var video = {},
+                url = that.input.val(),
                 matches = url.match(/v=(\w+)/);
-            
+            alert(1);
             if ( matches && matches[1] ) {
-                id = matches[1];
-                
-                $.getJSON( 'http://gdata.youtube.com/feeds/api/videos/'+id+'?alt=json', function ( video ) {
-                    var link = video.entry.link[0].href,
-                        thumb = video.entry.media$group.media$thumbnail[1].url,
-                        title = video.entry.title.$t,
-                        ul;
+                video.id = matches[1];
+                alert(2); 
+                $.getJSON( 'http://gdata.youtube.com/feeds/api/videos/'+video.id+'?alt=json', function ( data ) {
+                    video.link = data.entry.link[0].href;
+                    video.thumb = data.entry.media$group.media$thumbnail[1].url;
+                    video.title = data.entry.title.$t;
                     
-                    ul = $( 'section#playlist-queue ul');
-                    ul.append( [
+                    that.ulQueue.append( [
                             '<li>',
-                                '<a href="'+link+'">',
-                                    '<img src="'+thumb+'" width="60" height="45" />',
-                                    title,
+                                '<a href="'+video.link+'">',
+                                    '<img src="'+video.thumb+'" width="60" height="45" />',
+                                    video.title,
                                 '</a>',
                             '</li>'
                         ].join(''))
-                        .animate( {scrollTop:ul.height()}, 900 );
+                        .animate( {scrollTop:that.ulQueue.height()}, 900 );
 
-
-
-                    input.val('');
+                    that.clearInput();
                 } );
             }
 
 
         });
     }
-}
+};
+
+var User = function ( options ) {
+    this.name = options.name || 'Driver';
+    this.avatar = options.avatar || 'img/driver03.png';
+};
+
+User.prototype.send = function ( message ) {
+    console.log( this.name+' says: ' + message );
+};
