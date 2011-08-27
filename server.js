@@ -11,6 +11,7 @@ var app = express.createServer();
 var routes = require('./lib/routes');
 
 app.configure(function() {
+  app.use(express.logger());
   app.use(app.router);
   app.set('views', __dirname + '/views');
   app.register('.html', require('ejs'));
