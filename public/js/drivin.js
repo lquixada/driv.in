@@ -10,9 +10,3 @@ function onYouTubePlayerReady(playerId) {
 
     video.readyToPlay();
 }
-
-
-
-
-
-
