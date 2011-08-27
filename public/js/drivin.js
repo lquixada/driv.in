@@ -19,6 +19,15 @@ function onYouTubePlayerReady(playerId) {
 
 var chat = {
     init: function () {
+        $( 'input#message' ).keydown(function ( event ) {
+            if (event.keyCode === 13) {
+                var message = $( this ).val();
+                
+                $( 'section#chat ul' ).append( '<li><strong>Driver 1</strong> '+message+'</li>' ).scrollTop(100000);
+
+                $( this ).val( '' );
+            }
+        });
     }
 };
 
