@@ -89,6 +89,28 @@ var playlist = {
 
         this.bindEvents();
     },
+    
+    addItem: function ( data ) {
+        var video = {
+            link: data.entry.link[0].href,
+            thumb: data.entry.media$group.media$thumbnail[1].url,
+            title: data.entry.title.$t
+        };
+
+        this.ulQueue.append( [
+                '<li>',
+                    '<a href="'+video.link+'">',
+                        '<img src="'+video.thumb+'" width="60" height="45" />',
+                        video.title,
+                    '</a>',
+                '</li>'
+            ].join(''))
+            .animate( {
+                scrollTop: this.ulQueue.height()
+            }, 900 );
+
+        this.clearInput();
+    },
 
     clearInput: function () {
         this.input.val( '' );
@@ -98,32 +120,17 @@ var playlist = {
         var that = this;
 
         this.button.click(function () {
-            var video = {},
-                url = that.input.val(),
-                matches = url.match(/v=(\w+)/);
+            var videoId,
+                value = that.input.val(),
+                matches = value.match(/v=(\w+)/),
+                url;
             
             if ( matches && matches[1] ) {
-                video.id = matches[1];
+                videoId = matches[1];
+                url = 'http://gdata.youtube.com/feeds/api/videos/'+videoId+'?alt=json';
                 
-                $.getJSON( 'http://gdata.youtube.com/feeds/api/videos/'+video.id+'?alt=json', function ( data ) {
-                    video.link = data.entry.link[0].href;
-                    video.thumb = data.entry.media$group.media$thumbnail[1].url;
-                    video.title = data.entry.title.$t;
-                    
-                    that.ulQueue.append( [
-                            '<li>',
-                                '<a href="'+video.link+'">',
-                                    '<img src="'+video.thumb+'" width="60" height="45" />',
-                                    video.title,
-                                '</a>',
-                            '</li>'
-                        ].join(''))
-                        .animate( {scrollTop:that.ulQueue.height()}, 900 );
-
-                    that.clearInput();
-                } );
+                $.getJSON( url, $.proxy( that, 'addItem' ) );
             }
-
 
         });
     }
