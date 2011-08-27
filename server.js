@@ -19,6 +19,7 @@ app.configure(function() {
 });
 
 app.io = require('socket.io').listen(app);
+app.Timer = require('./lib/timer');
 
 routes(app);
 
