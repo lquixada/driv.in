@@ -17,6 +17,10 @@ function onYouTubePlayerReady(playerId) {
     player.cueVideoById("5NYt1qirBWg");
 }
 
+var chat = {
+    init: function () {
+    }
+};
 
 var playlist = {
     init: function ( options ) {

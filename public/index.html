@@ -47,24 +47,28 @@
         <section id="playlist">
             <h2>Playlist</h2>
 
-            <h3>Now</h3>
+            <section id="playlist-current">
+                <h3>Now</h3>
 
-            <ul id="playlist-current">
-                <li>ACDC - Back In Black</li>
-            </ul>
+                <ul id="playlist-current">
+                    <li>ACDC - Back In Black</li>
+                </ul>
+            </section>
+            
+            <section id="playlist-queue">
+                <h3>Next</h3>
 
-            <h3>Next</h3>
+                <ul id="playlist-queue">
+                    <li>Lady Gaga - Poker Face</li>
+                    <li>A Banda Mais Bonita da Cidade - Oração</li>
+                    <li>Iron Maiden - Fear Of The Dark</li>
+                </ul>
 
-            <ul id="playlist-queue">
-                <li>Lady Gaga - Poker Face</li>
-                <li>A Banda Mais Bonita da Cidade - Oração</li>
-                <li>Iron Maiden - Fear Of The Dark</li>
-            </ul>
-
-            <form>
-                <input type="text" id="video-url" name="video_url" value="" placeholder="Ex: http://www.youtube.com/watch?v=QW0i1U4u0KE">
-                <button type="button" id="video-add">add</button>
-            </form>
+                <form>
+                    <input type="text" id="video-url" name="video_url" value="" placeholder="Ex: http://www.youtube.com/watch?v=QW0i1U4u0KE">
+                    <button type="button" id="video-add">add</button>
+                </form>
+            </section>
 
             <script>
                 playlist.init();    
@@ -75,7 +79,7 @@
             <h2>Chat</h2>
 
             <div>
-                <input type="button" value="avatar"> 
+                <button type="button">avatar</button> 
                 <input type="text" name="user_name" value="" placeholder="Driver 1">
             </div>
 
@@ -88,8 +92,12 @@
 
             <form>
                 <input type="text" name="message" value="">
-                <input type="button" value="send">
+                <button type="button">send</button> 
             </form>
+
+            <script>
+                chat.init();
+            </script>
         </section>
     </aside>
 
