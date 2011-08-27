@@ -9,6 +9,7 @@ if (process.env.NODE_ENV == 'production') {
 var express = require('express');
 var app = express.createServer();
 var routes = require('./lib/routes');
+var redis  = require('redis');
 
 app.configure(function() {
   app.use(express.logger());
@@ -19,6 +20,7 @@ app.configure(function() {
   app.use(express.static(__dirname + '/public', { maxAge: 0 }));
 });
 
+app.redisClient = redis.createClient( 6379, 'localhost');
 app.io = require('socket.io').listen(app);
 app.Timer = require('./lib/timer');
 
