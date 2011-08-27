@@ -1,21 +1,12 @@
 
-function onYouTubePlayerReady() {
-    player.init( { element: $( 'diplayer' ).get( 0 ) });
-    player.loadId( '5NYt1qirBWg' );
-    player.pause();
-}
-
-
 function onYouTubePlayerReady(playerId) {
-    player = document.getElementById("diplayer");
+    player.init( { element: $( 'diplayer' ).get( 0 ) });
+    player.addEvent("onStateChange", "video.stateChanged");
+    player.loadId( video.id );
 
-    player.addEventListener("onStateChange", "video.stateChanged");
-
-    player.cueVideoById(video.id);
-        
     //Play and pause to force buffer
-    player.playVideo();
-    player.pauseVideo();
+    player.play();
+    player.pause();
 
     video.readyToPlay();
 }
@@ -61,6 +52,12 @@ var chat = {
 var player = {
     init: function ( options ) {
         this.element = options.element || null;
+    },
+
+    bindEvent: function ( event, callback ) {
+        if (this.element) {
+            this.element.addEventListener( event, callback );
+        }
     },
 
     loadId: function ( id ) {
