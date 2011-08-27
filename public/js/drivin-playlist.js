@@ -39,17 +39,20 @@ var playlist = {
         var that = this;
 
         this.button.click(function () {
-            var videoId,
-                value = that.input.val(),
-                matches = value.match(/v=(\w+)/),
-                url;
+          console.log('add video');
+          socket.emit('add video', 'asdasdas');
+
+            // var videoId,
+            //     value = that.input.val(),
+            //     matches = value.match(/v=(\w+)/),
+            //     url;
             
-            if ( matches && matches[1] ) {
-                videoId = matches[1];
-                url = 'http://gdata.youtube.com/feeds/api/videos/'+videoId+'?alt=json';
+            // if ( matches && matches[1] ) {
+            //     videoId = matches[1];
+            //     url = 'http://gdata.youtube.com/feeds/api/videos/'+videoId+'?alt=json';
                 
-                $.getJSON( url, $.proxy( that, 'addItem' ) );
-            }
+            //     $.getJSON( url, $.proxy( that, 'addItem' ) );
+            // }
 
         });
     }
