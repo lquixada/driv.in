@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>driv'in - social video experience in a digital drive-in</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Go Horse Brazil">
+    
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/drivin.css">
+
+    <!-- libs -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.6.2.min.js"></script>
+
+    <!-- divin code -->
+    <script src="js/drivin.js"></script>
+    <script src="js/drivin-chat.js"></script>
+    <script src="js/drivin-player.js"></script>
+    <script src="js/drivin-playlist.js"></script>
+    <script src="js/drivin-video.js"></script>
+    <script src="js/drivin-room.js"></script>
+    <script src="js/drivin-user.js"></script>
+</head>
+
+<body>
+
+<div id="drive-in">
+    
+    <section id="stage">
+        <h1>driv'in</h1>
+
+        <div id="video-player">
+            <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="540" height="332">
+                <param name="allowScriptAccess" value="always">
+                <param name="wmode" value="transparent">
+            </object>
+        </div>
+        
+        <div id="video-audience">
+            <div id="user-space"></div>
+        </div>
+
+        <script>
+            current = new User( {name:'lquixada', avatar:'img/driver03.png'} );
+
+            room.init();
+            room.add( current );
+            room.add( new User( {name:'cainanunes', avatar:'img/driver02.png'} ) );
+            room.add( new User( {name:'emerleite', avatar:'img/driver01.png'} ) );
+            room.add( new User( {name:'everton', avatar:'img/driver01.png'} ) );
+        </script>
+
+    </section>
+
+    <aside id="panels">
+
+        <section id="playlist">
+            <header>
+                <h2>Playlist</h2>
+            </header>
+
+            <section id="playlist-now">
+                <h3>Now</h3>
+
+                <ul>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            <marquee style="width:200px;">Desfile Cívico - Banda João de Barro 1</marquee>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            
+            <section id="playlist-queue">
+                <h3>Next</h3>
+
+                <ul>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            Desfile Cívico - Banda João de Barro 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            Desfile Cívico - Banda João de Barro 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
+                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="60" height="45">
+                            Desfile Cívico - Banda João de Barro 1
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <footer>
+                <input type="text" id="video-url" name="video_url" value="" placeholder="youtube url">
+                <button type="button" id="video-add">add video</button>
+            </footer>
+
+            <script>
+                playlist.init();    
+            </script>
+        </section>
+
+        <section id="chat">
+            <header>
+                <h2>Chat</h2>
+
+                <div id="user-info">
+                    <input type="text" id="user-name" name="user_name" placeholder="Driver 1">
+                    <button type="button">avatar</button> 
+                </div>
+            </header>
+             
+            <section id="chat-messages">
+                <ul>
+                    <li><strong>emerson leite</strong> esse node...</li>
+                    <li><strong>everton</strong> eu sou lá de pelotas</li>
+                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
+                    <li><strong>cainanunes</strong> quixadáááááá</li>
+                    <li><strong>lquixada</strong> whazzzuuuuup</li>
+                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
+                    <li><strong>emerson leite</strong> esse node...</li>
+                    <li><strong>everton</strong> eu sou lá de pelotas</li>
+                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
+                    <li><strong>cainanunes</strong> quixadáááááá</li>
+                    <li><strong>lquixada</strong> whazzzuuuuup</li>
+                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
+                </ul>
+            </section>
+
+            <footer>
+                <input type="text" id="message" name="message" maxlength="80" placeholder="send a message">
+            </footer>
+
+            <script>
+                  var socket = io.connect();
+                  socket.on('connect', function() {
+                    console.log('join');
+                    socket.emit('join', '<%= room %>');
+                  });
+                  
+                  chat.init( { user: current });
+                  video.init();
+            </script>
+        </section>
+    </aside>
+
+</div>
+
+<script type="text/javascript">
+ 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25382569-1']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ 
+</script>
+
+</body>
+
+</html>
