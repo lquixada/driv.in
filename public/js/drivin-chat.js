@@ -2,11 +2,13 @@
 var chat = {
     init: function ( options ) {
         this.section = $( 'section#chat' );
+        this.sectionChatMessages = this.section.find( 'section#chat-messages' );
         this.ul = this.section.find( 'ul' );
         this.input = this.section.find( 'input#message' );
 
         this.user = options.user;
-
+        
+        this.scrollToBottom();
         this.bindEvents();
     },
 
@@ -28,9 +30,14 @@ var chat = {
                 
                 that.user.send( message );
                 that.addMessage( message );
+                that.scrollToBottom();
                 that.clearInput();
             }
         });
+    },
+
+    scrollToBottom: function () {
+        this.sectionChatMessages.scrollTop( this.ul.height() );
     }
 };
 

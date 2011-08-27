@@ -178,15 +178,14 @@ section#chat li {
 section#chat section {
     position:absolute;
     top:60px;
-    bottom:50px;
+    bottom:35px;
     width:100%;
+    overflow-y:scroll;
 }
 
 section#chat ul {
     padding:5px 5px 5px 10px;
-    height:100%;
     font-size:12px;
-    overflow-y:scroll;
 }
 
 

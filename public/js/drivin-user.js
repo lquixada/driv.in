@@ -26,8 +26,10 @@ User.prototype.speak = function ( message ) {
 
     if ( this.element ) {
         this.element.find( 'span.user-ballon' ).html( message ).show();
+        
+        clearTimeout( this.timerSpeak );
 
-        setTimeout( function () {
+        this.timerSpeak = setTimeout( function () {
             that.element.find( 'span.user-ballon' ).fadeOut( 'fast' );
         }, 4000 );
     }
