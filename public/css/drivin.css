@@ -122,6 +122,14 @@ header {
 
 /* CHAT PANEL */
 
+
+section#chat {
+    position:absolute;
+    top:350px;
+    bottom:0;
+    width:100%;
+}
+
 section#chat div#user-info {
     position:absolute;
     top:15px;
@@ -129,6 +137,9 @@ section#chat div#user-info {
 }
 
 section#chat footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
     padding:5px 0;
     border-top:1px solid #ddd;
 }
@@ -141,9 +152,16 @@ section#chat li {
     margin:10px 0;
 }
 
+section#chat section {
+    position:absolute;
+    top:60px;
+    bottom:50px;
+    width:100%;
+}
+
 section#chat ul {
     padding:5px 5px 5px 10px;
-    height:200px;
+    height:100%;
     font-size:12px;
     overflow-y:scroll;
 }
