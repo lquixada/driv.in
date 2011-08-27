@@ -151,6 +151,10 @@
                     socket.emit('join', '<%= room %>');
                   });
                   
+                  socket.on('video added', function(video) {
+                    console.log(video);
+                  });
+
                   chat.init( { user: current });
                   video.init();
             </script>
