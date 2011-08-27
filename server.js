@@ -26,7 +26,9 @@ app.redisClient = redis.createClient( 6379, 'localhost');
 app.io = require('socket.io').listen(app);
 app.Timer = require('./lib/timer');
 app.Room = require('./lib/room');
-app.rooms = {};
+app.rooms = {
+    'xpto': new app.Room('xpto', app.redisClient)
+};
 
 routes(app);
 
