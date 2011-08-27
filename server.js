@@ -1,3 +1,4 @@
+//Just beacuse nodeko needs this
 if (process.env.NODE_ENV == 'production') {
   require('nko')('YJfSFoK4/CL4kLGY', function(err, res) {
     if (err) throw err;
@@ -5,8 +6,9 @@ if (process.env.NODE_ENV == 'production') {
   });
 }
 
-var express = require( 'express' ),
-    app = express.createServer();
+var express = require('express');
+var app = express.createServer();
+var routes = require('./lib/routes');
 
 app.use(express.static(__dirname + '/public', { maxAge: 0 }));
 
