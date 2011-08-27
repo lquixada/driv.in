@@ -1,0 +1,10 @@
+{ 
+  "name" : "drivin",
+  "description" : "Video Drive In",
+  "version" : "0.0.1",
+  "dependencies": {
+    "nko": "*"
+  }
+}
+
+
