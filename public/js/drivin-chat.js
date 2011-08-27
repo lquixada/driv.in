@@ -29,7 +29,6 @@ var chat = {
                 that.user.send( message );
                 that.addMessage( message );
                 that.clearInput();
-                
             }
         });
     }
