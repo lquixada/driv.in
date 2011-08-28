@@ -7,7 +7,6 @@ var player = {
         if (this.element) {
           this.element.setVolume(100);
         }
-        
     },
 
     toggleMute: function() {
@@ -29,7 +28,7 @@ var player = {
     loadId: function ( id, seconds ) {
         if (this.element) {
             if ( seconds > 0 ) {
-              this.element.cueVideoById( id, seconds ); 
+              this.element.cueVideoById( id, seconds );
             } else {
               this.element.cueVideoById( id );
             }

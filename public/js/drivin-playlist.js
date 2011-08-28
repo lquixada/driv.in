@@ -21,6 +21,26 @@ var playlist = {
             debugInfo('video added ' + video.id);
             self.addItem(video);
         });
+
+
+        setInterval(function(){
+            var duration = '';
+            if(player.element){
+                var timeRemain = player.element.getDuration() -
+                    player.element.getCurrentTime();
+
+                if(timeRemain !== 0){
+                    var m = Math.floor(timeRemain / 60);
+                    var s = Math.floor(timeRemain % 60);
+
+                    duration = '-' + m + ':' +
+                        (s < 10 ? '0' + s : s);
+                }
+            }
+
+            self.nowPlaying.find('.video-duration').text(duration);
+        }, 500);
+
     },
 
     killItem: function(video){
