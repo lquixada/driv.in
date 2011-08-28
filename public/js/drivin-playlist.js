@@ -25,7 +25,7 @@ var playlist = {
         this.ulQueue.find('li#' + video.id)
             .fadeOut(300, function() { $(this).remove(); });
 
-        this.nowPlaying.find('span.video-name')
+        this.nowPlaying.find('marquee.video-name')
             .text(video.title)
         this.nowPlaying.find('span.video-duration')
             .text(video.duration);
