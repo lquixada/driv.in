@@ -26,16 +26,16 @@ a#button-create-room {
 }
 
 a#button-create-room:hover {
-    background:url(/img/button-create-room.png) transparent -390px 0 no-repeat; 
+    background:url(/img/button-create-room.png) transparent -390px 0 no-repeat;
 }
 
 a#button-create-room:active {
-    background:url(/img/button-create-room.png) transparent -780px 0 no-repeat; 
+    background:url(/img/button-create-room.png) transparent -780px 0 no-repeat;
 }
 
 div.content {
     margin:0 auto;
-    width:940px; 
+    width:940px;
 }
 
 div.page {
@@ -137,6 +137,7 @@ section.hot-rooms li {
     background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
     background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
+    vertical-align: middle;
 }
 
 section.hot-rooms li:first-child {
@@ -173,7 +174,7 @@ section.hot-rooms span.room-video em {
     text-transform:uppercase;
 }
 
-section.hot-rooms span.room-video strong {
+section.hot-rooms span.room-video marquee.video-name {
     display:inline-block;
     width:150px;
     white-space:nowrap;
