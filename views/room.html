@@ -137,8 +137,12 @@
             </footer>
 
             <script>
+                  var playerReady = false;
                   var socket = io.connect();
                   var room = '<%= room.name %>'
+                  
+                  joinRoom();
+
                   socket.on('connect', function() {
                     socket.connected = true;
                   });
