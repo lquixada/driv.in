@@ -18,7 +18,6 @@ var playlist = {
         socket.on('video added', function(video) {
             debugInfo('video added ' + video.id);
             self.addItem(video);
-            self.clearInput();
         });
     },
 
@@ -36,15 +35,11 @@ var playlist = {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
             '  <a href="'  + video.link     + '">',
-            '  <img src="' + video.thumbUrl + '" width="60" height="45" />',
+            '  <img src="' + video.thumbUrl + '" width="45" height="37" />',
               video.title,
             '  </a>',
             '</li>'
         ].join(''));
-    },
-
-    clearInput: function () {
-        this.input.val( '' );
     },
 
     bindEvents: function () {
@@ -52,6 +47,7 @@ var playlist = {
         this.button.click(function () {
           debugInfo('add video');
           socket.emit('add video', that.input.val());
+          that.input.val('');
         });
     }
 };
