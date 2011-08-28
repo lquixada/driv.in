@@ -37,8 +37,9 @@
     <script src="js/drivin-room.js"></script>
     <script src="js/drivin-user.js"></script>
     <script>
-        $( window ).resize(function () {
+        function jumpVote() {
             var winW = 0;
+            
             if (document.body && document.body.offsetWidth) {
              winW = document.body.offsetWidth;
             }
@@ -62,7 +63,12 @@
                     left: 174
                 } );    
             }
-    });
+        }
+        $( document ).ready( function () {
+            jumpVote();
+        });
+
+        $( window ).resize( jumpVote );
     </script>
 </head>
 
