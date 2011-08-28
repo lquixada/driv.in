@@ -13,6 +13,8 @@ var playlist = {
         socket.on('next video', function(video) {
             debugInfo('next video ' + video.id);
             self.killItem(video);
+
+            self.tomatoes.removeClass('disabled');
         });
 
         socket.on('video added', function(video) {
@@ -35,7 +37,7 @@ var playlist = {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
             '  <a href="'  + video.link     + '">',
-            '  <img src="' + video.thumbUrl + '" width="45" height="37" />',
+            '  <img src="' + video.thumbUrl + '" />',
               video.title,
             '  </a>',
             '</li>'
@@ -52,7 +54,10 @@ var playlist = {
 
         this.tomatoes.click(function(e){
             e.preventDefault();
-            socket.emit('blame');
+            if(!$(this).hasClass('disabled')){
+                $(this).addClass('disabled');
+                socket.emit('blame');
+            }
         });
     }
 };

@@ -325,10 +325,11 @@ section#playlist img {
 }
 
 section#playlist ul {
-    height:107px;
+    height:104px;
     white-space:nowrap;
     overflow-x:hidden;
     overflow-y:scroll;
+    border-top:1px solid #eee;
 }
 
 section#playlist ul a {
@@ -340,8 +341,13 @@ section#playlist ul a {
 }
 
 section#playlist ul li {
-    background-color:#fff;
-    border-top:1px solid #eee;
+    height: 35px;
+    background: url(/img/bg-playlist.png) repeat-y scroll 0 0;
+}
+
+section#playlist ul li img {
+    width:  45px;
+    height: 34px;
 }
 
 section#playlist ul li:first-child {
@@ -354,6 +360,7 @@ section#playlist-queue {
 
 section#playlist-queue ul {
     border:1px solid #eee;
+    background: url(/img/bg-playlist.png) repeat-y scroll 0 0;
     border-width:1px 0;
 }
 
