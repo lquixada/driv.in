@@ -13,6 +13,8 @@ var playlist = {
         socket.on('next video', function(video) {
             debugInfo('next video ' + video.id);
             self.killItem(video);
+
+            selg.tomatoes.removeClass('disabled');
         });
 
         socket.on('video added', function(video) {
@@ -52,7 +54,10 @@ var playlist = {
 
         this.tomatoes.click(function(e){
             e.preventDefault();
-            socket.emit('blame');
+            if(!$(this).hasClass('disabled')){
+                $(this).addClass('disabled');
+                socket.emit('blame');
+            }
         });
     }
 };
