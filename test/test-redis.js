@@ -66,6 +66,14 @@ module.exports = testCase({
     });
   },
 
+  'should retreive blank playlist': function(test) { // fucking redis return null when blank!
+    var room2 = new Room('room2', client);
+    room2.playlist(function(playlist){
+      test.equal(0, playlist.length);
+      test.done();
+    });
+  },
+
   'should pop the current media': function(test) {
     room.popCurrentMedia(function(e, head){
         test.equal('url1', head.url);
