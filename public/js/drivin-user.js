@@ -9,7 +9,7 @@ User.prototype.draw = function () {
     this.element = $( [
             '<div class="user">',
                 '<span class="user-ballon"></span>',
-                '<img class="user-avatar" src="'+this.avatar+'">',
+                '<img class="user-avatar" src="'+this.avatar+'" width="150" height="150">',
             '</div>'
         ].join('') );
 
