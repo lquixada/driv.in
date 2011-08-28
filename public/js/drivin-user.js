@@ -8,7 +8,7 @@ var User = function ( options ) {
 User.prototype.draw = function () {
     this.element = $( [
             '<div class="user">',
-                '<span class="user-ballon"></span>',
+                '<span class="user-balloon"></span>',
                 '<img class="user-avatar" src="'+this.avatar+'" width="150" height="150">',
             '</div>'
         ].join('') );
@@ -21,7 +21,7 @@ User.prototype.speak = function ( message ) {
     var element = this.element;
 
     if ( element ) {
-        element.find( 'span.user-ballon' ).html( message ).show();
+        element.find( 'span.user-balloon' ).html( message ).show();
         
         clearTimeout( this.timerSpeak );
 
