@@ -174,15 +174,41 @@ div#video-audience div#user-space {
 }
 
 div#video-player {
+    padding:70px 10px 0;
+    background:url(/img/bg-bigscreen.png) transparent repeat-x 0 0;
+    width:590px;
+    height:370px;
+    z-index:5;
+}
+
+div#video-player,
+div#video-player div#buffer-overlay {
     position:absolute;
     top:20px;
     left:50%;
     margin-left:-305px;
-    padding:70px 10px 0;
-    width:590px;
-    height:370px;
-    background:url(/img/bg-bigscreen.png) transparent repeat-x 0 0;
-    z-index:5;
+}
+
+div#video-player div#buffer-overlay {
+    font-family: Nunito,Arial,sans-serif;
+    background: black;
+    margin-top: 46px;
+    padding: 0 10px;
+    text-align: center;
+    width:  590px;
+    height: 350px;
+    z-index: 10;
+}
+
+div#video-player div#buffer-overlay h3 {
+    margin-top: 60px;
+    font-size: 66px;
+    color: #6C0;
+}
+
+div#video-player div#buffer-overlay p {
+    font-size: 26px;
+    color: #666;
 }
 
 div#video-player input#room-title {

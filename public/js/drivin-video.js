@@ -4,6 +4,9 @@ var video = {
         socket.on('video started', function() {
             debugInfo('video started');
             player.play();
+
+            player.bufferLayer.hide();
+            clearInterval(player.bufferLayer.currentInterval);
         });
 
         socket.on('video ended', function() {
@@ -22,6 +25,19 @@ var video = {
             //Play and pause to force buffer
             player.play();
             player.pause();
+
+            // TODO: move bufferLayer to a better player
+            var c = 10;
+            player.bufferLayer.currentInterval = setInterval(function(){
+                c -= 1;
+                if(c > 0){
+                    player.bufferLayer.html("<h3>" + c + "</h3><p>Aguarde</p>");
+                    player.bufferLayer.show();
+                } else {
+                    player.bufferLayer.hide();
+                    clearInterval(player.bufferLayer.currentInterval);
+                }
+            }, 1000);
         });
 
         socket.on('move forward', function(videoId, seconds) {
@@ -39,6 +55,9 @@ var video = {
         socket.on('play now', function() {
             debugInfo('will play now');
             player.play();
+
+            player.bufferLayer.hide();
+            clearInterval(player.bufferLayer.currentInterval);
         });
     },
     stateChanged: function(newState) {

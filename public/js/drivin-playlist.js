@@ -40,7 +40,6 @@ var playlist = {
 
             self.nowPlaying.find('.video-duration').text(duration);
         }, 500);
-
     },
 
     killItem: function(video){
