@@ -172,8 +172,13 @@ div#video-player input#room-title {
     width:284px;
     height:41px;
     color:#000;
+    font-family:Nunito,Arial,sans-serif;
     font-size:26px;
     text-align:center;
+}
+
+div#video-player input#room-title.edit-mode {
+    color:#999;
 }
 
 footer {
