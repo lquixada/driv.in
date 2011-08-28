@@ -164,7 +164,8 @@ div#video-audience div#user-space {
 div#video-player {
     position:absolute;
     top:20px;
-    left:200px;
+    left:50%;
+    margin-left:-295px;
     padding:70px 10px 0;
     width:590px;
     height:370px;
@@ -392,10 +393,14 @@ section#playlist-now span.video-duration {
     color:#666;
     font-size:16px;
 }
+
+
+
 /* STAGE */
 
 section#stage {
     position:relative;
-    width:100%;
+    margin-right:300px;
     height:100%;
 }
+
