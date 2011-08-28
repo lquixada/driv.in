@@ -1,29 +1,45 @@
 
 var playlist = {
     init: function ( options ) {
+        var self = this;
         this.section = $( 'section#playlist' );
+        this.nowPlaying = this.section.find( 'section#playlist-now' );
         this.ulQueue = this.section.find( 'section#playlist-queue ul' );
         this.input = this.section.find( 'input#video-url' );
         this.button = this.section.find( 'button#video-add' );
 
         this.bindEvents();
+
+        socket.on('next video', function(video) {
+            debugInfo('next video ' + video.id);
+            self.killItem(video);
+        });
+
+        socket.on('video added', function(video) {
+            debugInfo('video added ' + video.id);
+            self.addItem(video);
+        });
     },
 
-    addItem: function ( data ) {
-        var video = {
-            link: data.entry.link[0].href,
-            thumb: data.entry.media$group.media$thumbnail[1].url,
-            title: data.entry.title.$t
-        };
+    killItem: function(video){
+        this.ulQueue.find('li#' + video.id)
+            .fadeOut(300, function() { $(this).remove(); });
 
+        this.nowPlaying.find('span.video-name')
+            .text(video.title)
+        this.nowPlaying.find('span.video-duration')
+            .text(video.duration);
+    },
+
+    addItem: function(video) {
         this.ulQueue.append( [
-                '<li>',
-                    '<a href="'+video.link+'">',
-                        '<img src="'+video.thumb+'" width="60" height="45" />',
-                        video.title,
-                    '</a>',
-                '</li>'
-            ].join(''))
+            '<li id="' + video.id + '">',
+            '  <a href="'  + video.link     + '">',
+            '  <img src="' + video.thumbUrl + '" width="60" height="45" />',
+              video.title,
+            '  </a>',
+            '</li>'
+        ].join(''))
             .animate( {
                 scrollTop: this.ulQueue.height()
             }, 900 );
@@ -38,7 +54,7 @@ var playlist = {
     bindEvents: function () {
         var that = this;
         this.button.click(function () {
-          console.log('add video');
+          debugInfo('add video');
           socket.emit('add video', that.input.val());
         });
     }

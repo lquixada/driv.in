@@ -10,9 +10,13 @@ var player = {
         }
     },
 
-    loadId: function ( id ) {
+    loadId: function ( id, seconds ) {
         if (this.element) {
-            this.element.cueVideoById( id );
+            if ( seconds > 0 ) {
+              this.element.cueVideoById( id, seconds ); 
+            } else {
+              this.element.cueVideoById( id );
+            }
         }
     },
 
@@ -25,6 +29,12 @@ var player = {
     pause: function () {
         if (this.element) {
             this.element.pauseVideo();
+        }
+    },
+
+    seekTo: function(seconds) {
+        if (this.element) {
+            this.element.seekTo(seconds, true);
         }
     }
 };
