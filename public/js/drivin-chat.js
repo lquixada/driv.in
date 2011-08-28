@@ -30,7 +30,7 @@ var chat = {
     },
 
     sendMessage: function(userName, userMessage) {
-      socket.emit('chat message', userName, userMessage);      
+      socket.emit('chat message', userName, userMessage);
     },
 
     addMessage: function ( userName, userMessage ) {
@@ -59,7 +59,7 @@ var chat = {
             var userName = $( this ).val();
             
             if (event.keyCode === 13 && userName) {
-                that.onUserNameChanged( userName );
+                currentUser.name = userName;
             }
         });
     },

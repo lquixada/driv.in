@@ -1,8 +1,12 @@
 
 var player = {
     muted: false,
+    bufferLayer: null,
 
     init: function ( options ) {
+        this.bufferLayer = $('#buffer-overlay');
+        this.bufferLayer.hide();
+
         this.element = options.element || null;
         if (this.element) {
           this.element.setVolume(100);

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Driv.in - The YouTube battle party</title>
+
+    <meta name="description" content="Social video experience in a digital drive-in">
+    <meta name="author" content="Go Horse Brazil">
+    
+    <meta property="og:url" content="http://driv.in/<%= room.name %>"> 
+    <meta property="og:title" content="Driv.in - The YouTube battle party"> 
+    <meta property="og:image" content="http://driv.in/img/logo-drivin.png"> 
+    <meta property="og:site_name" content="Driv.in"> 
+    
+    <link rel="image_src" href="http://driv.in/img/logo-drivin.png" />
+    <link rel="canonical" href="http://driv.in/<%= room.name %>" />
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/drivin.css">
+
+</head>
+
+<body>
+
+<div id="drive-in">
+
+    <section id="stage">
+        <h1><a href="/"><img src="/img/logo-drivin.png" alt="Driv.in"/></a></h1>
+
+        <iframe class="nko-vote" src="http://nodeknockout.com/iframe/go-horse-brazil" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
+        
+        <div id="video-player">
+            <input type="text" id="room-title" name="" value="NodeKO 2011" readonly>
+            
+            <img src="img/error.png" width="600" height="340">
+        </div>
+
+    </section>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25382569-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+</html>
+
