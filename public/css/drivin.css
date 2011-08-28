@@ -50,6 +50,14 @@ a.button-tomatoes:hover {
     background:url(/img/button-tomatoes.png) transparent 0px -90px no-repeat;
 }
 
+a.button-tomatoes:active {
+    background:url(/img/button-tomatoes.png) transparent 0px -180px no-repeat;
+}
+
+a.button-tomatoes.disabled {
+    background:url(/img/button-tomatoes.png) transparent 0px -270px no-repeat;
+}
+
 ul, li {
     margin:0;
     padding:0;
