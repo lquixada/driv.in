@@ -26,7 +26,7 @@ User.prototype.speak = function ( message ) {
         clearTimeout( this.timerSpeak );
 
         this.timerSpeak = setTimeout( function () {
-            //element.find( 'span.user-ballon' ).fadeOut( 'fast' );
+            element.find( 'span.user-ballon' ).fadeOut( 'fast' );
         }, 4000 );
     }
 };
