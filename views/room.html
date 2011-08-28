@@ -69,11 +69,12 @@
             <section id="playlist-now">
                 <h3>Now</h3>
 
-                <span class="video-name">Desfile Cívico - Banda João de Barro 1</span>
-                <span class="video-duration">-2:31</span>
+                <% if(room.playing()){ %>
+                    <span class="video-name"><%= room.currentMedia.title %></span>
+                    <span class="video-duration"><%= room.currentMedia.duration %></span>
 
-                <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
-
+                  <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
+                <% } %>
                 <!--<button style="margin:0; width:100%; height:60px;"></button>-->
             </section>
 
