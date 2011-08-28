@@ -25,6 +25,7 @@ app.configure(function() {
   app.register('.html', require('ejs'));
   app.set('view engine', 'html');
   app.use(express.static(__dirname + '/public', { maxAge: 0 }));
+  app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 });
 
 app.redisClient = redis.createClient( 6379, 'localhost');
@@ -36,5 +37,25 @@ app.rooms = {
 };
 
 routes(app);
+
+app.use(function(req, res, next){
+  res.render('404', { layout:false, status: 404, url: req.url });
+});
+
+app.use(function(err, req, res, next){
+  res.render('500', {
+      layout: false
+    , status: err.status || 500
+    , error: err
+  });
+});
+
+app.get('/404', function(req, res, next){
+  next();
+});
+
+app.get('/500', function(req, res, next){
+  next(new Error('error'));
+});
 
 app.listen(process.env.NODE_PORT || 8001);
