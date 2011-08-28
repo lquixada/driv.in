@@ -75,11 +75,12 @@ module.exports = testCase({
   },
 
   'should increment playlist ': function(test) {
+      room.dropMedia = function(){}; // stub off
       room.blamesReset(function(c){
           test.equal(0, c);
       });
 
-     room.blames(function(c){
+      room.blames(function(c){
           test.equal(0, c);
       });
 
