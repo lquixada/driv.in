@@ -114,31 +114,31 @@ section.hot-rooms a {
 
 section.hot-rooms li {
     display:inline-block;
+    margin-left:10px;
     width:220px;
-    height:150px;
+    height:133px;
     color:#fff;
     text-align:center;
     border-radius:10px;
-    border-width:1px;
+    border:1px solid #b7b7b7;
     border-color:#dcdcdc #b7b7b7 #b7b7b7 #dcdcdc;
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, rgb(217,217,217)),
-        color-stop(0.71, rgb(255,255,255))
-    );
-    background-image: -moz-linear-gradient(
-        center bottom,
-        rgb(217,217,217) 0%,
-        rgb(255,255,255) 71%
-    );
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(238,238,238,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(238,238,238,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
+    background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(238,238,238,1) 100%);
 }
 
+section.hot-rooms li:first-child {
+    margin:0;
+}
 
 section.hot-rooms span.room-name {
     display:block;
-    margin:10px 0;
+    margin:10px 0 0;
     color:#6fb515;
     font-size:24px;
     letter-spacing:1px;
@@ -153,10 +153,9 @@ section.hot-rooms span.room-count {
 
 section.hot-rooms span.room-video {
     display:block;
-    padding:20px 0;
+    padding:15px 0;
     color:#000;
     font-size:16px;
-    font-weight:bold;
     border-top:1px solid #e2e2e2;
 }
 
@@ -164,6 +163,14 @@ section.hot-rooms span.room-video em {
     color:#666;
     font-size:10px;
     font-style:normal;
+    text-transform:uppercase;
+}
+
+section.hot-rooms span.room-video strong {
+    display:inline-block;
+    width:150px;
+    white-space:nowrap;
+    overflow:hidden;
 }
 
 section.create-room {
