@@ -4,7 +4,9 @@ html, body {
 }
 
 body {
-    background:url(/img/bg-nuvens.jpg) transparent repeat-x 0 0;
+    background-image:url(/img/bg-clouds.jpg), url(/img/bg-wall.png), url(/img/bg-asphalt-topo.png), url(/img/bg-asphalt.png);
+    background-position: left top, left 337px, left 400px, left 1000px;
+    background-repeat: no-repeat, repeat-x, repeat-x, repeat;
 }
 
 ul, li {
@@ -69,6 +71,7 @@ div#drive-in {
 }
 
 div#wall {
+    display:none;
     position:absolute;
     top:337px;
     width:100%;
