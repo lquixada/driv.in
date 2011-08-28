@@ -56,10 +56,8 @@ var playlist = {
     addItem: function(video) {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
-            '  <a href="'  + video.link     + '">',
             '  <img src="' + video.thumbUrl + '" />',
               video.title,
-            '  </a>',
             '</li>'
         ].join(''));
     },
