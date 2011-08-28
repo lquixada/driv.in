@@ -81,6 +81,11 @@ aside#panels input {
     border-radius:5px;
 }
 
+
+aside#panels input:focus {
+    color:#333;
+}
+
 aside#panels button {
     margin-left:-10px;
     padding:6px 12px;
