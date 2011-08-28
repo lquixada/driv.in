@@ -42,6 +42,12 @@ div.page {
     background:url(/img/bg-home.jpg) #e3eff5 left top no-repeat;
 }
 
+div#social {
+    position:absolute;
+    top:70px;
+    right:0;
+}
+
 footer {
     margin:0 auto;
     width:940px;
