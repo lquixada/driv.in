@@ -25,7 +25,7 @@ var chat = {
 
         socket.on('user leave', function(user) {
           debugInfo('user leave:' + user.id);
-          room.remove(user);
+          room.remove(new User({id: user.id}));
         });
     },
 
