@@ -11,14 +11,14 @@
     <meta name="description" content="Social video experience in a digital drive-in">
     <meta name="author" content="Go Horse Brazil">
 
-    <meta property="og:url" content="http://driv.in/"> 
-    <meta property="og:title" content="Driv.in - The YouTube battle party"> 
-    <meta property="og:image" content="http://driv.in/img/logo-drivin.png"> 
-    <meta property="og:site_name" content="Driv.in"> 
+    <meta property="og:url" content="http://driv.in/">
+    <meta property="og:title" content="Driv.in - The YouTube battle party">
+    <meta property="og:image" content="http://driv.in/img/logo-drivin.png">
+    <meta property="og:site_name" content="Driv.in">
 
     <link rel="image_src" href="http://driv.in/img/logo-drivin.png" />
     <link rel="canonical" href="http://driv.in/" />
-    
+
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
@@ -49,19 +49,19 @@
                 <p>
                     Create rooms,<br>
                     invite friends<br>
-                    and watch videos.        
+                    and watch videos.
                 </p>
-                
+
                 <form action="/rooms" method="post">
                     <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
                     <a id="button-create-room" href="#submit" onclick="this.parentNode.submit(); return false;">create room</a>
                 </form>
             </section>
-            
+
             <section class="hot-rooms">
-                
+
                 <h2>Hot Rooms</h2>
-                
+
                 <ul>
                     <% for(var roomId in rooms){ %>
                        <% var room = rooms[roomId]; %>
@@ -69,7 +69,14 @@
                             <a href="/<%= room.name %>">
                                 <span class="room-name"><%= room.name %></span>
                                 <span class="room-count"><%= room.users.length %> persons</span>
-                                <span class="room-video"><em>now</em> <strong>DEV - BASS Down L</strong></span>
+                                <% if(room.playing()){ %>
+                                  <span class="room-video">
+                                    <em>now</em>
+                                    <marquee scrolldelay="150" class="video-name">
+                                        <%= room.currentMedia.title %>
+                                    </marquee>
+                                  </span>
+                                <% } %>
                             </a>
                        </li>
                     <% } %>
