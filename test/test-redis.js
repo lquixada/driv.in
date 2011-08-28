@@ -56,6 +56,16 @@ module.exports = testCase({
         });
   },
 
+  'should retreive playlist': function(test) {
+    client.rpush(room.playlistId, JSON.stringify({url: 'url3'}));
+    room.playlist(function(e, playlist){
+      test.equal(2,      playlist.length);
+      test.equal('url2', playlist[0]['url']);
+      test.equal('url3', playlist[1]['url']);
+      test.done();
+    });
+  },
+
   'should pop the current media': function(test) {
     room.popCurrentMedia(function(e, head){
         test.equal('url1', head.url);
