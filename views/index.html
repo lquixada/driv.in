@@ -1,22 +1,62 @@
+<!DOCTYPE html>
+
 <html>
-  <body>
-    <h1>Driv.in</h1>
 
-    <form action="/rooms" method="post">
-      <p>
-        <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
-        <input type="submit" value="Start now!" />
-      </p>
-    </form>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <ul id="hot_rooms">
-    <% for(var roomId in rooms){ %>
-       <% var room = rooms[roomId]; %>
-       <li>
-         <a href="/<%= room.name %>"><%= room.name %> (<%= room.users.length %>)</a>
-       </li>
-    <% } %>
-    </ul>
-  </body>
+    <title>Driv.in - social video experience in a digital drive-in</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Go Horse Brazil">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+
+    <div class="page">
+        <header>
+            <h1>Driv.in</h1>
+            <span class="slogan">The YouTube battle party.</span>
+
+            <ul class="social">
+                <li></li>
+            </ul>
+        </header>
+
+        <section class="create-room">
+            <p>
+                Create rooms,<br>
+                invite friends<br>
+                and watch videos.        
+            </p>
+            
+            <form action="/rooms" method="post">
+                <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
+                <a id="button-create-room" href="#submit" onclick="this.parentNode.submit(); return false;">create room</a>
+            </form>
+        </section>
+        
+        <section class="hot-rooms">
+            
+            <h2>Hot Rooms</h2>
+            
+            <ul>
+                <% for(var roomId in rooms){ %>
+                   <% var room = rooms[roomId]; %>
+                   <li>
+                     <a href="/<%= room.name %>"><%= room.name %> (<%= room.users.length %>)</a>
+                   </li>
+                <% } %>
+            </ul>
+
+        </section>
+    </div>
+
+</body>
 
 </html>
