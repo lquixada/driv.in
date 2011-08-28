@@ -19,7 +19,7 @@ User.prototype.draw = function () {
 }
 
 User.prototype.remove = function() {
-  $( this.id ).remove();
+  $( '#' + this.id ).remove();
 },
 
 User.prototype.speak = function ( message ) {
