@@ -21,7 +21,9 @@ var player = {
     },
 
     play: function () {
+        debugInfo("player element:" + this.element);
         if (this.element) {
+            debugInfo("will play");
             this.element.playVideo();
         }
     },
