@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background-color:#d2f1ff;
+    background:url(/img/bg-nuvens.jpg) transparent repeat-x 0 0;
 }
 
 ul, li {
@@ -68,12 +68,22 @@ div#drive-in {
     height:100%;
 }
 
+div#wall {
+    position:absolute;
+    top:337px;
+    width:100%;
+    height:63px;
+    background:url(/img/bg-muro.png) transparent repeat-x 0 0;
+}
+
 div#video-player {
     position:absolute;
     top:50px;
     left:200px;
-    background-color:#000;
-    border:3px solid red;
+    padding:80px 10px 0;
+    width:590px;
+    height:350px;
+    background:url(/img/bg-telao.png) transparent repeat-x 0 0;
     z-index:5;
 }
 
@@ -83,7 +93,6 @@ div#video-audience {
     bottom:20px;
     width:100%;
     height:200px;
-    border:1px solid blue;
     z-index:10;
 }
 
@@ -115,6 +124,16 @@ div#video-audience div#user-space {
 footer {
     position:relative;
     text-align:center;
+}
+
+h1 {
+    position:absolute;
+    margin:30px;
+    width:134px;
+    height:35px;
+    text-indent:-5000px;
+    background:url(/img/logo-drivin.png) transparent no-repeat 0 0;
+    overflow:hidden;
 }
 
 h2 {
@@ -159,6 +178,21 @@ section#chat {
     top:350px;
     bottom:0;
     width:100%;
+}
+
+section#chat div.gradient {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:20px;
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
+    background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);    
 }
 
 section#chat div#user-info {
@@ -272,8 +306,7 @@ section#playlist-now span.video-name {
     position:absolute;
     display:block;
     top:5px;
-    left:45px;
-    right:10px;
+    left:40px;
     width:190px;
     font-size:16px;
     font-weight:bold;
