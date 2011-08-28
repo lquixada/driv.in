@@ -29,9 +29,9 @@ var video = {
             // TODO: move bufferLayer to a better player
             var c = 10;
             player.bufferLayer.currentInterval = setInterval(function(){
-                c -= 1;
+                c -= 1; 
                 if(c > 0){
-                    player.bufferLayer.html("<h3>" + c + "</h3><p>Aguarde</p>");
+                    player.bufferLayer.html("<h3>" + c + "</h3><p>Waiting</p>");
                     player.bufferLayer.show();
                 } else {
                     player.bufferLayer.hide();
