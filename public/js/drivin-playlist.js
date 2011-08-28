@@ -18,6 +18,7 @@ var playlist = {
         socket.on('video added', function(video) {
             debugInfo('video added ' + video.id);
             self.addItem(video);
+            self.clearInput();
         });
     },
 
@@ -39,12 +40,7 @@ var playlist = {
               video.title,
             '  </a>',
             '</li>'
-        ].join(''))
-            .animate( {
-                scrollTop: this.ulQueue.height()
-            }, 900 );
-
-        this.clearInput();
+        ].join(''));
     },
 
     clearInput: function () {
