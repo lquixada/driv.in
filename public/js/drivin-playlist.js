@@ -38,7 +38,7 @@ var playlist = {
     bindEvents: function () {
         var that = this;
         this.button.click(function () {
-          console.log('add video');
+          debugInfo('add video');
           socket.emit('add video', that.input.val());
         });
     }

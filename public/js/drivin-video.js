@@ -2,10 +2,12 @@
 var video = {
     init: function( options ) {
         socket.on('video started', function() {
+            debugInfo('video started'); 
             player.play();
         });
 
         socket.on('video ended', function() {
+            debugInfo('video ended');
             player.pause();
         });
 
@@ -39,6 +41,6 @@ var video = {
         });
     },
     stateChanged: function(newState) {
-      //nothing
+      debugInfo('video state:' + newState);
     }
 };
