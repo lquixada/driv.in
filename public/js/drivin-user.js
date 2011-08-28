@@ -21,12 +21,13 @@ User.prototype.speak = function ( message ) {
     var element = this.element;
 
     if ( element ) {
+        message = '<strong>'+this.name+'</strong>'+message;
         element.find( 'span.user-balloon' ).html( message ).show();
         
         clearTimeout( this.timerSpeak );
 
         this.timerSpeak = setTimeout( function () {
-            element.find( 'span.user-ballon' ).fadeOut( 'fast' );
+            element.find( 'span.user-balloon' ).fadeOut( 'fast' );
         }, 4000 );
     }
 };

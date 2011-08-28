@@ -113,12 +113,12 @@ div#drive-in {
 
 div#video-player {
     position:absolute;
-    top:50px;
+    top:20px;
     left:200px;
     padding:80px 10px 0;
     width:590px;
     height:350px;
-    background:url(/img/bg-telao.png) transparent repeat-x 0 0;
+    background:url(/img/bg-bigscreen.png) transparent repeat-x 0 0;
     z-index:5;
 }
 
@@ -151,12 +151,29 @@ div#video-audience span.user-balloon {
     background:url(/img/bg-chat-balloon.png) transparent repeat-x 0 0;
 }
 
+div#video-audience span.user-balloon strong {
+    display:block;
+    margin-bottom:3px;
+    color:#6fb515;
+}
+
 div#video-audience div#user-space {
     position:absolute;
     top:30px;
     bottom:30px;
     left:30px;
     right:330px;
+}
+
+div#video-player input#room-title {
+    position:absolute;
+    top:5px;
+    left:160px;
+    width:284px;
+    height:41px;
+    color:#000;
+    font-size:26px;
+    text-align:center;
 }
 
 footer {
