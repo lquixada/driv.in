@@ -33,7 +33,7 @@ app.io = require('socket.io').listen(app);
 app.Timer = require('./lib/timer');
 app.Room = require('./lib/room');
 app.rooms = {
-    'xpto': new app.Room('xpto', app.redisClient)
+    'NodeKo2011': new app.Room('NodeKo2011', app.redisClient)
 };
 
 routes(app);
