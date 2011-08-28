@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background:url(/img/bg-home.jpg) #e3eff5 left top no-repeat;
+    background-color:#a6bfcd;
 }
 
 ul, li {
@@ -33,9 +33,43 @@ a#button-create-room:active {
     background:url(/img/button-create-room.png) transparent -780px 0 no-repeat; 
 }
 
+div.content {
+    margin:0 auto;
+    width:940px; 
+}
+
 div.page {
+    background:url(/img/bg-home.jpg) #e3eff5 left top no-repeat;
+}
+
+footer {
     margin:0 auto;
     width:940px;
+    text-align:center;
+}
+
+footer a {
+    color:#46565f;
+    text-decoration:none;
+}
+
+footer a:hover {
+    text-decoration:underline;
+}
+
+footer a:visited {
+    color:#46565f;
+}
+
+footer img {
+    margin:50px 0 20px;
+}
+
+footer p {
+    margin:20px 0 100px;
+    color:#5c727f;
+    font-size:16px;
+    text-align:center;
 }
 
 h1 {
@@ -49,10 +83,13 @@ h1 {
 }
 
 h2 {
-    color:#369;
-    font-family: Nunito, Arial, sans-serif;
+    color:#666;
+    font-family:Nunito, Arial, sans-serif;
+    font-size:20px;
     font-weight:normal;
+    letter-spacing:2px;
     text-align:center;
+    text-transform:uppercase;
 }
 
 header {
@@ -63,16 +100,6 @@ header {
 
 header iframe {
     vertical-align:middle;
-}
-
-p {
-    margin:0;
-    padding:0;
-    color:#369;
-    font-family: Nunito, Arial, sans-serif;
-    font-size:70px;
-    letter-spacing:-3px;
-    line-height:1.15em;
 }
 
 section.hot-rooms {
@@ -93,6 +120,16 @@ section.create-room {
     padding:50px 0;
     border:2px solid #fff;
     border-width:2px 0;
+}
+
+section.create-room p {
+    margin:0;
+    padding:0;
+    color:#369;
+    font-family: Nunito, Arial, sans-serif;
+    font-size:70px;
+    letter-spacing:-3px;
+    line-height:1.15em;
 }
 
 span.slogan {
