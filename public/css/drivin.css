@@ -64,7 +64,7 @@ aside#panels {
     font-size:11px;
     background-color:#fff;
     border-left:1px solid #ccc;
-    box-shadow: -1px 0 5px 0 #aaa;
+    box-shadow: -1px 0 5px 0 rgba(0,0,0, 0.2);
     z-index:15;
 }
 
