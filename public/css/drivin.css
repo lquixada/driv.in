@@ -9,6 +9,30 @@ body {
     background-repeat: no-repeat, repeat-x, repeat-x, repeat;
 }
 
+a#button-mute {
+    position:absolute;
+    display:block;
+    top:30px;
+    right:330px;
+    width:40px;
+    height:40px;
+    text-indent:-5000px;
+    background:url(/img/button-mute.png) transparent 0 0 no-repeat;
+    overflow:hidden;
+}
+
+a#button-mute:hover {
+    background:url(/img/button-mute.png) transparent -50px 0 no-repeat; 
+}
+
+a#button-mute.muted {
+    background:url(/img/button-mute.png) transparent -100px 0 no-repeat; 
+}
+
+a#button-mute.muted:hover {
+    background:url(/img/button-mute.png) transparent -150px 0 no-repeat; 
+}
+
 a.button-tomatoes {
     position:absolute;
     display:block;
@@ -192,7 +216,7 @@ section#chat {
 }
 
 section#chat div.gradient {
-    position:absolute;
+    position:relative;
     top:0;
     left:0;
     width:100%;
