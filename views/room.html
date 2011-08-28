@@ -34,8 +34,7 @@
 <div id="drive-in">
 
     <section id="stage">
-
-        <h1>Driv.in</h1>
+        <h1><a href="/"><img src="/img/logo-drivin.png" alt="Driv.in"/></a></h1>
 
         <iframe class="nko-vote" src="http://nodeknockout.com/iframe/go-horse-brazil" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
         
@@ -100,11 +99,7 @@
                     <%= room.currentMedia.title %>
                   <% } %>
                 </marquee>
-                <span class="video-duration">
-                  <% if(room.playing()){ %>
-                    <%= room.currentMedia.duration %>
-                  <% } %>
-                </span>
+                <span class="video-duration"></span>
                 <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
                 <!--<button style="margin:0; width:100%; height:60px;"></button>-->
             </section>
