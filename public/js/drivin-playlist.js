@@ -7,7 +7,7 @@ var playlist = {
         this.ulQueue = this.section.find( 'section#playlist-queue ul' );
         this.input = this.section.find( 'input#video-url' );
         this.button = this.section.find( 'button#video-add' );
-
+        this.tomatoes = this.section.find( 'a.button-tomatoes' );
         this.bindEvents();
 
         socket.on('next video', function(video) {
@@ -18,7 +18,6 @@ var playlist = {
         socket.on('video added', function(video) {
             debugInfo('video added ' + video.id);
             self.addItem(video);
-            self.clearInput();
         });
     },
 
@@ -36,22 +35,24 @@ var playlist = {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
             '  <a href="'  + video.link     + '">',
-            '  <img src="' + video.thumbUrl + '" width="60" height="45" />',
+            '  <img src="' + video.thumbUrl + '" width="45" height="37" />',
               video.title,
             '  </a>',
             '</li>'
         ].join(''));
     },
 
-    clearInput: function () {
-        this.input.val( '' );
-    },
-
     bindEvents: function () {
         var that = this;
         this.button.click(function () {
-          debugInfo('add video');
-          socket.emit('add video', that.input.val());
+            debugInfo('add video');
+            socket.emit('add video', that.input.val());
+            that.input.val('');
+        });
+
+        this.tomatoes.click(function(e){
+            e.preventDefault();
+            socket.emit('blame');
         });
     }
 };

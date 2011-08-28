@@ -31,6 +31,7 @@ var video = {
             debugInfo('will seek to ' + seconds + ' seconds');
             player.seekTo( seconds );
 
+            //Play and pause to force buffer
             player.play();
             player.pause();
         });
@@ -41,6 +42,11 @@ var video = {
         });
     },
     stateChanged: function(newState) {
+      if (newState == 5) {
+            //Play and pause to force buffer
+            // player.play();
+            // player.pause();
+      }
       debugInfo('video state:' + newState);
     }
 };
