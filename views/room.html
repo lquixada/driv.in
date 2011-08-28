@@ -137,10 +137,8 @@
                 <ul>
                   <% playlist.forEach(function(media){ %>
                     <li id="<%= media.id %>">
-                        <a href="<%= media.url %>" target="_blank">
-                            <img src="<%= media.thumbUrl %>" />
-                            <%= media.title %>
-                        </a>
+                        <img src="<%= media.thumbUrl %>" />
+                        <%= media.title %>
                     </li>
                   <% });%>
                 </ul>
