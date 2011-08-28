@@ -1,18 +1,17 @@
 
 var video = {
     id: "5NYt1qirBWg",
+    seconds: 0,
     init: function( options ) {
         socket.on('video started', function() {
-            console.log('video started');
             player.play();
         });
 
         socket.on('video ended', function() {
-            console.log('video ended');
             player.pause();
         });
     },
     stateChanged: function(newState) {
-      console.log(newState);
+      //nothing
     }
 };
