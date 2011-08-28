@@ -151,6 +151,12 @@ div#video-audience span.user-balloon {
     background:url(/img/bg-chat-balloon.png) transparent repeat-x 0 0;
 }
 
+div#video-audience span.user-balloon strong {
+    display:block;
+    margin-bottom:3px;
+    color:#6fb515;
+}
+
 div#video-audience div#user-space {
     position:absolute;
     top:30px;
