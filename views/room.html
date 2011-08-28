@@ -151,6 +151,14 @@
                     console.log(video);
                   });
 
+                  socket.on('next video', function(videoId) {
+                      player.loadId( videoId );
+                   
+                      //Play and pause to force buffer
+                      player.play();
+                      player.pause();
+                  });
+
                   chat.init( {
                       onMessageSent: function ( message ) {
                           this.addMessage( currentUser.name, message );
