@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Driv.in - social video experience in a digital drive-in</title>
+    <title>Driv.in - The YouTube battle party</title>
 
     <meta name="description" content="">
     <meta name="author" content="Go Horse Brazil">
@@ -25,7 +25,7 @@
 
                 <span class="slogan">
                     The YouTube battle party.
-                    <iframe src="http://nodeknockout.com/iframe/node-ice" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
+                    <iframe src="http://nodeknockout.com/iframe/go-horse-brazil" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
                 </span>
 
                 <img src="img/button-social.png" style="position:absolute; top:65px; right:0;" />
@@ -52,7 +52,11 @@
                     <% for(var roomId in rooms){ %>
                        <% var room = rooms[roomId]; %>
                        <li>
-                         <a href="/<%= room.name %>"><%= room.name %> (<%= room.users.length %>)</a>
+                            <a href="/<%= room.name %>">
+                                <span class="room-name"><%= room.name %></span>
+                                <span class="room-count"><%= room.users.length %> persons</span>
+                                <span class="room-video"><em>now</em> <span>DEV - BASS Down L</span></span>
+                            </a>
                        </li>
                     <% } %>
                 </ul>
