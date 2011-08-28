@@ -116,7 +116,11 @@ div#drive-in {
     height:100%;
 }
 
-
+iframe.nko-vote {
+    position:absolute;
+    top:35px;
+    left:16%;
+}
 
 div#video-audience {
     position:absolute;
