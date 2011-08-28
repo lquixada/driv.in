@@ -22,11 +22,11 @@ User.prototype.remove = function() {
   $( '#' + this.id ).remove();
 },
 
-User.prototype.speak = function ( message ) {
+User.prototype.speak = function ( userName, message ) {
     var element = this.element;
 
     if ( element ) {
-        message = '<strong>'+this.name+'</strong>'+message;
+        message = '<strong>'+userName+'</strong>'+message;
         element.find( 'span.user-balloon' ).html( message ).show();
         
         clearTimeout( this.timerSpeak );

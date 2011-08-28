@@ -16,7 +16,7 @@ var chat = {
         var self = this;
         socket.on('chat message', function(message) {
           self.addMessage(message.userName, message.userMessage);
-          room.users[message.userId].speak(message.userMessage);
+          room.users[message.userId].speak(message.userName, message.userMessage);
         });
 
         socket.on('user join', function(user) {
@@ -60,6 +60,7 @@ var chat = {
             
             if (event.keyCode === 13 && userName) {
                 currentUser.name = userName;
+                $( this ).val('');
             }
         });
     },
