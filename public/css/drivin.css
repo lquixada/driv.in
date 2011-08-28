@@ -13,7 +13,7 @@ a#button-mute {
     position:absolute;
     display:block;
     top:30px;
-    right:330px;
+    right:15px;
     width:40px;
     height:40px;
     text-indent:-5000px;
@@ -165,7 +165,7 @@ div#video-player {
     position:absolute;
     top:20px;
     left:50%;
-    margin-left:-295px;
+    margin-left:-305px;
     padding:70px 10px 0;
     width:590px;
     height:370px;
