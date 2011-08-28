@@ -41,6 +41,7 @@
         <script>
             $( 'a#button-mute' ).click(function () {
                 $(this).toggleClass( 'muted' );
+                player.toggleMute();
                 return false;
             });
         </script>
