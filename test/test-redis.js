@@ -29,6 +29,9 @@ module.exports = testCase({
   },
 
   'should add media to room': function(test) {
+    room.broadcast     = function(){}; // stub off
+    room.playNextVideo = function(){}; // stub off
+
     room.addMedia({url:'url3'}, function(e, val){
         client.llen(room.playlistId, function(elen, length){
             test.equal(3, length);
@@ -45,7 +48,7 @@ module.exports = testCase({
   'should retreive the current media': function(test) {
         room.currentMedia(function(e, current){
             test.equal('url1', current.url);
-     
+
             client.llen(room.playlistId, function(elen, length){
                 test.equal(2, length);
                 test.done();
