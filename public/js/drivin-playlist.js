@@ -10,8 +10,9 @@ var playlist = {
 
         this.bindEvents();
 
-        socket.on('next video', function() {
-            debugInfo('video ended');
+        socket.on('next video', function(video) {
+            debugInfo('next video ' + video.id);
+            self.killItem(video);
         });
 
         socket.on('video added', function(video) {
@@ -20,9 +21,19 @@ var playlist = {
         });
     },
 
-    addItem: function (video) {
+    killItem: function(video){
+        this.ulQueue.find('li#' + video.id)
+            .fadeOut(300, function() { $(this).remove(); });
+
+        this.nowPlaying.find('span.video-name')
+            .text(video.title)
+        this.nowPlaying.find('span.video-duration')
+            .text(video.duration);
+    },
+
+    addItem: function(video) {
         this.ulQueue.append( [
-            '<li>',
+            '<li id="' + video.id + '">',
             '  <a href="'  + video.link     + '">',
             '  <img src="' + video.thumbUrl + '" width="60" height="45" />',
               video.title,

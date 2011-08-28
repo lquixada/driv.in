@@ -2,7 +2,7 @@
 var video = {
     init: function( options ) {
         socket.on('video started', function() {
-            debugInfo('video started'); 
+            debugInfo('video started');
             player.play();
         });
 
@@ -15,9 +15,9 @@ var video = {
             debugInfo(video);
         });
 
-        socket.on('next video', function(videoId) {
-            debugInfo('received next video');
-            player.loadId( videoId );
+        socket.on('next video', function(video) {
+            debugInfo('received next video ' + video.id);
+            player.loadId(video.id);
 
             //Play and pause to force buffer
             player.play();
