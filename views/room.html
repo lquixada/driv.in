@@ -143,34 +143,6 @@
                     socket.connected = true;
                   });
 
-                  socket.on('video added', function(video) {
-                    console.log(video);
-                  });
-
-                  socket.on('next video', function(videoId) {
-                      console.log('received next video');
-                      player.loadId( videoId );
-
-                      //Play and pause to force buffer
-                      player.play();
-                      player.pause();
-                  });
-
-                  socket.on('move forward', function(videoId, seconds) {
-                      console.log('loading video: ' + videoId);
-                      player.loadId( videoId, seconds );
-
-                      console.log('will seek to ' + seconds + ' seconds');
-                      player.seekTo( seconds );
-
-                      player.play();
-                      player.pause();
-                  });
-
-                  socket.on('play now', function() {
-                      console.log('will play now');
-                      player.play();
-                  });
 
                   chat.init( {
                       onMessageSent: function ( message ) {
