@@ -1,13 +1,15 @@
 
 var User = function ( options ) {
+    this.id = options.id;
     this.name = options.name || 'Driver';
     this.avatar = options.avatar || 'img/driver03.png';
 };
 
 
 User.prototype.draw = function () {
+    var self = this;
     this.element = $( [
-            '<div class="user">',
+            '<div class="user" id="' + self.id  + '">',
                 '<span class="user-balloon"></span>',
                 '<img class="user-avatar" src="'+this.avatar+'" width="150" height="150">',
             '</div>'
@@ -16,6 +18,9 @@ User.prototype.draw = function () {
     return this.element;
 }
 
+User.prototype.remove = function() {
+  $( this.id ).remove();
+},
 
 User.prototype.speak = function ( message ) {
     var element = this.element;

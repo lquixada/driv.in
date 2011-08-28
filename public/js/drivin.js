@@ -10,21 +10,29 @@ function onYouTubePlayerReady(playerId) {
 
     playerReady = true;
     debugInfo('youtube socket connected:' + socket.connected);
-  
-    // if (socket.connected) {
-    //   socket.emit('join', room);
-    // } else {
-    //   debugInfo('not connected yet');
-    // }
 }
 
 function joinRoom() {
   setTimeout(function() {
     if (playerReady && socket.connected) {
       debugInfo('can join room');
-      socket.emit('join', room);
+      socket.emit('join', roomName);
+      currentUser = new User( {id: socket.socket.sessionid, name:'lquixada', avatar:'img/avatar01.png'} );
+      room.add(currentUser);
+      initChat();
       return;
     }
     joinRoom();
   }, 50);
+}
+
+function initChat() {
+    chat.init( {
+        onMessageSent: function ( message ) {
+            this.sendMessage( currentUser.name, message );
+        },
+        onUserNameChanged: function ( userName ) {
+            currentUser.name = userName;
+        }
+    });
 }
