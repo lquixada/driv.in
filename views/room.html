@@ -79,12 +79,15 @@
             <section id="playlist-now">
                 <h3>Now</h3>
 
-                <marquee class="video-name">
+                <marquee scrolldelay="150" class="video-name">
+                    Peter, Bjorn & John - Young Folks
+                
                   <% if(room.playing()){ %>
                     <%= room.currentMedia.title %>
                   <% } %>
                 </marquee>
                 <span class="video-duration">
+                  -2:31
                   <% if(room.playing()){ %>
                     <%= room.currentMedia.duration %>
                   <% } %>
