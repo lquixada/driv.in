@@ -35,7 +35,7 @@
 
     <section id="stage">
         <h1>Driv.in</h1>
-        
+
         <a id="button-mute" href="#mute">mute sound</a>
 
         <script>
@@ -112,7 +112,7 @@
                   <% playlist.forEach(function(media){ %>
                     <li id="<%= media.id %>">
                         <a href="<%= media.url %>" target="_blank">
-                            <img src="<%= media.thumbUrl %>" width="47" height="35">
+                            <img src="<%= media.thumbUrl %>" />
                             <%= media.title %>
                         </a>
                     </li>
@@ -137,7 +137,7 @@
             </header>
 
             <section id="chat-messages">
-                
+
                 <ul>
                     <li><strong>emerson leite</strong> esse node...</li>
                     <li><strong>everton</strong> eu sou lá de pelotas</li>

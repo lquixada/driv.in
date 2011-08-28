@@ -14,7 +14,7 @@ var playlist = {
             debugInfo('next video ' + video.id);
             self.killItem(video);
 
-            selg.tomatoes.removeClass('disabled');
+            self.tomatoes.removeClass('disabled');
         });
 
         socket.on('video added', function(video) {
@@ -37,7 +37,7 @@ var playlist = {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
             '  <a href="'  + video.link     + '">',
-            '  <img src="' + video.thumbUrl + '" width="45" height="37" />',
+            '  <img src="' + video.thumbUrl + '" />',
               video.title,
             '  </a>',
             '</li>'
