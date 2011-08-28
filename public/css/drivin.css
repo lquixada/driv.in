@@ -118,7 +118,7 @@ div#video-player {
     padding:80px 10px 0;
     width:590px;
     height:350px;
-    background:url(/img/bg-telao.png) transparent repeat-x 0 0;
+    background:url(/img/telao.png) transparent repeat-x 0 0;
     z-index:5;
 }
 
@@ -163,6 +163,17 @@ div#video-audience div#user-space {
     bottom:30px;
     left:30px;
     right:330px;
+}
+
+div#video-player input#room-title {
+    position:absolute;
+    top:5px;
+    left:160px;
+    width:284px;
+    height:41px;
+    color:#000;
+    font-size:26px;
+    text-align:center;
 }
 
 footer {
