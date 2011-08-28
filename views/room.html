@@ -66,15 +66,15 @@
         <div id="video-player">
             <input type="text" id="room-title" name="" value="NodeKO 2011" readonly>
 
-            <script>
-                $( 'input#room-title' ).dblclick(function () {
-                    $( this ).addClass('edit-mode').removeAttr( 'readonly' );
-                });
+            <!--<script>-->
+                <!--$( 'input#room-title' ).dblclick(function () {-->
+                    <!--$( this ).addClass('edit-mode').removeAttr( 'readonly' );-->
+                <!--});-->
 
-                $( 'input#room-title' ).blur(function () {
-                    $( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );
-                });
-            </script>
+                <!--$( 'input#room-title' ).blur(function () {-->
+                    <!--$( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );-->
+                <!--});-->
+            <!--</script>-->
 
             <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="600" height="340">
                 <param name="allowScriptAccess" value="always">
@@ -137,10 +137,8 @@
                 <ul>
                   <% playlist.forEach(function(media){ %>
                     <li id="<%= media.id %>">
-                        <a href="<%= media.url %>" target="_blank">
-                            <img src="<%= media.thumbUrl %>" />
-                            <%= media.title %>
-                        </a>
+                        <img src="<%= media.thumbUrl %>" />
+                        <%= media.title %>
                     </li>
                   <% });%>
                 </ul>
