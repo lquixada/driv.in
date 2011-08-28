@@ -79,11 +79,11 @@
             <section id="playlist-now">
                 <h3>Now</h3>
 
-                <span class="video-name">
+                <marquee class="video-name">
                   <% if(room.playing()){ %>
                     <%= room.currentMedia.title %>
                   <% } %>
-                </span>
+                </marquee>
                 <span class="video-duration">
                   <% if(room.playing()){ %>
                     <%= room.currentMedia.duration %>
