@@ -1,29 +1,34 @@
 
 var playlist = {
     init: function ( options ) {
+        var self = this;
         this.section = $( 'section#playlist' );
+        this.nowPlaying = this.section.find( 'section#playlist-now' );
         this.ulQueue = this.section.find( 'section#playlist-queue ul' );
         this.input = this.section.find( 'input#video-url' );
         this.button = this.section.find( 'button#video-add' );
 
         this.bindEvents();
+
+        socket.on('next video', function() {
+            debugInfo('video ended');
+        });
+
+        socket.on('video added', function(video) {
+            debugInfo('video added ' + video.id);
+            self.addItem(video);
+        });
     },
 
-    addItem: function ( data ) {
-        var video = {
-            link: data.entry.link[0].href,
-            thumb: data.entry.media$group.media$thumbnail[1].url,
-            title: data.entry.title.$t
-        };
-
+    addItem: function (video) {
         this.ulQueue.append( [
-                '<li>',
-                    '<a href="'+video.link+'">',
-                        '<img src="'+video.thumb+'" width="60" height="45" />',
-                        video.title,
-                    '</a>',
-                '</li>'
-            ].join(''))
+            '<li>',
+            '  <a href="'  + video.link     + '">',
+            '  <img src="' + video.thumbUrl + '" width="60" height="45" />',
+              video.title,
+            '  </a>',
+            '</li>'
+        ].join(''))
             .animate( {
                 scrollTop: this.ulQueue.height()
             }, 900 );

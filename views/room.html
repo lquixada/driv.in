@@ -97,10 +97,6 @@
                 <input type="text" id="video-url" name="video_url" value="" placeholder="paste a video url from youtube">
                 <button type="button" id="video-add">add video</button>
             </footer>
-
-            <script>
-                playlist.init();
-            </script>
         </section>
 
         <section id="chat">
@@ -140,14 +136,14 @@
                   var playerReady = false;
                   var socket = io.connect();
                   var room = '<%= room.name %>'
-                  
+
                   joinRoom();
 
                   socket.on('connect', function() {
                     socket.connected = true;
                   });
 
-
+                  playlist.init();
                   chat.init( {
                       onMessageSent: function ( message ) {
                           this.addMessage( currentUser.name, message );
