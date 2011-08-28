@@ -11,9 +11,18 @@
     <meta name="description" content="Social video experience in a digital drive-in">
     <meta name="author" content="Go Horse Brazil">
 
+    <meta property="og:url" content="http://driv.in/<%= room.name %>">
+    <meta property="og:title" content="Driv.in - The YouTube battle party">
+    <meta property="og:image" content="http://driv.in/img/logo-drivin.png">
+    <meta property="og:site_name" content="Driv.in">
+
+    <link rel="image_src" href="http://driv.in/img/logo-drivin.png" />
+    <link rel="canonical" href="http://driv.in/<%= room.name %>" />
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/drivin.css">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- libs -->
     <script src="/socket.io/socket.io.js"></script>
@@ -38,6 +47,12 @@
 
         <iframe class="nko-vote" src="http://nodeknockout.com/iframe/go-horse-brazil" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
 
+        <div id="social">
+            <a href="http://www.facebook.com/share.php?u=http://driv.in/<%= room.name %>" target="_blank"><img src="img/button-social-facebook.png" /></a>
+            <a href="http://twitter.com/share?url=http://driv.in/<%= room.name %>&text=Join%20me%20on%20driv.in" target="_blank"><img src="img/button-social-twitter.png" /></a>
+            <!--<a href="http://plus.google.com"><img src="img/button-social-gplus.png" /></a>-->
+        </div>
+
         <a id="button-mute" href="#mute">mute sound</a>
 
         <script>
@@ -52,15 +67,15 @@
         <div id="video-player">
             <input type="text" id="room-title" name="" value="NodeKO 2011" readonly>
 
-            <script>
-                $( 'input#room-title' ).dblclick(function () {
-                    $( this ).addClass('edit-mode').removeAttr( 'readonly' );
-                });
+            <!--<script>-->
+                <!--$( 'input#room-title' ).dblclick(function () {-->
+                    <!--$( this ).addClass('edit-mode').removeAttr( 'readonly' );-->
+                <!--});-->
 
-                $( 'input#room-title' ).blur(function () {
-                    $( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );
-                });
-            </script>
+                <!--$( 'input#room-title' ).blur(function () {-->
+                    <!--$( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );-->
+                <!--});-->
+            <!--</script>-->
 
             <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="600" height="340">
                 <param name="allowScriptAccess" value="always">
@@ -75,13 +90,26 @@
         </div>
 
         <script>
-            currentUser = new User( {name:'lquixada', avatar:'img/avatar01.png'} );
+            var currentUser = null;
+//            currentUser = new User( {name:'lquixada', avatar:'img/avatar01.png'} );
+
+              var playerReady = false;
+              var socket = io.connect();
+              var roomName = '<%= room.name %>'
+
+              joinRoom();
+
+              socket.on('connect', function() {
+                socket.connected = true;
+              });
+
+
 
             room.init();
-            room.add( currentUser );
-            room.add( new User( {name:'cainanunes', avatar:'img/avatar01.png'} ) );
-            room.add( new User( {name:'emerleite', avatar:'img/avatar01.png'} ) );
-            room.add( new User( {name:'everton', avatar:'img/avatar01.png'} ) );
+//            room.add( currentUser );
+//            room.add( new User( {name:'cainanunes', avatar:'img/avatar01.png'} ) );
+//            room.add( new User( {name:'emerleite', avatar:'img/avatar01.png'} ) );
+//          room.add( new User( {name:'everton', avatar:'img/avatar01.png'} ) );
         </script>
 
     </section>
@@ -112,10 +140,8 @@
                 <ul>
                   <% playlist.forEach(function(media){ %>
                     <li id="<%= media.id %>">
-                        <a href="<%= media.url %>" target="_blank">
-                            <img src="<%= media.thumbUrl %>" />
-                            <%= media.title %>
-                        </a>
+                        <img src="<%= media.thumbUrl %>" />
+                        <%= media.title %>
                     </li>
                   <% });%>
                 </ul>
@@ -133,26 +159,11 @@
 
                 <div id="user-info">
                     <input type="text" id="user-name" maxlength="20" placeholder="enter a username">
-                    <button type="button">avatar</button>
                 </div>
             </header>
 
             <section id="chat-messages">
-
-                <ul>
-                    <li><strong>emerson leite</strong> esse node...</li>
-                    <li><strong>everton</strong> eu sou lá de pelotas</li>
-                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
-                    <li><strong>cainanunes</strong> quixadáááááá</li>
-                    <li><strong>lquixada</strong> whazzzuuuuup</li>
-                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
-                    <li><strong>emerson leite</strong> esse node...</li>
-                    <li><strong>everton</strong> eu sou lá de pelotas</li>
-                    <li><strong>lquixada</strong> hmmmm!!!!!</li>
-                    <li><strong>cainanunes</strong> quixadáááááá</li>
-                    <li><strong>lquixada</strong> whazzzuuuuup</li>
-                    <li><strong>cainanunes</strong> mas bah! mecaiu os butiá dos bolso</li>
-                </ul>
+                <ul></ul>
             </section>
 
             <footer>
@@ -160,28 +171,8 @@
             </footer>
 
             <script>
-                  var playerReady = false;
-                  var socket = io.connect();
-                  var room = '<%= room.name %>'
-
-                  joinRoom();
-
-                  socket.on('connect', function() {
-                    socket.connected = true;
-                  });
 
                   playlist.init();
-                  chat.init( {
-                      onMessageSent: function ( message ) {
-                          this.addMessage( currentUser.name, message );
-
-                          currentUser.speak( message );
-                          /* insert here command for socket to broadcast the message */
-                      },
-                      onUserNameChanged: function ( userName ) {
-                          currentUser.name = userName;
-                      }
-                  });
 
                   video.init();
             </script>

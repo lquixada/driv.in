@@ -12,6 +12,25 @@ var chat = {
        
         this.scrollToBottom();
         this.bindEvents();
+
+        var self = this;
+        socket.on('chat message', function(message) {
+          self.addMessage(message.userName, message.userMessage);
+          room.users[message.userId].speak(message.userMessage);
+        });
+
+        socket.on('user join', function(user) {
+          room.add(new User( {id: user.id, name: user.name, avatar:'img/avatar01.png'}));
+        });
+
+        socket.on('user leave', function(user) {
+          debugInfo('user leave:' + user.id);
+          room.remove(new User({id: user.id}));
+        });
+    },
+
+    sendMessage: function(userName, userMessage) {
+      socket.emit('chat message', userName, userMessage);      
     },
 
     addMessage: function ( userName, userMessage ) {
