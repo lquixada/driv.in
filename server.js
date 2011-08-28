@@ -17,7 +17,7 @@ var routes = require('./lib/routes');
 var redis  = require('redis');
 
 app.configure(function() {
-  app.use(express.favicon());
+  app.use(express.favicon(__dirname + '/public/favicon.ico'));
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(app.router);
