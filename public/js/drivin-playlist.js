@@ -29,7 +29,7 @@ var playlist = {
                 var timeRemain = player.element.getDuration() -
                     player.element.getCurrentTime();
 
-                if(timeRemain !== 0){
+                if(timeRemain > 0){
                     var m = Math.floor(timeRemain / 60);
                     var s = Math.floor(timeRemain % 60);
 
