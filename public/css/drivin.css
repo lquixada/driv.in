@@ -338,7 +338,7 @@ section#chat input#message {
 }
 
 section#chat input#user-name {
-    width:200px;
+    width:86%;
 }
 
 section#chat li {
