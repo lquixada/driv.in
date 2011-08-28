@@ -6,6 +6,11 @@ if (process.env.NODE_ENV == 'production') {
   });
 }
 
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ' + err);
+  process.exit(1);
+});
+
 var express = require('express');
 var app = express.createServer();
 var routes = require('./lib/routes');
