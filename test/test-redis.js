@@ -45,17 +45,6 @@ module.exports = testCase({
     });
   },
 
-  'should retreive the current media': function(test) {
-        room.currentMedia(function(e, current){
-            test.equal('url1', current.url);
-
-            client.llen(room.playlistId, function(elen, length){
-                test.equal(2, length);
-                test.done();
-            });
-        });
-  },
-
   'should retreive playlist': function(test) {
     client.rpush(room.playlistId, JSON.stringify({url: 'url3'}));
     room.playlist(function(playlist){
@@ -83,5 +72,23 @@ module.exports = testCase({
             test.done();
         });
     });
+  },
+
+  'should increment playlist ': function(test) {
+      room.blamesReset(function(c){
+          test.equal(0, c);
+      });
+
+     room.blames(function(c){
+          test.equal(0, c);
+      });
+
+      room.blame(function(currValue1){
+          test.equal(1, currValue1);
+          room.blame(function(currValue2){
+              test.equal(2, currValue2);
+              test.done();
+          });
+      });
   }
 });
