@@ -1,7 +1,23 @@
 
 var player = {
+    muted: false,
+
     init: function ( options ) {
         this.element = options.element || null;
+        if (this.element) {
+          this.element.setVolume(100);
+        }
+        
+    },
+
+    toggleMute: function() {
+        if (this.mute) {
+          this.mute = false;
+          if (this.element) { this.element.unMute(); }
+        } else {
+          this.mute = true;
+          if (this.element) { this.element.mute(); }
+        }
     },
 
     bindEvent: function ( event, callback ) {
@@ -16,6 +32,9 @@ var player = {
               this.element.cueVideoById( id, seconds ); 
             } else {
               this.element.cueVideoById( id );
+            }
+            if (this.mute) {
+              this.element.mute();
             }
         }
     },
