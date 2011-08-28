@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
+
     <title>Driv.in - social video experience in a digital drive-in</title>
 
     <meta name="description" content="">
     <meta name="author" content="Go Horse Brazil">
-    
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/drivin.css">
@@ -32,7 +32,7 @@
 <body>
 
 <div id="drive-in">
-    
+
     <section id="stage">
         <h1>Driv.in</h1>
 
@@ -42,7 +42,7 @@
                 <param name="wmode" value="transparent">
             </object>
         </div>
-        
+
         <div id="video-audience">
             <div id="user-space"></div>
         </div>
@@ -71,34 +71,24 @@
 
                 <span class="video-name">Desfile Cívico - Banda João de Barro 1</span>
                 <span class="video-duration">-2:31</span>
-                
+
                 <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
 
                 <!--<button style="margin:0; width:100%; height:60px;"></button>-->
             </section>
-            
+
             <section id="playlist-queue">
                 <h3>Next</h3>
 
                 <ul>
+                  <% playlist.forEach(function(media){ %>
                     <li>
-                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
-                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="47" height="35">
-                            Desfile Cívico - Banda João de Barro 1
+                        <a href="<%= media.url %>" target="_blank">
+                            <img src="<%= media.thumbUrl %>" width="47" height="35">
+                            <%= media.title %>
                         </a>
                     </li>
-                    <li>
-                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
-                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="47" height="35">
-                            Desfile Cívico - Banda João de Barro 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.youtube.com/watch?v=MXZkFAKx454&amp;feature=youtube_gdata" target="_blank">
-                            <img src="http://i.ytimg.com/vi/MXZkFAKx454/1.jpg" width="47" height="35">
-                            Desfile Cívico - Banda João de Barro 1
-                        </a>
-                    </li>
+                  <% });%>
                 </ul>
             </section>
 
@@ -108,7 +98,7 @@
             </footer>
 
             <script>
-                playlist.init();    
+                playlist.init();
             </script>
         </section>
 
@@ -121,10 +111,10 @@
                     <button type="button">avatar</button>
                 </div>
             </header>
-             
+
             <section id="chat-messages">
                 <div class="gradient">aaaa</div>
-                
+
                 <ul>
                     <li><strong>emerson leite</strong> esse node...</li>
                     <li><strong>everton</strong> eu sou lá de pelotas</li>
@@ -147,11 +137,11 @@
 
             <script>
                   var socket = io.connect();
-                  var room = '<%= room %>'
+                  var room = '<%= room.name %>'
                   socket.on('connect', function() {
                     socket.connected = true;
                   });
-                  
+
                   socket.on('video added', function(video) {
                     console.log(video);
                   });
@@ -159,7 +149,7 @@
                   socket.on('next video', function(videoId) {
                       console.log('received next video');
                       player.loadId( videoId );
-                   
+
                       //Play and pause to force buffer
                       player.play();
                       player.pause();
@@ -167,7 +157,7 @@
 
                   socket.on('move forward', function(videoId, seconds) {
                       console.log('loading video: ' + videoId);
-                      player.loadId( videoId, seconds ); 
+                      player.loadId( videoId, seconds );
 
                       console.log('will seek to ' + seconds + ' seconds');
                       player.seekTo( seconds );
@@ -201,17 +191,17 @@
 </div>
 
 <script type="text/javascript">
- 
+
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-25382569-1']);
   _gaq.push(['_trackPageview']);
- 
+
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
- 
+
 </script>
 
 </body>

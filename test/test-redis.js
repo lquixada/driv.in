@@ -58,7 +58,7 @@ module.exports = testCase({
 
   'should retreive playlist': function(test) {
     client.rpush(room.playlistId, JSON.stringify({url: 'url3'}));
-    room.playlist(function(e, playlist){
+    room.playlist(function(playlist){
       test.equal(2,      playlist.length);
       test.equal('url2', playlist[0]['url']);
       test.equal('url3', playlist[1]['url']);
