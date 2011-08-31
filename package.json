@@ -3,15 +3,16 @@
   "description": "Video Drive In",
   "version": "0.0.1",
   "dependencies": {
-    "nko": "*",
-    "fakeweb": "*",
-    "nodeunit": "*",
     "database-cleaner": "*",
-    "socket.io": "*",
-    "redis": "*",
-    "hiredis": "*",
+    "ejs": "*",
     "express": "~2.4.6",
-    "ejs": "*"
+    "fakeweb": "*",
+    "hiredis": "*",
+    "nko": "*",
+    "nodeunit": "*",
+    "redis": "*",
+    "sanitizer": "*",
+    "socket.io": "*"
   },
   "private": "true"
 }
