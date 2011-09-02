@@ -39,7 +39,7 @@
     <script>
         function jumpVote() {
             var winW = 0;
-            
+
             if (document.body && document.body.offsetWidth) {
              winW = document.body.offsetWidth;
             }
@@ -56,12 +56,12 @@
                 $( 'iframe.nko-vote' ).css( {
                     top: 70,
                     left: 55
-                } );        
+                } );
             } else {
                 $( 'iframe.nko-vote' ).css( {
                     top: 35,
                     left: 174
-                } );    
+                } );
             }
         }
         $( document ).ready( function () {
@@ -97,21 +97,12 @@
             });
         </script>
 
-
         <div id="video-player">
             <input type="text" id="room-title" name="" value="<%= room.name %>" readonly>
 
-            <!--<script>-->
-                <!--$( 'input#room-title' ).dblclick(function () {-->
-                    <!--$( this ).addClass('edit-mode').removeAttr( 'readonly' );-->
-                <!--});-->
-
-                <!--$( 'input#room-title' ).blur(function () {-->
-                    <!--$( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );-->
-                <!--});-->
-            <!--</script>-->
-
-            <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="600" height="340">
+            <object type="application/x-shockwave-flash"
+                    id="diplayer" width="600" height="340"
+                    data="<%= room.currentMediaPlayerUrl() %>" >
                 <param name="allowScriptAccess" value="always">
                 <param name="wmode" value="transparent">
             </object>
