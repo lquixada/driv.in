@@ -173,8 +173,13 @@
             </section>
 
             <footer>
-                <input type="text" id="video-url" name="video_url" value="" placeholder="paste a video url from youtube">
-                <button type="button" id="video-add">add video</button>
+              <form action="/rooms/<%= room.id %>/videos" method="post">
+                <p>
+                  <input type="text" id="video-url" name="video[url]" value=""
+                         placeholder="paste a video url from youtube">
+                  <input type="submit" id="video-add" value="add video" />
+                </p>
+              </form>
             </footer>
         </section>
 

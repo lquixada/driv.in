@@ -10,6 +10,7 @@
     "hiredis": "*",
     "nko": "*",
     "nodeunit": "*",
+    "path": "*",
     "redis": "*",
     "sanitizer": "*",
     "socket.io": "*"

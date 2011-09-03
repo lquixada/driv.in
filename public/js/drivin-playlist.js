@@ -74,11 +74,11 @@ var playlist = {
 
     bindEvents: function () {
         var that = this;
-        this.button.click(function () {
-            debugInfo('add video');
-            socket.emit('add video', that.input.val());
-            that.input.val('');
-        });
+        // this.button.click(function () {
+        //     debugInfo('add video');
+        //     socket.emit('add video', that.input.val());
+        //     that.input.val('');
+        // });
 
         this.tomatoes.click(function(e){
             e.preventDefault();
