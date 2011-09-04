@@ -1,28 +1,30 @@
-var testCase = require('nodeunit').testCase,
-    DatabaseCleaner = require('database-cleaner'),
-    databaseCleaner = new DatabaseCleaner('redis');
-var redis  = require('redis');
-var client = redis.createClient( 6379, 'localhost');
+var DatabaseCleaner = require('database-cleaner');
+var databaseCleaner = new DatabaseCleaner('redis');
+
+global.app = {};
+global.app.redisClient = require('redis')
+    .createClient( 6379, 'localhost');
 
 var Room = require('../lib/room');
-var room = new Room('room1', client);
+var room = new Room('room1');
 
+var testCase = require('nodeunit').testCase;
 module.exports = testCase({
   setUp: function (callback) {
-    client.del  (room.playlistId);
-    client.rpush(room.playlistId, JSON.stringify({url: 'url1'}));
-    client.rpush(room.playlistId, JSON.stringify({url: 'url2'}));
+    app.redisClient.del  (room.playlistId);
+    app.redisClient.rpush(room.playlistId, JSON.stringify({url: 'url1'}));
+    app.redisClient.rpush(room.playlistId, JSON.stringify({url: 'url2'}));
     callback();
   },
 
   tearDown: function (callback) {
-    databaseCleaner.clean(client, callback);
+    databaseCleaner.clean(app.redisClient, callback);
   },
 
   'should clean the playlist': function(test) {
     room.clear();
 
-    client.llen(room.playlistId, function(e, val){
+    app.redisClient.llen(room.playlistId, function(e, val){
         test.equal(0, val);
         test.done();
     });
@@ -33,11 +35,11 @@ module.exports = testCase({
     room.playNextVideo = function(){}; // stub off
 
     room.addMedia({url:'url3'}, function(e, val){
-        client.llen(room.playlistId, function(elen, length){
+        app.redisClient.llen(room.playlistId, function(elen, length){
             test.equal(3, length);
         });
 
-        client.rpop(room.playlistId, function(etail, tail){
+        app.redisClient.rpop(room.playlistId, function(etail, tail){
             var media = JSON.parse(tail)
             test.equal('url3', media.url);
             test.done();
@@ -46,7 +48,7 @@ module.exports = testCase({
   },
 
   'should retreive playlist': function(test) {
-    client.rpush(room.playlistId, JSON.stringify({url: 'url3'}));
+    app.redisClient.rpush(room.playlistId, JSON.stringify({url: 'url3'}));
     room.playlist(function(playlist){
       test.equal(2,      playlist.length);
       test.equal('url2', playlist[0]['url']);
@@ -56,7 +58,7 @@ module.exports = testCase({
   },
 
   'should retreive blank playlist': function(test) { // fucking redis return null when blank!
-    var room2 = new Room('room2', client);
+    var room2 = new Room('room2', app.redisClient);
     room2.playlist(function(playlist){
       test.equal(0, playlist.length);
       test.done();
@@ -67,7 +69,7 @@ module.exports = testCase({
     room.popCurrentMedia(function(e, head){
         test.equal('url1', head.url);
 
-        client.llen(room.playlistId, function(elen, length){
+        app.redisClient.llen(room.playlistId, function(elen, length){
             test.equal(1, length);
             test.done();
         });
