@@ -77,7 +77,13 @@ aside#panels {
     z-index:15;
 }
 
-aside#panels input {
+aside#panels form p {
+    margin:  0;
+    padding: 0;
+    text-align: left;
+}
+
+aside#panels form input.text {
     padding:0 10px;
     width:180px;
     height:34px;
@@ -90,11 +96,11 @@ aside#panels input {
 }
 
 
-aside#panels input:focus {
+aside#panels form input.text:focus {
     color:#333;
 }
 
-aside#panels button {
+aside#panels form input.submit {
     margin-left:-10px;
     padding:6px 12px;
     height:36px;

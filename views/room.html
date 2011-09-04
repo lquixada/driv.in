@@ -175,9 +175,11 @@
             <footer>
               <form action="/rooms/<%= room.id %>/videos" method="post">
                 <p>
-                  <input type="text" id="video-url" name="video[url]" value=""
+                  <input type="text" class="text"
+                         id="video-url" name="video[url]" value=""
                          placeholder="paste a video url from youtube">
-                  <input type="submit" id="video-add" value="add video" />
+                  <input type="submit" id="video-add" class="submit"
+                         value="add video" />
                 </p>
               </form>
             </footer>
