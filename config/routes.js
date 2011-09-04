@@ -8,6 +8,10 @@ module.exports = function(app) {
 
     app.post('/rooms/:id/videos', VideosController.create);
 
+    app.get('/healthcheck', function(req, res) {
+        res.send(200);
+    });
+
     app.use(function(req, res, next){
         res.render('404', {
             layout:false,
