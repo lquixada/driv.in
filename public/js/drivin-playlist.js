@@ -2,12 +2,12 @@
 var playlist = {
     init: function ( options ) {
         var self = this;
-        this.section = $( 'section#playlist' );
-        this.nowPlaying = this.section.find( 'section#playlist-now' );
-        this.ulQueue = this.section.find( 'section#playlist-queue ul' );
-        this.input = this.section.find( 'input#video-url' );
-        this.button = this.section.find( 'button#video-add' );
-        this.tomatoes = this.section.find( 'a.button-tomatoes' );
+        this.section    = $('section#playlist');
+        this.form       = this.section.find('form');
+        this.nowPlaying = this.section.find('section#playlist-now');
+        this.ulQueue    = this.section.find('section#playlist-queue ul');
+        this.tomatoes   = this.section.find('a.button-tomatoes');
+
         this.bindEvents();
 
         socket.on('next video', function(video) {
@@ -74,11 +74,24 @@ var playlist = {
 
     bindEvents: function () {
         var that = this;
-        // this.button.click(function () {
-        //     debugInfo('add video');
-        //     socket.emit('add video', that.input.val());
-        //     that.input.val('');
-        // });
+        this.form.submit(function(e){
+            e.preventDefault();
+            var self  = $(this);
+            var input = self.find('input[type=text]');
+            if(!$.trim(input.val())){
+                return false;
+            }
+
+            var submit = self.find('input[type=submit]');
+            submit.attr('disabled', 'disabled');
+
+            $.post(self.attr('action'), self.serialize(), {
+                success: function(){
+                    submit.attr('disabled', '');
+                    input.val('');
+                }
+            });
+        });
 
         this.tomatoes.click(function(e){
             e.preventDefault();
