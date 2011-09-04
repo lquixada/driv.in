@@ -15,10 +15,6 @@ module.exports = function(app) {
 
             console.log('join ' + roomId);
             Room.findOrCreate(roomId, function(room){
-                room.users.forEach(function(user) {
-                    socket.emit('user join', {id: user.id, name: user.name});
-                });
-
                 room.addUser(socket);
 
                 room.broadcast('user join', {id: socket.id, name: socket.userName});
