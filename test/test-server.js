@@ -10,6 +10,7 @@ var room = new Room('room1', redisClient);
 module.exports = testCase({
     setUp: function(callback){
         // TODO: require server and boot app!
+        callback();
     },
     tearDown: function(callback){
         dbCleaner.clean(redisClient, callback);

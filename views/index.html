@@ -64,21 +64,23 @@
 
                 <ul>
                     <% for(var roomId in rooms){ %>
-                       <% var room = rooms[roomId]; %>
-                       <li>
-                            <a href="/<%= room.name %>">
-                                <span class="room-name"><%= room.name %></span>
-                                <span class="room-count"><%= room.users.length %> persons</span>
-                                <% if(room.playing()){ %>
-                                  <span class="room-video">
-                                    <em>now</em>
-                                    <marquee scrolldelay="150" class="video-name">
-                                        <%= room.currentMedia.title %>
-                                    </marquee>
-                                  </span>
-                                <% } %>
-                            </a>
-                       </li>
+                        <% if(rooms.hasOwnProperty(roomId)){ %>
+                          <% var room = rooms[roomId]; %>
+                          <li>
+                              <a href="/<%= room.name %>">
+                                  <span class="room-name"><%= room.name %></span>
+                                  <span class="room-count"><%= room.users.length %> persons</span>
+                                  <% if(room.playing()){ %>
+                                      <span class="room-video">
+                                          <em>now</em>
+                                          <marquee scrolldelay="150" class="video-name">
+                                              <%= room.currentMedia.title %>
+                                          </marquee>
+                                      </span>
+                                  <% } %>
+                              </a>
+                          </li>
+                        <% } %>
                     <% } %>
                 </ul>
 
