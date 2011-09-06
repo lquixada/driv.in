@@ -7,7 +7,10 @@ module.exports = function(app) {
 
         socket.on('disconnect', function () {
             console.log('user disconnected:' + socket.id);
-            app.io.sockets.emit('user leave', {id: socket.id});
+
+            Room.userLeave(socket, function(u){
+                app.io.sockets.emit('user leave', {id: socket.id});
+            });
         });
 
         socket.on('join', function(roomId, userName) {
