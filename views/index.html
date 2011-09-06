@@ -69,7 +69,7 @@
                           <li>
                               <a href="/<%= room.name %>">
                                   <span class="room-name"><%= room.name %></span>
-                                  <span class="room-count"><%= room.users.length %> persons</span>
+                                  <span class="room-count"><%= persons(room.users.length) %></span>
                                   <% if(room.playing()){ %>
                                       <span class="room-video">
                                           <em>now</em>
