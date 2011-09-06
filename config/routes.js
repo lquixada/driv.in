@@ -1,7 +1,11 @@
-var  RoomsController = requireLib( 'roomsController.js');
+var  RoomsController = requireLib('roomsController.js' );
 var VideosController = requireLib('videosController.js');
 
+var RoomsHelper = requireLib('roomsHelper.js');
+
 module.exports = function(app) {
+    app = RoomsHelper.all(app);
+
     app.get('/',       RoomsController.index);
     app.get('/:id',    RoomsController.show );
     app.post('/rooms', RoomsController.create);
