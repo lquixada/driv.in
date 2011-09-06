@@ -20,11 +20,8 @@ module.exports = testCase({
         var self = this;
         self.room1.addUser(self.newUser1, function(u){
             test.equal(self.newUser1, u);
-
-            self.room1.countUsers(function(c){
-                test.equal(1, c);
-                test.done();
-            });
+            test.equal(1, self.room1.users.length);
+            test.done();
         });
     },
 
@@ -35,47 +32,32 @@ module.exports = testCase({
                 test.equal(self.newUser1, u1);
                 test.equal(self.newUser1, u2);
 
-                self.room1.countUsers(function(c){
-                    test.equal(1, c);
-                    test.done();
-                });
+                test.equal(1, self.room1.users.length);
+                test.done();
             });
         });
     },
 
     'should allow users to leave the room': function(test){
         var self = this;
-        self.room1.addUser(self.newUser1, function(u1){
-            self.room1.addUser(self.newUser2, function(u2){
-                self.room1.removeUser(self.newUser1, function(u){
-                    self.room1.countUsers(function(c){
-                        test.equal(1, c);
-                        test.done();
-                    });
-                });
-            });
+
+        self.room1.users = [self.newUser1, self.newUser2];
+        self.room1.removeUser(self.newUser1, function(u){
+            test.equal(1, self.room1.users.length);
+            test.done();
         });
     },
 
     'should remove users from all rooms once': function(test){
         var self = this;
-        self.room1.addUser(self.newUser1, function(u1){
-            self.room1.addUser(self.newUser2, function(u2){
-                self.room2.addUser(self.newUser1, function(u3){
-                    self.room2.addUser(self.newUser3, function(u4){
-                        Room.userLeave(self.newUser1, function(u){
-                            self.room1.countUsers(function(c1){
-                                test.equal(1, c1);
 
-                                self.room2.countUsers(function(c2){
-                                    test.equal(1, c2);
-                                    test.done();
-                                });
-                            });
-                        });
-                    });
-                });
-            });
+        self.room1.users = [self.newUser1, self.newUser2];
+        self.room2.users = [self.newUser1, self.newUser3];
+
+        Room.userLeave(self.newUser1, function(u){
+            test.equal(1, self.room1.users.length);
+            test.equal(1, self.room2.users.length);
+            test.done();
         });
     }
 });
