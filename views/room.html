@@ -36,40 +36,6 @@
     <script src="js/drivin-video.js"></script>
     <script src="js/drivin-room.js"></script>
     <script src="js/drivin-user.js"></script>
-    <script>
-        function jumpVote() {
-            var winW = 0;
-            
-            if (document.body && document.body.offsetWidth) {
-             winW = document.body.offsetWidth;
-            }
-            if (document.compatMode=='CSS1Compat' &&
-                document.documentElement &&
-                document.documentElement.offsetWidth ) {
-             winW = document.documentElement.offsetWidth;
-            }
-            if (window.innerWidth && window.innerHeight) {
-             winW = window.innerWidth;
-            }
-
-            if ( winW < 1164 ) {
-                $( 'iframe.nko-vote' ).css( {
-                    top: 70,
-                    left: 55
-                } );        
-            } else {
-                $( 'iframe.nko-vote' ).css( {
-                    top: 35,
-                    left: 174
-                } );    
-            }
-        }
-        $( document ).ready( function () {
-            jumpVote();
-        });
-
-        $( window ).resize( jumpVote );
-    </script>
 </head>
 
 <body>
@@ -78,8 +44,6 @@
 
     <section id="stage">
         <h1><a href="/"><img src="/img/logo-drivin.png" alt="Driv.in"/></a></h1>
-
-        <iframe class="nko-vote" src="http://nodeknockout.com/iframe/go-horse-brazil" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
 
         <div id="social">
             <a href="http://www.facebook.com/share.php?u=http://driv.in/<%= room.name %>" target="_blank"><img src="img/button-social-facebook.png" /></a>
