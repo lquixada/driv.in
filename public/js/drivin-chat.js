@@ -1,6 +1,8 @@
 
 var chat = {
     init: function ( options ) {
+        var self = this;
+
         this.section = $( 'section#chat' );
         this.sectionChatMessages = this.section.find( 'section#chat-messages' );
         this.ul = this.section.find( 'ul' );
@@ -13,19 +15,10 @@ var chat = {
         this.scrollToBottom();
         this.bindEvents();
 
-        var self = this;
+
         socket.on('chat message', function(message) {
           self.addMessage(message.userName, message.userMessage);
           room.users[message.userId].speak(message.userName, message.userMessage);
-        });
-
-        socket.on('user join', function(user) {
-          room.add(new User( {id: user.id, name: user.name, avatar:'img/avatar01.png'}));
-        });
-
-        socket.on('user leave', function(user) {
-          debugInfo('user leave:' + user.id);
-          room.remove(new User({id: user.id}));
         });
     },
 

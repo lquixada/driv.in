@@ -16,6 +16,7 @@ function joinRoom() {
   setTimeout(function() {
     if (playerReady && socket.connected) {
       debugInfo('can join room');
+      room.init();
       socket.emit('join', roomName, 'user');
       currentUser = new User( {id: socket.socket.sessionid, name:'user', avatar:'img/avatar01.png'} );
       room.add(currentUser);

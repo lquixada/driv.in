@@ -2,8 +2,20 @@ var room = {
     users: {},
 
     init: function () {
+        var that = this;
+
         this.div = $( 'div#video-audience' );
         this.divSpace = this.div.find( 'div#user-space' );
+
+        socket.on('user join', function(user) {
+          debugInfo('user join:' + user.id);
+          that.add(new User( {id: user.id, name: user.name, avatar:'img/avatar01.png'}));
+        });
+
+        socket.on('user leave', function(user) {
+          debugInfo('user leave:' + user.id);
+          that.remove(new User({id: user.id}));
+        });
     },
 
     add: function ( user ) {

@@ -88,26 +88,16 @@
         </div>
 
         <script>
-            var currentUser = null;
-//            currentUser = new User( {name:'lquixada', avatar:'img/avatar01.png'} );
+          var currentUser = null;
+          var playerReady = false;
+          var socket = io.connect();
+          var roomName = '<%= room.name %>'
 
-              var playerReady = false;
-              var socket = io.connect();
-              var roomName = '<%= room.name %>'
+          joinRoom();
 
-              joinRoom();
-
-              socket.on('connect', function() {
-                socket.connected = true;
-              });
-
-
-
-            room.init();
-//            room.add( currentUser );
-//            room.add( new User( {name:'cainanunes', avatar:'img/avatar01.png'} ) );
-//            room.add( new User( {name:'emerleite', avatar:'img/avatar01.png'} ) );
-//          room.add( new User( {name:'everton', avatar:'img/avatar01.png'} ) );
+          socket.on('connect', function() {
+            socket.connected = true;
+          });
         </script>
 
     </section>
