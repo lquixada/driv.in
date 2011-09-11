@@ -32,6 +32,7 @@ var chat = {
             
             if (event.keyCode == 13) {
                 that.userName = userName;
+                that.inputUserMessage.focus();
 
                 $.publish( 'user-name-changed', { userName: userName } );
             }

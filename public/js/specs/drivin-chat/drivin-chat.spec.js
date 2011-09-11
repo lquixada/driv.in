@@ -28,11 +28,11 @@ describe("Chat", function() {
     describe("User message input", function() {
         
         beforeEach(function() {
-            this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
-            this.input = $( 'section#chat' ).find( 'input#user-message' );
-            this.ul = $( 'section#chat' ).find( 'ul' ); 
-            
             chat.init();
+
+            this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
+            this.input = chat.inputUserMessage;
+            this.ul = chat.ulMessages; 
         });
         
         it("should publish the user message", function() {
@@ -86,10 +86,11 @@ describe("Chat", function() {
     describe("User name input", function() {
 
         beforeEach(function() {
-            this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
-            this.inputUserName = $( 'section#chat' ).find( 'input#user-name' );
-
             chat.init();
+
+            this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
+            this.inputUserName = chat.inputUserName;
+            this.inputUserMessage = chat.inputUserMessage;
         });
 
         it("should publish the new user name", function() {
@@ -113,6 +114,14 @@ describe("Chat", function() {
             });
         });
 
+        it("should give focus to the user message input on Enter key", function() {
+            this.inputUserName.val( 'John' );
+            this.inputUserName.trigger( this.enterKey );
+
+            expect( this.inputUserMessage.is(':focus') ).toBe( true );
+        });
+        
+
         it("should not publish while Enter key is not pressed", function() {
             var subscriber;
             
@@ -134,14 +143,16 @@ describe("Chat", function() {
     describe("Message coming", function() {
 
         it("should add message to the message list", function() {
-            this.ul = $( 'section#chat' ).find( 'ul' ); 
+            var ul;
 
             chat.init();
 
+            ul = chat.ulMessages; 
+
             $.publish( 'user-message-received', { userName: 'Bill', userMessage: 'foo bar' } );
 
-            expect( this.ul.find( 'li' ).size() ).toBe( 1 );
-            expect( this.ul.find( 'li' ).text() ).toBe( 'Bill foo bar' );
+            expect( ul.find( 'li' ).size() ).toBe( 1 );
+            expect( ul.find( 'li' ).text() ).toBe( 'Bill foo bar' );
         });
         
     });
