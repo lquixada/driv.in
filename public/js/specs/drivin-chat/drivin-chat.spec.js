@@ -17,7 +17,6 @@ describe("Chat", function() {
             this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
             this.input = $( 'section#chat' ).find( 'input#user-message' );
             this.ul = $( 'section#chat' ).find( 'ul' ); 
-            this.listener = null;
             
             chat.init();
         });
@@ -62,13 +61,11 @@ describe("Chat", function() {
         });
 
         it("should publish the text", function() {
-            var message;
+            var message, subscriber;
 
-            this.listener = function ( event, data ) {
+            subscriber = $.subscribe( 'message.chat', function ( event, data ) {
                 message = data.message;
-            };
-
-            $.subscribe( 'message.chat', this.listener );
+            });
 
             this.input.val( 'foo bar' );
             this.input.trigger( this.enterKey );
@@ -77,7 +74,7 @@ describe("Chat", function() {
 
             runs(function() {
                 expect( message ).toBe( 'foo bar' );
-                $.unsubscribe( 'message.chat', this.listener);
+                subscriber.unsubscribe();
             });
         });
         
@@ -88,23 +85,16 @@ describe("Chat", function() {
         beforeEach(function() {
             this.enterKey = $.Event( 'keydown', { keyCode: 13 } );
             this.inputUserName = $( 'section#chat' ).find( 'input#user-name' );
-            this.listener = null;
-            
+
             chat.init();
         });
 
-        afterEach(function() { 
-            $.unsubscribe( 'username.chat', this.listener);
-        });
-
         it("should publish the new user name", function() {
-            var userName;
+            var userName, subscriber;
 
-            this.listener = function ( event, data ) {
+            subscriber = $.subscribe( 'username.chat', function ( event, data ) {
                 userName = data.userName;
-            };
-
-            $.subscribe( 'username.chat', this.listener );
+            });
 
             this.inputUserName.val( 'John' );
             this.inputUserName.trigger( this.enterKey );
@@ -113,14 +103,14 @@ describe("Chat", function() {
 
             runs(function() {
                 expect( userName ).toBe( 'John' );
-                $.unsubscribe( 'username.chat', this.listener);
+                subscriber.unsubscribe();
             });
         });
 
         it("should not publish while Enter key is not pressed", function() {
-            var listener = jasmine.createSpy();
-
-            $.subscribe( 'username.chat', listener );
+            var subscriber;
+            
+            subscriber= $.subscribe( 'username.chat', jasmine.createSpy() );
 
             this.inputUserName.val( 'Jo' );
             this.inputUserName.keydown();
@@ -128,8 +118,8 @@ describe("Chat", function() {
             waits(50);
 
             runs(function() {
-                expect( listener ).not.toHaveBeenCalled();
-                $.unsubscribe( 'username.chat', listener);
+                expect( subscriber.callback ).not.toHaveBeenCalled();
+                subscriber.unsubscribe();
             });
         });
 
