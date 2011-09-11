@@ -2,11 +2,15 @@ savedCode = '';
 
 beforeEach(function() {
     savedCode = $( 'div#main' ).html();
+
+    this.newUser = { id: 1, name: 'John', avatar: '/img/avatar01.png' };
+    this.div = $( 'div#user-space' );
 });
 
 afterEach(function() { 
     $( 'div#main' ).html( savedCode );
 });
+
 
 describe("Audience", function() {
     
@@ -18,13 +22,10 @@ describe("Audience", function() {
         });
     });
 
+
     describe("add users", function() {
         beforeEach(function() {
-            this.newUser = { id: 1, name: 'John', avatar: 'avatar.png' };
-            this.div = $( 'div#user-space' );
-
             audience.init();
-
             audience.add( this.newUser );
         });
         
@@ -32,8 +33,8 @@ describe("Audience", function() {
             var user = audience.users[this.newUser.id];
 
             expect( user ).toBeDefined();
-            expect( user.name ).toBe( 'John' );
-            expect( user.avatar ).toBe( 'avatar.png' );
+            expect( user.name ).toBe( this.newUser.name );
+            expect( user.avatar ).toBe( this.newUser.avatar );
         });
         
         it("should add new user to the room", function() {
@@ -47,7 +48,7 @@ describe("Audience", function() {
                 img = divUser.find( 'img.user-avatar' );
 
             expect( img.size() ).toBe( 1 );
-            expect( img.attr( 'src' ) ).toBe( 'avatar.png' );
+            expect( img.attr( 'src' ) ).toBe( this.newUser.avatar );
         });
         
         it("should add new user with balloon", function() {
@@ -56,13 +57,11 @@ describe("Audience", function() {
 
             expect( span.size() ).toBe( 1 );
         });
-    });    
-    
+    });
+
+
     describe("remove user", function() {
         beforeEach(function() {
-            this.newUser = { id: 1, name: 'John', avatar: 'avatar.png' };
-            this.div = $( 'div#user-space' );
-
             audience.init();
             audience.add( this.newUser );
             audience.remove( this.newUser );
@@ -78,6 +77,36 @@ describe("Audience", function() {
             expect( divUser.size() ).toBe( 0 );
         });
     });
-    
+
+
+    describe("pubsub events", function() {
+        it("should listen the to user-added event", function() {
+            spyOn(audience, 'add');
+
+            audience.init();
+
+            $.publish( 'user-added', this.newUser );
+            
+            waits(50);
+
+            runs(function() {
+                expect( audience.add ).toHaveBeenCalled();
+            });
+        });
+
+        it("should listen the to user:remove event", function() {
+            spyOn(audience, 'remove');
+
+            audience.init();
+
+            $.publish( 'user-removed', this.newUser );
+            
+            waits(50);
+
+            runs(function() {
+                expect( audience.remove ).toHaveBeenCalled();
+            });
+        });
+    });
 });    
 
