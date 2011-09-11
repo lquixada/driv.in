@@ -5,7 +5,7 @@ beforeEach(function() {
 });
 
 afterEach(function() { 
-    $( 'div#main' ).html( savedCode ); 
+    $( 'div#main' ).html( savedCode );
 });
 
 
@@ -28,6 +28,20 @@ describe("Chat", function() {
 
             expect( this.ul.find( 'li' ).size() ).toBe( 1 );
             expect( this.ul.find( 'li' ).text() ).toMatch( /foo bar$/ );
+        });
+
+        it("should clear the input when message is sent", function() {
+            this.input.val( 'foo bar' );
+            this.input.trigger( this.enterKey );
+
+            expect( this.input.val() ).toBe( '' );
+        });
+
+        it("should not send empty messages", function() {
+            this.input.val( '' );
+            this.input.trigger( this.enterKey );
+
+            expect( this.ul.find( 'li' ).size() ).not.toBe( 1 );
         });
 
         it("should show user name on message list", function() {
