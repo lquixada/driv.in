@@ -67,7 +67,7 @@
                    <li>
                         <a href="/<%= room.name %>">
                             <span class="room-name"><%= room.name %></span>
-                            <span class="room-count"><%= room.users.length %> persons</span>
+                            <span class="room-count"><%= persons(room.users.length) %></span>
                             <% if(room.playing()){ %>
                               <span class="room-video">
                                 <em>now</em>
@@ -97,17 +97,17 @@
 </footer>
 
 <script type="text/javascript">
- 
+
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-25382569-1']);
   _gaq.push(['_trackPageview']);
- 
+
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
- 
+
 </script>
 
 </body>
