@@ -16,10 +16,10 @@ function joinRoom() {
   var timer = setInterval(function() {
     if (playerReady && socket.connected) {
       debugInfo('can join room');
-      room.init();
+      audience.init();
       socket.emit('join', roomName, 'user');
       currentUser = new User( {id: socket.socket.sessionid, name:'user', avatar:'img/avatar01.png'} );
-      room.add(currentUser);
+      audience.add(currentUser);
 
       chat.init({
         userName: currentUser.name
@@ -27,7 +27,7 @@ function joinRoom() {
       
       socket.on('chat message', function(message) {
           $.publish( 'user-message-received', message );
-          room.users[message.userId].speak(message.userName, message.userMessage);
+          audience.users[message.userId].speak(message.userName, message.userMessage);
       });
 
       $.subscribe( 'user-message-sent', function (event, message) {

@@ -1,4 +1,4 @@
-var room = {
+var audience = {
     users: {},
 
     init: function () {

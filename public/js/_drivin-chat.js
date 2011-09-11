@@ -18,7 +18,7 @@ var chat = {
 
         socket.on('chat message', function(message) {
           self.addMessage(message.userName, message.userMessage);
-          room.users[message.userId].speak(message.userName, message.userMessage);
+          audience.users[message.userId].speak(message.userName, message.userMessage);
         });
     },
 
