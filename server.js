@@ -28,6 +28,9 @@ app.configure(function() {
   app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 });
 
+var RoomsHelper = require('./lib/roomsHelper.js');
+app = RoomsHelper.all(app);
+
 app.redisClient = redis.createClient( 6379, 'localhost');
 app.io = require('socket.io').listen(app);
 app.Timer = require('./lib/timer');
