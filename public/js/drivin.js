@@ -13,27 +13,33 @@ function onYouTubePlayerReady(playerId) {
 }
 
 function joinRoom() {
-  setTimeout(function() {
+  var timer = setInterval(function() {
     if (playerReady && socket.connected) {
       debugInfo('can join room');
       room.init();
       socket.emit('join', roomName, 'user');
       currentUser = new User( {id: socket.socket.sessionid, name:'user', avatar:'img/avatar01.png'} );
       room.add(currentUser);
-      initChat();
-      return;
+
+      chat.init({
+        userName: currentUser.name
+      });
+      
+      socket.on('chat message', function(message) {
+          $.publish( 'user-message-received', message );
+          room.users[message.userId].speak(message.userName, message.userMessage);
+      });
+
+      $.subscribe( 'user-message-sent', function (event, message) {
+          socket.emit('chat message', message.userName, message.userMessage);
+      });
+      
+      $.subscribe( 'user-name-changed', function (event, message) {
+          currentUser.name = message.userName;
+      });
+      
+      clearInterval( timer );
     }
-    joinRoom();
-  }, 50);
+  }, 100);
 }
 
-function initChat() {
-    chat.init( {
-        onMessageSent: function ( message ) {
-            this.sendMessage( currentUser.name, message );
-        },
-        onUserNameChanged: function ( userName ) {
-            currentUser.name = userName;
-        }
-    });
-}

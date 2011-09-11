@@ -6,7 +6,7 @@ var chat = {
         this.section = $( 'section#chat' );
         this.sectionChatMessages = this.section.find( 'section#chat-messages' );
         this.ul = this.section.find( 'ul' );
-        this.inputMessage = this.section.find( 'input#message' );
+        this.inputUserMessage = this.section.find( 'input#user-message' );
         this.inputUserName = this.section.find( 'input#user-name' );
 
         this.onMessageSent = options.onMessageSent || $.noop();
@@ -32,13 +32,13 @@ var chat = {
     },
 
     clearInput: function () {
-        this.inputMessage.val( '' );
+        this.inputUserMessage.val( '' );
     },
 
     bindEvents: function () {
         var that = this;
         
-        this.inputMessage.keydown(function ( event ) {
+        this.inputUserMessage.keydown(function ( event ) {
             var message = $( this ).val();
 
             if (event.keyCode === 13 && message) {

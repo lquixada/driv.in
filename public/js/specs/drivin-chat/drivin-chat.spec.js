@@ -6,10 +6,24 @@ beforeEach(function() {
 
 afterEach(function() { 
     $( 'div#main' ).html( savedCode );
+
+    $( document ).unbind( 'user-name-changed' );
+    $( document ).unbind( 'user-message-received' );
+    $( document ).unbind( 'user-message-sent' );
 });
 
 
 describe("Chat", function() {
+
+    describe("Options", function() {
+
+        it("should set the user name", function() {
+            chat.init( { userName: 'Paul' } );
+
+            expect( chat.userName ).toBe( 'Paul' );
+        });
+            
+    });    
     
     describe("User message input", function() {
         
@@ -20,13 +34,30 @@ describe("Chat", function() {
             
             chat.init();
         });
+        
+        it("should publish the user message", function() {
+            var message, subscriber;
 
-        it("should show user message on message list", function() {
+            subscriber = $.subscribe( 'user-message-sent', function ( event, data ) {
+                message = data.userMessage;
+            });
+
             this.input.val( 'foo bar' );
             this.input.trigger( this.enterKey );
 
-            expect( this.ul.find( 'li' ).size() ).toBe( 1 );
-            expect( this.ul.find( 'li' ).text() ).toMatch( /foo bar$/ );
+            waits(50);
+
+            runs(function() {
+                expect( message ).toBe( 'foo bar' );
+                subscriber.unsubscribe();
+            });
+        });
+
+        it("should not show user message and name on message list", function() {
+            this.input.val( 'foo bar' );
+            this.input.trigger( this.enterKey );
+
+            expect( this.ul.find( 'li' ).size() ).toBe( 0 );
         });
 
         it("should clear the input when message is sent", function() {
@@ -43,39 +74,11 @@ describe("Chat", function() {
             expect( this.ul.find( 'li' ).size() ).not.toBe( 1 );
         });
 
-        it("should show user name on message list", function() {
-            chat.userName = 'John';
-
-            this.input.val( 'foo bar' );
-            this.input.trigger( this.enterKey );
-
-            expect( this.ul.find( 'li' ).size() ).toBe( 1 );
-            expect( this.ul.find( 'li strong' ).text() ).toBe( 'John' );
-        });
-
         it("should not send text to the message list when key is not Enter", function() {
             this.input.val( 'foo' );
             this.input.keydown();
             
             expect( this.ul.find( 'li' ).size() ).toBe( 0 );
-        });
-
-        it("should publish the text", function() {
-            var message, subscriber;
-
-            subscriber = $.subscribe( 'message.chat', function ( event, data ) {
-                message = data.message;
-            });
-
-            this.input.val( 'foo bar' );
-            this.input.trigger( this.enterKey );
-
-            waits(50);
-
-            runs(function() {
-                expect( message ).toBe( 'foo bar' );
-                subscriber.unsubscribe();
-            });
         });
         
     });
@@ -92,9 +95,11 @@ describe("Chat", function() {
         it("should publish the new user name", function() {
             var userName, subscriber;
 
-            subscriber = $.subscribe( 'username.chat', function ( event, data ) {
+            subscriber = $.subscribe( 'user-name-changed', function ( event, data ) {
                 userName = data.userName;
             });
+            
+            chat.userName = 'user';
 
             this.inputUserName.val( 'John' );
             this.inputUserName.trigger( this.enterKey );
@@ -103,6 +108,7 @@ describe("Chat", function() {
 
             runs(function() {
                 expect( userName ).toBe( 'John' );
+                expect( chat.userName ).toBe( 'John' );
                 subscriber.unsubscribe();
             });
         });
@@ -110,7 +116,7 @@ describe("Chat", function() {
         it("should not publish while Enter key is not pressed", function() {
             var subscriber;
             
-            subscriber= $.subscribe( 'username.chat', jasmine.createSpy() );
+            subscriber = $.subscribe( 'user-name-changed', jasmine.createSpy() );
 
             this.inputUserName.val( 'Jo' );
             this.inputUserName.keydown();
@@ -124,6 +130,21 @@ describe("Chat", function() {
         });
 
     });    
+    
+    describe("Message coming", function() {
+
+        it("should add message to the message list", function() {
+            this.ul = $( 'section#chat' ).find( 'ul' ); 
+
+            chat.init();
+
+            $.publish( 'user-message-received', { userName: 'Bill', userMessage: 'foo bar' } );
+
+            expect( this.ul.find( 'li' ).size() ).toBe( 1 );
+            expect( this.ul.find( 'li' ).text() ).toBe( 'Bill foo bar' );
+        });
+        
+    });
     
 });    
 
