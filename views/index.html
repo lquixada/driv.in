@@ -20,95 +20,95 @@
     <link rel="canonical" href="http://driv.in/" />
 
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/index.css">
+
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
 <body>
 
-    <div class="page">
-        <div class="content">
-            <header>
-                <h1>Driv.in</h1>
+<div class="page">
+    <div class="content">
+        <header>
+            <h1>Driv.in</h1>
 
-                <span class="slogan">
-                    The YouTube battle party.
-                </span>
+            <span class="slogan">
+                The YouTube battle party.
+            </span>
 
-                <div id="social">
-                    <a href="http://www.facebook.com/share.php?u=http://driv.in/" target="_blank"><img src="img/button-social-facebook.png" /></a>
-                    <a href="http://twitter.com/share?url=http://driv.in/&text=Join%20me%20on%20driv.in" target="_blank"><img src="img/button-social-twitter.png" /></a>
-                    <!--<a href="http://plus.google.com"><img src="img/button-social-gplus.png" /></a>-->
-                </div>
-            </header>
+            <div id="social">
+                <a href="http://www.facebook.com/share.php?u=http://driv.in/" target="_blank"><img src="img/button-social-facebook.png" /></a>
+                <a href="http://twitter.com/share?url=http://driv.in/&text=Join%20me%20on%20driv.in" target="_blank"><img src="img/button-social-twitter.png" /></a>
+            </div>
+        </header>
 
-            <section class="create-room">
-                <p>
-                    Create rooms,<br>
-                    invite friends<br>
-                    and watch videos.
-                </p>
+        <section class="create-room">
+            <p>
+                Create rooms,<br>
+                invite friends<br>
+                and watch videos.
+            </p>
 
-                <form action="/rooms" method="post">
-                    <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
-                    <a id="button-create-room" href="#submit" onclick="this.parentNode.submit(); return false;">create room</a>
-                </form>
-            </section>
+            <form action="/rooms" method="post">
+                <input name="name" id="name" type="hidden" value="<%= newRoom %>" />
+                <a id="button-create-room" href="#submit" onclick="this.parentNode.submit(); return false;">create room</a>
+            </form>
+        </section>
 
-            <section class="hot-rooms">
+        <section class="hot-rooms">
 
-                <h2>Hot Rooms</h2>
+            <h2>Hot Rooms</h2>
 
-                <ul>
-                    <% for(var roomId in rooms){ %>
-                       <% var room = rooms[roomId]; %>
-                       <li>
-                            <a href="/<%= room.name %>">
-                                <span class="room-name"><%= room.name %></span>
-                                <span class="room-count"><%= room.users.length %> persons</span>
-                                <% if(room.playing()){ %>
-                                  <span class="room-video">
-                                    <em>now</em>
-                                    <marquee scrolldelay="150" class="video-name">
-                                        <%= room.currentMedia.title %>
-                                    </marquee>
-                                  </span>
-                                <% } %>
-                            </a>
-                       </li>
-                    <% } %>
-                </ul>
+            <ul>
+                <% for(var roomId in rooms){ %>
+                   <% var room = rooms[roomId]; %>
+                   <li>
+                        <a href="/<%= room.name %>">
+                            <span class="room-name"><%= room.name %></span>
+                            <span class="room-count"><%= room.users.length %> persons</span>
+                            <% if(room.playing()){ %>
+                              <span class="room-video">
+                                <em>now</em>
+                                <marquee scrolldelay="150" class="video-name">
+                                    <%= room.currentMedia.title %>
+                                </marquee>
+                              </span>
+                            <% } %>
+                        </a>
+                   </li>
+                <% } %>
+            </ul>
 
-            </section>
-        </div>
+        </section>
+    </div> <!-- .content -->
 
-    </div>
+</div> <!-- .page -->
 
-    <footer>
-        <img src="/img/logo-nodejs-ko.png">
+<footer>
+    <img src="/img/logo-nodejs-ko.png">
 
-        <p>
-            Driv.in is a contestant project at the <a href="http://nodeknockout.com/">Node.js Knockout 2011</a>, developed by <a href="http://nodeknockout.com/teams/go-horse-brazil">Go Horse Brazil team</a>,<br>
-            composed by <a href="http://twitter.com/cainanunes">Cainã Nunes</a>, <a href="http://twitter.com/emerleite">Emerson Macedo</a>,
-            <a href="http://twitter.com/everton_carpes">Everton Carpes</a> and <a href="http://twitter.com/lquixada">Leonardo Quixadá</a>.
-        </p>
-    </footer>
+    <p>
+        Driv.in is a contestant project at the <a href="http://nodeknockout.com/">Node.js Knockout 2011</a>, developed by <a href="http://nodeknockout.com/teams/go-horse-brazil">Go Horse Brazil team</a>,<br>
+        composed by <a href="http://twitter.com/cainanunes">Cainã Nunes</a>, <a href="http://twitter.com/emerleite">Emerson Macedo</a>,
+        <a href="http://twitter.com/everton_carpes">Everton Carpes</a> and <a href="http://twitter.com/lquixada">Leonardo Quixadá</a>.
+    </p>
+</footer>
 
-    <script type="text/javascript">
-     
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-25382569-1']);
-      _gaq.push(['_trackPageview']);
-     
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-     
-    </script>
+<script type="text/javascript">
+ 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25382569-1']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ 
+</script>
 
 </body>
 
