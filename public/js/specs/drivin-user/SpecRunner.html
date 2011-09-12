@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>Drivin Audience Test Runner</title>
+  <title>Drivin Chat Test Runner</title>
   
   <link href="/js/libs/jasmine-1.0.2/jasmine.css" rel="stylesheet"/>
 	
@@ -14,22 +14,23 @@
   <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 	
   <!-- source code -->
-  <script src="/js/sources/drivin-audience.js"></script>
+  <script src="/js/sources/drivin-user.js"></script>
 
   <!-- specs -->
-  <script src="/js/specs/drivin-audience/drivin-audience.spec.js"></script>
+  <script src="/js/specs/drivin-user/drivin-user.spec.js"></script>
 </head>
 
 <body>
 
 <div id="main">
 
-    <div id="video-audience">
-        <div id="user-space"></div>
+    <div class="user">
+        <span class="user-balloon"></span>
+        <img class="user-avatar" src="">
     </div>
-    
+
 </div>
-	
+
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
 jasmine.getEnv().execute();

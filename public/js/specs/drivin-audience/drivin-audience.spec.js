@@ -94,8 +94,28 @@ describe("Audience", function() {
             divUser = this.div.find( 'div#'+this.newUser.id );
 
             expect( divUser.find( 'span.user-balloon' ).text() ).toBe( 'John foo bar!' );
+            expect( divUser.find( 'span.user-balloon' ).is( ':visible' ) ).toBe( true );
         });
-        
+
+        it("should make user speak and hide ballon after some seconds", function() {
+            var divUser;
+            
+            jasmine.Clock.useMock();
+            
+            audience.init();
+            audience.add( this.newUser );
+            audience.speak( {
+                 userId: this.newUser.id,
+               userName: this.newUser.name,
+            userMessage: 'foo bar!'
+            } );
+            
+            jasmine.Clock.tick(4000);
+
+            divUser = this.div.find( 'div#'+this.newUser.id );
+
+            expect( divUser.find( 'span.user-balloon' ).is( ':hidden' ) ).toBe( true );
+        });
     });
 
     describe("pubsub events", function() {

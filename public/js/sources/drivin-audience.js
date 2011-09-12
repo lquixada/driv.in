@@ -18,9 +18,9 @@ var audience = {
         this.users[user.id] = user;
 
         element = $( [
-            '<div id="'+user.id+'">',
-                '<span class="user-balloon"></span>',
-                '<img class="user-avatar" src="'+user.avatar+'">',
+            '<div class="user" id="'+user.id+'">',
+                '<span class="user-balloon" style="display:none;"></span>',
+                '<img class="user-avatar" src="'+user.avatar+'" width="150" height="150">',
             '</div>'
         ].join( '' ) );
         
@@ -38,12 +38,12 @@ var audience = {
     bindSubscribers: function () {
         var that = this;
 
-        $.subscribe( 'user-added', function ( event, message ) {
-            that.add( message );
+        $.subscribe( 'user-added', function ( event, user ) {
+            that.add( user );
         } );
         
-        $.subscribe( 'user-removed', function ( event, message ) {
-            that.remove( message );
+        $.subscribe( 'user-removed', function ( event, user ) {
+            that.remove( user );
         } );
 
         $.subscribe( 'user-message-received', function ( event, data ) {
@@ -58,9 +58,15 @@ var audience = {
     },
 
     speak: function ( data ) {
-        this.divUserSpace
-            .find( 'div#'+data.userId )
-            .find( 'span.user-balloon' )
-            .html( '<strong>'+data.userName+'</strong> '+data.userMessage );
+        var balloon = this.divUserSpace.find( 'div#'+data.userId+' span.user-balloon' );
+
+        balloon.html( '<strong>'+data.userName+'</strong> '+data.userMessage )
+            .show();
+        
+        clearTimeout(this.timer);
+
+        this.timer = setTimeout(function () {
+            balloon.hide();
+        }, 4000 );
     }
 };
