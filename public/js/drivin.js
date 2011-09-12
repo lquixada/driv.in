@@ -31,10 +31,6 @@ function joinRoom() {
 
             socket.on('user join', function(data) {
                 debugInfo('user join:' + data.id);
-
-                console.log( data );
-
-                // To be refactored
                 data.avatar = '/img/avatar01.png';
                 $.publish('user-added', data);
             });

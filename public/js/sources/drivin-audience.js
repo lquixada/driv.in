@@ -9,7 +9,6 @@ var audience = {
     },
 
     add: function ( data ) {
-        //console.log(data);
         var divUser,
             user = new User( data );
             width = this.divUserSpace.width(),
@@ -18,8 +17,7 @@ var audience = {
             bottom = Math.floor( Math.random()*height ); /* from 20 to 120 */
         
         this.users[user.id] = user;
-        //console.log('HUM?');
-        //console.log(this.users[user.id]);
+
         divUser = user.render();
         divUser.css({
             bottom: bottom,
@@ -44,7 +42,6 @@ var audience = {
         } );
 
         $.subscribe( 'user-message-received', function ( event, data ) {
-            console.log( data );
             that.speak( data );
         } );
     },
@@ -62,3 +59,4 @@ var audience = {
         this.users[data.userId].speak( data.userMessage );
     }
 };
+
