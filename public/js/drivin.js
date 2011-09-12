@@ -1,17 +1,17 @@
 function debugInfo(message) {
-	if (console) {
-		console.log(message);
-	}
+    if (console) {
+        console.log(message);
+    }
 }
 
 function onYouTubePlayerReady(playerId) {
-	player.init({
-		element: $('#diplayer').get(0)
-	});
-	player.bindEvent("onStateChange", "video.stateChanged");
+    player.init({
+        element: $('#diplayer').get(0)
+    });
+    player.bindEvent("onStateChange", "video.stateChanged");
 
-	playerReady = true;
-	debugInfo('youtube socket connected:' + socket.connected);
+    playerReady = true;
+    debugInfo('youtube socket connected:' + socket.connected);
 }
 
 function joinRoom() {
@@ -32,12 +32,14 @@ function joinRoom() {
             socket.on('user join', function(data) {
                 debugInfo('user join:' + data.id);
 
+                console.log( data );
+
                 // To be refactored
                 data.avatar = '/img/avatar01.png';
                 $.publish('user-added', data);
             });
 
-            socket.on('user leave', function(user) {
+            socket.on('user leave', function(data) {
                 debugInfo('user leave:' + data.id);
                 $.publish('user-removed', data);
             });
