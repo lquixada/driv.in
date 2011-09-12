@@ -36,7 +36,7 @@ var player = {
     },
     
     play: function () {
-        debugInfo('player element:' + this.element+ 'will play');
+        debugInfo('player element:' + this.element + ' will play');
         this.element.playVideo();
     },
 

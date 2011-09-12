@@ -1,3 +1,7 @@
+
+// Disable debugInfo for testing purposes
+debugInfo = function () {};
+
 describe("Player", function() {
     beforeEach(function() {
         this.youtubeApiMock = {
