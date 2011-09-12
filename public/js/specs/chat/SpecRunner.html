@@ -14,16 +14,36 @@
   <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 	
   <!-- source code -->
-  <script src="/js/sources/drivin-user.js"></script>
+  <script src="/js/sources/chat.js"></script>
 
   <!-- specs -->
-  <script src="/js/specs/drivin-user/drivin-user.spec.js"></script>
+  <script src="/js/specs/chat/chat.spec.js"></script>
 </head>
 
 <body>
 
-<div id="main"></div>
+<div id="main">
 
+    <section id="chat">
+        <header>
+            <h2>Chat</h2>
+
+            <div id="user-info">
+                <input type="text" id="user-name" maxlength="20" placeholder="enter a username">
+            </div>
+        </header>
+
+        <section id="chat-messages">
+            <ul></ul>
+        </section>
+
+        <footer>
+            <input type="text" id="user-message" maxlength="80" placeholder="send a message">
+        </footer>
+    </section>
+    
+</div>
+	
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
 jasmine.getEnv().execute();
