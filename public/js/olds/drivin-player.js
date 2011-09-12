@@ -9,6 +9,7 @@ var player = {
         this.bufferLayer.hide();
 
         this.element = options.element || null;
+
         if (this.element) {
           this.element.setVolume(100);
         }
