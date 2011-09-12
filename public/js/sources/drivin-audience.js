@@ -3,17 +3,9 @@ var audience = {
     users: {},
 
     init: function () {
-        var that = this;
-
         this.divUserSpace = $( 'div#user-space' );
 
-        $.subscribe( 'user-added', function ( event, message ) {
-            that.add( message );
-        } );
-        
-        $.subscribe( 'user-removed', function ( event, message ) {
-            that.remove( message );
-        } );
+        this.bindSubscribers();
     },
 
     add: function ( user ) {
@@ -43,9 +35,32 @@ var audience = {
         this.divUserSpace.append( element );
     },
 
+    bindSubscribers: function () {
+        var that = this;
+
+        $.subscribe( 'user-added', function ( event, message ) {
+            that.add( message );
+        } );
+        
+        $.subscribe( 'user-removed', function ( event, message ) {
+            that.remove( message );
+        } );
+
+        $.subscribe( 'user-message-received', function ( event, data ) {
+            that.speak( data, data.message );
+        } );
+    },
+
     remove: function ( user ) {
         delete this.users[user.id];
 
         this.divUserSpace.find( 'div#'+user.id ).remove();
+    },
+
+    speak: function ( data ) {
+        this.divUserSpace
+            .find( 'div#'+data.userId )
+            .find( 'span.user-balloon' )
+            .html( '<strong>'+data.userName+'</strong> '+data.userMessage );
     }
 };

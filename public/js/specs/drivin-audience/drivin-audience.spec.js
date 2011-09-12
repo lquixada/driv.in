@@ -78,10 +78,29 @@ describe("Audience", function() {
         });
     });
 
+    describe("user to speak", function() {
+        
+        it("should make user speak", function() {
+            var divUser;
+
+            audience.init();
+            audience.add( this.newUser );
+            audience.speak( {
+                 userId: this.newUser.id,
+               userName: this.newUser.name,
+            userMessage: 'foo bar!'
+            } );
+            
+            divUser = this.div.find( 'div#'+this.newUser.id );
+
+            expect( divUser.find( 'span.user-balloon' ).text() ).toBe( 'John foo bar!' );
+        });
+        
+    });
 
     describe("pubsub events", function() {
         it("should listen the to user-added event", function() {
-            spyOn(audience, 'add');
+            spyOn( audience, 'add' );
 
             audience.init();
 
@@ -94,17 +113,31 @@ describe("Audience", function() {
             });
         });
 
-        it("should listen the to user:remove event", function() {
-            spyOn(audience, 'remove');
+        it("should listen the to user-removed event", function() {
+            spyOn( audience, 'remove' );
 
             audience.init();
 
             $.publish( 'user-removed', this.newUser );
             
-            waits(50);
+            waits( 50 );
 
             runs(function() {
                 expect( audience.remove ).toHaveBeenCalled();
+            });
+        });
+
+        it("should listen the user-message-received event", function() {
+            spyOn( audience, 'speak' );
+
+            audience.init();
+
+            $.publish( 'user-message-received', this.newUser );
+            
+            waits( 50 );
+
+            runs(function() {
+                expect( audience.speak ).toHaveBeenCalled();
             });
         });
     });
