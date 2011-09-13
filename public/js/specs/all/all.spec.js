@@ -10,8 +10,8 @@ var Runners = {
 
 describe("Driv.in", function() {
     beforeEach(function() {
-        window.done = false;
-        window.noErrors = false;        
+        window.testsDone = false;
+        window.testsSucess = false;        
     });
 
     afterEach(function() { 
@@ -28,11 +28,11 @@ describe("Driv.in", function() {
                     $( 'div#main' ).html( '<iframe src="'+url+'"></iframe>' );
 
                     waitsFor(function() {
-                        return window.done;
+                        return window.testsDone;
                     }, "Tests suite never never completed", 10000 );
 
                     runs(function () {
-                        expect( window.noErrors ).toBe( true );
+                        expect( window.testsSuccess ).toBe( true );
                     });
                 });
             });

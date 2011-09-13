@@ -2,17 +2,14 @@
 describe("Chat", function() {
 
     describe("Options", function() {
-
         it("should set the user name", function() {
             chat.init( { userName: 'Paul' } );
 
             expect( chat.userName ).toBe( 'Paul' );
         });
-        
     });    
     
     describe("User message input", function() {
-        
         beforeEach(function() {
             chat.init();
 
@@ -66,11 +63,9 @@ describe("Chat", function() {
             
             expect( this.ul.find( 'li' ).size() ).toBe( 0 );
         });
-        
     });
 
     describe("User name input", function() {
-
         beforeEach(function() {
             chat.init();
 
@@ -123,11 +118,9 @@ describe("Chat", function() {
                 subscriber.unsubscribe();
             });
         });
-
-    });    
+    });
     
     describe("Message coming", function() {
-
         it("should add message to the message list", function() {
             var ul;
 
@@ -140,8 +133,6 @@ describe("Chat", function() {
             expect( ul.find( 'li' ).size() ).toBe( 1 );
             expect( ul.find( 'li' ).text() ).toBe( 'Bill foo bar' );
         });
-        
     });
-    
-});    
+});
 
