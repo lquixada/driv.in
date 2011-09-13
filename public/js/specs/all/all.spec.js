@@ -27,7 +27,7 @@ describe("Driv.in", function() {
 
                     waitsFor(function() {
                         return window.done;
-                    }, "Tests suite never never completed", this.timeout );
+                    }, "Tests suite never never completed", 10000 );
 
                     runs(function () {
                         expect( window.noErrors ).toBe( true );
