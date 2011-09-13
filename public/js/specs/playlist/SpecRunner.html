@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Playlist Test Runner</title>
+
+    <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
+
+    <!-- dependencies -->
+    <script src="/js/libs/jasmine-1.1.0/jasmine.js"></script>
+    <script src="/js/libs/jasmine-1.1.0/jasmine-html.js"></script>
+    <script src="/js/libs/jasmine-grid-reporter-0.1.js"></script>
+    <script src="/js/libs/jasmine-helpers.js"></script>
+    <script src="/js/libs/jquery-1.6.2.min.js"></script>
+    <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
+
+    <!-- source code -->
+    <script src="/js/sources/playlist.js"></script>
+
+    <!-- specs -->
+    <script src="/js/specs/playlist/playlist.spec.js"></script>
+</head>
+
+<body>
+
+<div id="main">
+
+    <section id="playlist">
+        <header>
+            <h2>Playlist</h2>
+        </header>
+
+        <section id="playlist-now">
+            <h3>Now</h3>
+
+            <marquee scrolldelay="150" class="video-title"></marquee>
+            <span class="video-duration"></span>
+            <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
+        </section>
+
+        <section id="playlist-queue">
+            <h3>Next</h3>
+
+            <ul>
+                <li id="123"><img src="thumb01.jpg" />Title 01</li>
+                <li id="456"><img src="thumb02.jpg" />Title 02</li>
+                <li id="789"><img src="thumb03.jpg" />Title 03</li>
+            </ul>
+        </section>
+
+        <footer>
+            <input type="text" id="video-url" placeholder="paste a video url from youtube">
+            <button type="button" id="video-add">add video</button>
+        </footer>
+    </section>
+
+</div>
+
+<script>
+jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+jasmine.getEnv().addReporter(new jasmine.GridReporter());
+jasmine.getEnv().execute();
+</script>
+
+</body>
+
+</html>

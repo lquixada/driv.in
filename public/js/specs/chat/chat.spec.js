@@ -1,17 +1,3 @@
-savedCode = '';
-
-beforeEach(function() {
-    savedCode = $( 'div#main' ).html();
-});
-
-afterEach(function() { 
-    $( 'div#main' ).html( savedCode );
-
-    $( document ).unbind( 'user-name-changed' );
-    $( document ).unbind( 'user-message-received' );
-    $( document ).unbind( 'user-message-sent' );
-});
-
 
 describe("Chat", function() {
 
@@ -22,7 +8,7 @@ describe("Chat", function() {
 
             expect( chat.userName ).toBe( 'Paul' );
         });
-            
+        
     });    
     
     describe("User message input", function() {

@@ -2,12 +2,14 @@
 var playlist = {
     init: function ( options ) {
         var self = this;
+
         this.section = $( 'section#playlist' );
         this.nowPlaying = this.section.find( 'section#playlist-now' );
         this.ulQueue = this.section.find( 'section#playlist-queue ul' );
         this.input = this.section.find( 'input#video-url' );
         this.button = this.section.find( 'button#video-add' );
         this.tomatoes = this.section.find( 'a.button-tomatoes' );
+
         this.bindEvents();
 
         socket.on('next video', function(video) {
@@ -48,7 +50,6 @@ var playlist = {
         }, 500);
     },
 
-
     updateCurrentTrack: function(title, duration){
         this.nowPlaying.find('marquee.video-name')
             .text(title)
@@ -66,8 +67,8 @@ var playlist = {
     addItem: function(video) {
         this.ulQueue.append( [
             '<li id="' + video.id + '">',
-            '  <img src="' + video.thumbUrl + '" />',
-              video.title,
+                '<img src="' + video.thumbUrl + '" />',
+                video.title,
             '</li>'
         ].join(''));
     },

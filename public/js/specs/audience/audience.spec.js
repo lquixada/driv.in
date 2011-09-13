@@ -1,14 +1,6 @@
-savedCode = '';
-
 beforeEach(function() {
-    savedCode = $( 'div#main' ).html();
-
     this.newUser = { id: 1, name: 'John', avatar: '/img/avatar01.png' };
     this.div = $( 'div#user-space' );
-});
-
-afterEach(function() { 
-    $( 'div#main' ).html( savedCode );
 });
 
 
