@@ -3,21 +3,22 @@
 <html>
 
 <head>
-  <title>Drivin Player Test Runner</title>
-  
-  <link href="/js/libs/jasmine-1.0.2/jasmine.css" rel="stylesheet"/>
-	
-  <!-- dependencies -->
-  <script src="/js/libs/jasmine-1.0.2/jasmine.js"></script>
-  <script src="/js/libs/jasmine-1.0.2/jasmine-html.js"></script>
-  <script src="/js/libs/jquery-1.6.2.min.js"></script>
-  <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
-	
-  <!-- source code -->
-  <script src="/js/sources/player.js"></script>
+    <title>Player Test Runner</title>
 
-  <!-- specs -->
-  <script src="/js/specs/player/player.spec.js"></script>
+    <link href="/js/libs/jasmine-1.0.2/jasmine.css" rel="stylesheet"/>
+
+    <!-- dependencies -->
+    <script src="/js/libs/jasmine-1.0.2/jasmine.js"></script>
+    <script src="/js/libs/jasmine-1.0.2/jasmine-html.js"></script>
+    <script src="/js/libs/jasmine-grid-reporter-0.1.js"></script>
+    <script src="/js/libs/jquery-1.6.2.min.js"></script>
+    <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
+
+    <!-- source code -->
+    <script src="/js/sources/player.js"></script>
+
+    <!-- specs -->
+    <script src="/js/specs/player/player.spec.js"></script>
 </head>
 
 <body>
@@ -28,6 +29,7 @@
 
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+jasmine.getEnv().addReporter(new jasmine.GridReporter());
 jasmine.getEnv().execute();
 </script>
 
