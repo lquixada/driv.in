@@ -23,12 +23,6 @@ describe("Driv.in", function() {
         (function (Runner, url) {
             describe( Runner, function() {
                 it("should have no errors", function() {
-                    //console.log( w );
-                    $( 'div#main' ).html( '' );
-
-                    console.log( Runner );
-                    console.log( url );
-
                     $( 'div#main' ).html( '<iframe src="'+url+'"></iframe>' );
 
                     waitsFor(function() {
