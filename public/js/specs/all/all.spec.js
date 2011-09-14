@@ -23,7 +23,7 @@ describe("Driv.in", function() {
 
         (function (Runner, url) {
 
-            describe( Runner, function() {
+            describe( Runner+' Runner', function() {
                 it("should have no errors", function() {
                     $( 'div#main' ).html( '<iframe src="'+url+'"></iframe>' );
 
