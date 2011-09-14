@@ -1,3 +1,8 @@
+beforeEach(function() {
+    // Disabling temporarily for tests
+    playlist.updateTrackDuration = jasmine.createSpy();
+});
+
 
 describe("Playlist", function() {
 
@@ -125,6 +130,65 @@ describe("Playlist", function() {
             
             runs(function() {
                 expect( playlist.addTrack ).toHaveBeenCalledWith( video );
+            }); 
+        });
+
+        it("should clear current video on video-ended when none available", function() {
+            playlist.init();
+            playlist.setCurrentTrack = jasmine.createSpy();
+            playlist.ul.html( '' );
+
+            $.publish( 'video-ended' );
+            
+            waits(50);
+            
+            runs(function() {
+                expect( playlist.setCurrentTrack ).toHaveBeenCalledWith( '', '' );
+            }); 
+        });
+
+        it("should not clear current video on video-ended when one is available", function() {
+            playlist.init();
+            playlist.setCurrentTrack = jasmine.createSpy();
+            playlist.ul.html( '<li></li>' );
+
+            $.publish( 'video-ended' );
+            
+            waits(50);
+            
+            runs(function() {
+                expect( playlist.setCurrentTrack ).not.toHaveBeenCalledWith( '', '' );
+            }); 
+        });
+
+        it("should go to next video on video-next", function() {
+            var video = {};
+
+            playlist.init();
+            playlist.goToNextTrack = jasmine.createSpy();
+
+            $.publish( 'video-next', video );
+            
+            waits(50);
+            
+            runs(function() {
+                expect( playlist.goToNextTrack ).not.toHaveBeenCalledWith( video );
+            }); 
+        });
+
+        it("should enable tomatoes on video-next", function() {
+            var video = {};
+
+            playlist.init();
+            playlist.a.addClass( 'disabled' );
+            playlist.goToNextTrack = jasmine.createSpy();
+
+            $.publish( 'video-next', video );
+            
+            waits(50);
+            
+            runs(function() {
+                expect( playlist.a.hasClass( 'disabled' ) ).toBe( false );
             }); 
         });
     });

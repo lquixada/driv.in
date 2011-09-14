@@ -40,12 +40,30 @@ function joinRoom() {
                 $.publish('user-removed', data);
             });
 
+            socket.on('next video', function(video) {
+                debugInfo('next video ' + video.id);
+                $.publish( 'video-next', video );
+            });
+
+            socket.on('video added', function(video) {
+                debugInfo('video added ' + video.id);
+                $.publish( 'video-added', video );
+            });
+            
+            socket.on('video ended', function() {
+                $.publish( 'video-ended' );
+            });
+
             $.subscribe('user-message-sent', function(event, message) {
                 socket.emit('chat message', message.userName, message.userMessage);
             });
 
             $.subscribe('user-name-changed', function(event, message) {
                 audience.users[socket.socket.sessionid].name = message.userName;
+            });
+
+            $.subscribe('video-add', function(event, message) {
+                socket.emit('add video', message);
             });
 
             clearInterval(timer);

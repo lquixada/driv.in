@@ -10,17 +10,36 @@ var playlist = {
         this.input = this.section.find( 'input#video-url' );
         this.a = this.section.find( 'a.button-tomatoes' );
 
+        this.updateTrackDuration();
         this.bindEvents();
-
-        $.subscribe( 'video-added', function (event, data) {
-            that.addTrack( data );
-        } )
+        this.bindSubscribers();
     },
 
     addTrack: function ( video ) {
         this.ul.append( [
             '<li id="'+video.id+'"><img src="'+video.thumbUrl+'" />'+video.title+'</li>',
         ].join('') );
+    },
+
+    bindSubscribers: function () {
+        var that = this;
+
+        $.subscribe( 'video-added', function (event, data) {
+            that.addTrack( data );
+        } );
+
+        $.subscribe( 'video-ended', function (event, data) {
+            if(that.ul.find('li').size() < 1){
+                that.setCurrentTrack('', '');
+            }
+        } );
+
+        $.subscribe( 'video-next', function ( video ) {
+            debugInfo('next video ' + video.id);
+            that.goToNextTrack(video);
+
+            that.a.removeClass('disabled');
+        } );
     },
 
     bindEvents: function () {
@@ -37,18 +56,39 @@ var playlist = {
         this.a.click( function () {
             $( this ).addClass( 'disabled' );
             $.publish( 'tomato-thrown', {} );
-        })
+        });
     },
 
     goToNextTrack: function ( video ) {
-        $( 'section#playlist-queue ul li:first' ).remove();
+        this.ul.find( 'li:first' ).remove();
 
         this.setCurrentTrack( video.title, video.duration );
     },
 
     setCurrentTrack: function ( title, duration ) {
-       $( 'marquee.video-title' ).html( title );
-       $( 'span.video-duration' ).html( duration );
+        this.marquee.html( title );
+        this.span.html( duration );
+    },
+    
+    /* Be careful: not tested! May bite you! */
+    updateTrackDuration: function () {
+        setInterval(function(){
+            var duration = '';
+            if(player.element){
+                var timeRemain = player.element.getDuration() -
+                    player.element.getCurrentTime();
+
+                if(timeRemain > 0){
+                    var m = Math.floor(timeRemain / 60);
+                    var s = Math.floor(timeRemain % 60);
+
+                    duration = '-' + m + ':' +
+                        (s < 10 ? '0' + s : s);
+                }
+            }
+
+            self.nowPlaying.find('.video-duration').text(duration);
+        }, 500);
     }
 };
 
