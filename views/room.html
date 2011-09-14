@@ -102,7 +102,7 @@
             <section id="playlist-now">
                 <h3>Now</h3>
 
-                <marquee scrolldelay="150" class="video-name">
+                <marquee scrolldelay="150" class="video-title">
                   <% if(room.playing()){ %>
                     <%= room.currentMedia.title %>
                   <% } %>
@@ -125,7 +125,7 @@
             </section>
 
             <footer>
-                <input type="text" id="video-url" name="video_url" value="" placeholder="paste a video url from youtube">
+                <input type="text" id="video-url" placeholder="paste a video url from youtube">
                 <button type="button" id="video-add">add video</button>
             </footer>
         </section>

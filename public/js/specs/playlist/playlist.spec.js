@@ -61,7 +61,7 @@ describe("Playlist", function() {
         it("should allow user to add video through input and button", function() {
             var message, subscriber;
 
-            subscriber = $.subscribe( 'video-added', function ( event, data ) {
+            subscriber = $.subscribe( 'video-sent', function ( event, data ) {
                 message = data;
             }); 
             
@@ -162,7 +162,7 @@ describe("Playlist", function() {
         });
 
         it("should go to next video on video-next", function() {
-            var video = {};
+            var video = { id: 1 };
 
             playlist.init();
             playlist.goToNextTrack = jasmine.createSpy();
@@ -172,7 +172,7 @@ describe("Playlist", function() {
             waits(50);
             
             runs(function() {
-                expect( playlist.goToNextTrack ).not.toHaveBeenCalledWith( video );
+                expect( playlist.goToNextTrack ).toHaveBeenCalledWith( video );
             }); 
         });
 

@@ -62,8 +62,12 @@ function joinRoom() {
                 audience.users[socket.socket.sessionid].name = message.userName;
             });
 
-            $.subscribe('video-add', function(event, message) {
+            $.subscribe('video-sent', function(event, message) {
                 socket.emit('add video', message);
+            });
+
+            $.subscribe('tomato-thrown', function(event, message) {
+                socket.emit('blame');
             });
 
             clearInterval(timer);

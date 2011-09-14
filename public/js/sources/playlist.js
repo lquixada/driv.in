@@ -34,7 +34,7 @@ var playlist = {
             }
         } );
 
-        $.subscribe( 'video-next', function ( video ) {
+        $.subscribe( 'video-next', function ( event, video ) {
             debugInfo('next video ' + video.id);
             that.goToNextTrack(video);
 
@@ -50,7 +50,7 @@ var playlist = {
             
             that.input.val( '' );
 
-            $.publish( 'video-added', url );
+            $.publish( 'video-sent', url );
         } );
 
         this.a.click( function () {
@@ -66,12 +66,14 @@ var playlist = {
     },
 
     setCurrentTrack: function ( title, duration ) {
-        this.marquee.html( title );
-        this.span.html( duration );
+        this.marquee.text( title );
+        this.span.text( duration );
     },
     
     /* Be careful: not tested! May bite you! */
     updateTrackDuration: function () {
+        var that = this;
+
         setInterval(function(){
             var duration = '';
             if(player.element){
@@ -87,7 +89,7 @@ var playlist = {
                 }
             }
 
-            self.nowPlaying.find('.video-duration').text(duration);
+            that.span.text(duration);
         }, 500);
     }
 };

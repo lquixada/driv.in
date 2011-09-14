@@ -420,7 +420,7 @@ section#playlist-now {
 }
 
 
-section#playlist-now marquee.video-name {
+section#playlist-now marquee.video-title {
     position:absolute;
     top:5px;
     left:40px;
