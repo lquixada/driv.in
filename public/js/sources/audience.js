@@ -10,21 +10,20 @@ var audience = {
 
     add: function ( data ) {
         var divUser,
-            user = new User( data );
-            width = this.divUserSpace.width(),
-            height = this.divUserSpace.height(),
-            left = Math.floor( Math.random()*(width-100) ), /* from 50 to 450 */
-            bottom = Math.floor( Math.random()*height ); /* from 20 to 120 */
+            user = new User( data ),
+            /* random percentages: from 0.00 to 100.00 */
+            left = Math.floor( Math.random()*10000 )/100, 
+            bottom = Math.floor( Math.random()*10000 )/100;
         
         this.users[user.id] = user;
-
+        
         divUser = user.render();
         divUser.css({
-            bottom: bottom,
-            left: left,
+            bottom: bottom+'%',
+            left: left+'%',
             /* Perspective issue: the more far the driver is from the video,
              * the closest he is to the user */
-            zIndex: -bottom
+            zIndex: -Math.floor(bottom*100) 
         });
 
         this.divUserSpace.append( divUser );
