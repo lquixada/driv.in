@@ -2,6 +2,7 @@
 var chat = {
     init: function ( options ) {
         this.section = $( 'section#chat' );
+        this.sectionMessageList = this.section.find( 'section#chat-messages' );
         this.inputUserMessage = this.section.find( 'input#user-message' );
         this.inputUserName = this.section.find( 'input#user-name' );
         this.ulMessages = this.section.find( 'ul' );
@@ -49,6 +50,7 @@ var chat = {
 
     _addMessage: function ( userName, userMessage ) {
         this.ulMessages.append( '<li><strong>'+userName+'</strong> '+userMessage+'</li>' );
+        this.sectionMessageList.scrollTop( this.ulMessages.height() );
     },
 
     _clearInputUserMessage: function () {
