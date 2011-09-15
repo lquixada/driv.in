@@ -47,8 +47,13 @@ var audience = {
 
     remove: function ( data ) {
         var user = this.users[data.id];
-
-        user.remove();
+        
+        // If user disconnects (ex: reloads the page) before
+        // the user DOM renders, it throws an error.
+        // use try ... finally instead?
+        if (user) {
+            user.remove();
+        }
 
         delete this.users[data.id];
     },
