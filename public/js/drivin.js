@@ -11,13 +11,13 @@ function onYouTubePlayerReady(playerId) {
     player.bindEvent("onStateChange", "video.stateChanged");
 
     playerReady = true;
-    debugInfo('youtube socket connected:' + socket.connected);
+    logger.log('youtube socket connected:' + socket.connected);
 }
 
 function joinRoom() {
     var timer = setInterval(function() {
         if (playerReady && socket.connected) {
-            debugInfo('can join room');
+            logger.log('can join room');
             audience.init();
             socket.emit('join', roomName, 'user');
 
@@ -30,23 +30,19 @@ function joinRoom() {
             });
 
             socket.on('user join', function(data) {
-                debugInfo('user join:' + data.id);
                 data.avatar = '/img/avatar01.png';
                 $.publish('user-added', data);
             });
 
             socket.on('user leave', function(data) {
-                debugInfo('user leave:' + data.id);
                 $.publish('user-removed', data);
             });
 
             socket.on('next video', function(video) {
-                debugInfo('next video ' + video.id);
                 $.publish( 'video-next', video );
             });
 
             socket.on('video added', function(video) {
-                debugInfo('video added ' + video.id);
                 $.publish( 'video-added', video );
             });
             

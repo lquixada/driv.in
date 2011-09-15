@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Logger Test Runner</title>
+
+    <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
+
+    <!-- dependencies -->
+    <script src="/js/libs/jasmine-1.1.0/jasmine.js"></script>
+    <script src="/js/libs/jasmine-1.1.0/jasmine-html.js"></script>
+    <script src="/js/libs/jasmine-grid-reporter-0.1.js"></script>
+    <script src="/js/libs/jasmine-helpers.js"></script>
+    <script src="/js/libs/jquery-1.6.2.min.js"></script>
+    <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
+
+    <!-- source code -->
+    <script src="/js/sources/logger.js"></script>
+
+    <!-- specs -->
+    <script src="/js/specs/logger/logger.spec.js"></script>
+</head>
+
+<body>
+
+<div id="main">
+</div>
+
+<script>
+jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+jasmine.getEnv().addReporter(new jasmine.GridReporter());
+jasmine.getEnv().execute();
+</script>
+
+</body>
+
+</html>

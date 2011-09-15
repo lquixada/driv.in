@@ -1,5 +1,3 @@
-// Disable debugInfo for testing purposes
-debugInfo = function () {};
 
 beforeEach(function() {
     this.divMain = $( 'div#main' );

@@ -4,7 +4,8 @@ var Runners = {
     'Playlist': '/js/specs/playlist/SpecRunner.html',
     'Audience': '/js/specs/audience/SpecRunner.html',
     'Chat': '/js/specs/chat/SpecRunner.html',
-    'User': '/js/specs/user/SpecRunner.html'
+    'User': '/js/specs/user/SpecRunner.html',
+    'Logger': '/js/specs/logger/SpecRunner.html'
 }
 
 

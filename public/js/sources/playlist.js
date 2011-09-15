@@ -35,7 +35,6 @@ var playlist = {
         } );
 
         $.subscribe( 'video-next', function ( event, video ) {
-            debugInfo('next video ' + video.id);
             that.goToNextTrack(video);
 
             that.a.removeClass('disabled');
