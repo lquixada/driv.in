@@ -47,7 +47,7 @@ var player = {
     toggleMute: function () {
         if (this.mute) {
             this.mute = false;
-            this.element.unmute();
+            this.element.unMute();
         } else {
             this.mute = true;
             this.element.mute();
