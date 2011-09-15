@@ -285,6 +285,7 @@ section#chat {
     top:350px;
     bottom:0;
     width:100%;
+    min-height:200px;
 }
 
 section#chat div.gradient {
