@@ -72,7 +72,6 @@ function joinRoom() {
 
             clearInterval(timer);
         }
-    },
-    100);
+    }, 100 );
 }
 

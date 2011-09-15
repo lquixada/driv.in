@@ -8,7 +8,7 @@ describe("Player", function() {
             addEventListener: jasmine.createSpy(),
             setVolume: jasmine.createSpy(),
             mute: jasmine.createSpy(),
-            unmute: jasmine.createSpy(),
+            unMute: jasmine.createSpy(),
             cueVideoById: jasmine.createSpy()
         };
 
@@ -136,7 +136,7 @@ describe("Player", function() {
             player.toggleMute();
 
             expect( player.mute ).toBe( false );
-            expect( player.element.unmute ).toHaveBeenCalled();
+            expect( player.element.unMute ).toHaveBeenCalled();
         });
     });
     
