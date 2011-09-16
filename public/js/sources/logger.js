@@ -17,6 +17,10 @@ var logger = {
        $.subscribe('video-added', function (event, data) {
            that.log('video added: ' + JSON.stringify( data ) );
        });
+       
+       $.subscribe('video-ended', function () {
+           that.log('video ended.');
+       });
     },
 
     log: function ( message ) {

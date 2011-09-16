@@ -10,18 +10,11 @@ var video = {
         });
 
         socket.on('video ended', function() {
-            debugInfo('video ended');
             player.pause();
         });
 
-        socket.on('video added', function(video) {
-            debugInfo(video);
-        });
-
         socket.on('next video', function(video) {
-            debugInfo('received next video ' + video.id);
             player.loadId(video.id);
-
             player.forceBuffer();
 
             // TODO: move bufferLayer to a better player
