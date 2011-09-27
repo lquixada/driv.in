@@ -5,6 +5,7 @@ var Runners = {
     'Audience': '/js/specs/audience/SpecRunner.html',
     'Chat': '/js/specs/chat/SpecRunner.html',
     'User': '/js/specs/user/SpecRunner.html',
+    'Channel': '/js/specs/channel/SpecRunner.html',
     'Logger': '/js/specs/logger/SpecRunner.html'
 }
 
