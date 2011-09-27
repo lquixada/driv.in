@@ -49,10 +49,11 @@ var video = {
             clearInterval(player.bufferLayer.currentInterval);
         });
     },
-    stateChanged: function(newState) {
-      if (newState == 5) {
+
+    stateChanged: function (state) {
+      if (state == 5) {
         // player.forceBuffer();
       }
-      logger.log('video state:' + newState);
+      logger.log( 'video state: ' + state );
     }
 };

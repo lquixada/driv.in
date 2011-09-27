@@ -5,7 +5,8 @@ function onYouTubePlayerReady() {
         element: $('#diplayer').get(0)
     });
 
-    logger.log('youtube socket connected:' + socket.connected);
+    logger.log( 'youtube player ready: ' + player.ready );
+    logger.log( 'socket connected: ' + socket.connected );
 }
 
 var room = {
@@ -15,7 +16,7 @@ var room = {
 
         this.timer = setInterval(function() {
             if (player.ready && socket.connected) {
-                logger.log('can join room');
+                logger.log('user joining room.');
                 audience.init();
                 socket.emit('join', room.name, 'user');
 
