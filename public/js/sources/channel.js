@@ -1,1 +1,5 @@
-var channel = {};
+var channel = {
+    init: function () {
+        this.socket = io.connect();
+    }
+};

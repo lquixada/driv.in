@@ -1,14 +1,3 @@
-
-function onYouTubePlayerReady() {
-    player.init({
-        ready: true,
-        element: $('#diplayer').get(0)
-    });
-
-    logger.log( 'youtube player ready: ' + player.ready );
-    logger.log( 'socket connected: ' + socket.connected );
-}
-
 var room = {
     name: 'room1',
     join: function () {
@@ -18,12 +7,16 @@ var room = {
             if (player.ready && socket.connected) {
                 logger.log('user joining room.');
                 audience.init();
-                socket.emit('join', room.name, 'user');
 
                 chat.init({
                     userName: 'user'
                 });
                 
+                // channel.init();
+
+                /* SOCKET */
+                socket.emit('join', room.name, 'user');
+
                 /* Publishers */
                 socket.on('chat message', function(message) {
                     $.publish('user-message-received', message);

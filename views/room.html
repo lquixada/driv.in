@@ -30,7 +30,7 @@
     <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- divin code -->
-    <script src="/js/drivin.js"></script>
+    <script src="/js/sources/room.js"></script>
     <script src="/js/sources/chat.js"></script>
     <script src="/js/sources/player.js"></script>
     <script src="/js/sources/playlist.js"></script>
@@ -46,6 +46,16 @@
     socket.on('connect', function() {
         socket.connected = true;
     });
+
+    function onYouTubePlayerReady() {
+        player.init({
+            ready: true,
+            element: $('#diplayer').get(0)
+        });
+
+        logger.log( 'youtube player ready: ' + player.ready );
+        logger.log( 'socket connected: ' + socket.connected );
+    }
 
     $( function () {
         logger.init();
