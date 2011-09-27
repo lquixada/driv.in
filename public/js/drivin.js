@@ -1,8 +1,3 @@
-function debugInfo(message) {
-    if (console) {
-        console.log(message);
-    }
-}
 
 function onYouTubePlayerReady(playerId) {
     player.init({

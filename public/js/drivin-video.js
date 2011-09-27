@@ -2,7 +2,7 @@
 var video = {
     init: function( options ) {
         socket.on('video started', function() {
-            debugInfo('video started');
+            logger.log('video started');
             player.play();
 
             player.bufferLayer.hide();
@@ -32,17 +32,17 @@ var video = {
         });
 
         socket.on('move forward', function(videoId, seconds) {
-            debugInfo('loading video: ' + videoId);
+            logger.log('loading video: ' + videoId);
             player.loadId( videoId, seconds );
 
-            debugInfo('will seek to ' + seconds + ' seconds');
+            logger.log('will seek to ' + seconds + ' seconds');
             player.seekTo( seconds );
 
             player.forceBuffer();
         });
 
         socket.on('play now', function() {
-            debugInfo('will play now');
+            logger.log('will play now');
             player.play();
 
             player.bufferLayer.hide();
@@ -53,6 +53,6 @@ var video = {
       if (newState == 5) {
         // player.forceBuffer();
       }
-      debugInfo('video state:' + newState);
+      logger.log('video state:' + newState);
     }
 };
