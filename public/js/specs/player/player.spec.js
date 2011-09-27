@@ -26,6 +26,10 @@ describe("Player", function() {
             expect( player.element ).toBe( this.youtubeApiMock );
         });
 
+        it("should not be ready", function() {
+            expect( player.ready ).toBe( false );
+        });
+        
         it("should set the video volume to the max", function() {
             expect( player.element.setVolume ).toHaveBeenCalledWith( 100 );
         });

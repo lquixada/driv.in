@@ -10,16 +10,16 @@ function onYouTubePlayerReady(playerId) {
     });
     player.bindEvent("onStateChange", "video.stateChanged");
 
-    playerReady = true;
+    player.ready = true;
     logger.log('youtube socket connected:' + socket.connected);
 }
 
 function joinRoom() {
     var timer = setInterval(function() {
-        if (playerReady && socket.connected) {
+        if (player.ready && socket.connected) {
             logger.log('can join room');
             audience.init();
-            socket.emit('join', roomName, 'user');
+            socket.emit('join', room.name, 'user');
 
             chat.init({
                 userName: 'user'

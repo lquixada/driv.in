@@ -39,6 +39,13 @@
     <script src="/js/sources/audience.js"></script>
     <script src="/js/sources/logger.js"></script>
     <script>
+    var room = { name:'<%= room.name %>' },
+        socket = io.connect();
+
+    socket.on('connect', function() {
+        socket.connected = true;
+    });
+
     logger.init();
     </script>
 </head>
@@ -80,18 +87,6 @@
         <div id="video-audience">
             <div id="user-space"></div>
         </div>
-
-        <script>
-          var playerReady = false;
-          var socket = io.connect();
-          var roomName = '<%= room.name %>'
-
-          joinRoom();
-
-          socket.on('connect', function() {
-            socket.connected = true;
-          });
-        </script>
 
     </section>
 
@@ -139,6 +134,8 @@
           playlist.init();
 
           video.init();
+
+          joinRoom();
         </script>
     </aside>
 
