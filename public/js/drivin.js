@@ -1,11 +1,10 @@
 
-function onYouTubePlayerReady(playerId) {
+function onYouTubePlayerReady() {
     player.init({
+        ready: true,
         element: $('#diplayer').get(0)
     });
-    player.bindEvent("onStateChange", "video.stateChanged");
 
-    player.ready = true;
     logger.log('youtube socket connected:' + socket.connected);
 }
 

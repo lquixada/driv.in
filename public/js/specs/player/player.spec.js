@@ -17,6 +17,8 @@ describe("Player", function() {
     
     describe("init", function() {
         beforeEach(function() {
+            spyOn( player, 'bindEvent' );
+
             player.init( {
                 element: this.youtubeApiMock
             } );
@@ -40,6 +42,23 @@ describe("Player", function() {
 
         it("should hide the video bufferLayer", function() {
             expect( player.bufferLayer.is( ':hidden' ) ).toBe( true );
+        });
+
+        it("should listen to state changed event to warn video.", function() {
+            expect( player.bindEvent ).toHaveBeenCalledWith( 'onStateChange', 'video.stateChanged' );
+        });
+    });
+
+    describe("init with ready", function() {
+        beforeEach(function() {
+            player.init( {
+                ready: true,
+                element: this.youtubeApiMock
+            } );
+        });
+        
+        it("should not be ready", function() {
+            expect( player.ready ).toBe( true );
         });
     });
 

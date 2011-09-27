@@ -1,13 +1,15 @@
 var player = {
     init: function ( options ) {
         this.mute = false;
-        this.ready = false;
+        this.ready = options.ready || false;
 
         this.bufferLayer = $('#buffer-overlay');
         this.bufferLayer.hide();
 
         this.element = options.element;
         this.element.setVolume(100);
+        
+        this.bindEvent( 'onStateChange', 'video.stateChanged' );
     },
 
     bindEvent: function ( event, callback ) {
