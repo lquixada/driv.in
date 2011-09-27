@@ -39,14 +39,21 @@
     <script src="/js/sources/audience.js"></script>
     <script src="/js/sources/logger.js"></script>
     <script>
-    var room = { name:'<%= room.name %>' },
-        socket = io.connect();
+    room.name = '<%= room.name %>';
+
+    socket = io.connect();
 
     socket.on('connect', function() {
         socket.connected = true;
     });
 
-    logger.init();
+    $( function () {
+        logger.init();
+
+        playlist.init();
+        video.init();
+        room.join(); 
+    });
     </script>
 </head>
 
@@ -129,14 +136,6 @@
         </section>
 
         <%- partial('partials/chat') %>
-
-        <script>
-          playlist.init();
-
-          video.init();
-
-          joinRoom();
-        </script>
     </aside>
 
 </div>
