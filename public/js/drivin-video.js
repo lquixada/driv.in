@@ -1,7 +1,7 @@
 
 var video = {
     init: function( options ) {
-        socket.on('video started', function() {
+        $.subscribe('video-started', function () {
             logger.log('video started');
             player.play();
 
@@ -9,11 +9,11 @@ var video = {
             clearInterval(player.bufferLayer.currentInterval);
         });
 
-        socket.on('video ended', function() {
+        $.subscribe('video-ended', function() {
             player.pause();
         });
 
-        socket.on('next video', function(video) {
+        $.subscribe('video-next', function(event, video) {
             player.loadId(video.id);
             player.forceBuffer();
 
@@ -31,17 +31,17 @@ var video = {
             }, 1000);
         });
 
-        socket.on('move forward', function(videoId, seconds) {
-            logger.log('loading video: ' + videoId);
-            player.loadId( videoId, seconds );
+        $.subscribe('move-forward', function (event, data) {
+            logger.log('loading video: ' + data.videoId);
+            player.loadId( data.videoId, data.seconds );
 
-            logger.log('will seek to ' + seconds + ' seconds');
-            player.seekTo( seconds );
+            logger.log('will seek to ' + data.seconds + ' seconds');
+            player.seekTo( data.seconds );
 
             player.forceBuffer();
         });
 
-        socket.on('play now', function() {
+        $.subscribe('play-now', function() {
             logger.log('will play now');
             player.play();
 

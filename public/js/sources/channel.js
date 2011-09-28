@@ -33,6 +33,18 @@ var channel = {
             $.publish( 'video-added', video );
         });
 
+        this.socket.on('video started', function() {
+            $.publish( 'video-started' );
+        });
+
+        this.socket.on('play now', function() {
+            $.publish( 'play-now' );
+        });
+
+        this.socket.on('move forward', function(data) {
+            $.publish( 'move-forward', data );
+        });
+        
         this.socket.on('video ended', function() {
             $.publish( 'video-ended' );
         });

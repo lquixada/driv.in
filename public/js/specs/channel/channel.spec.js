@@ -29,6 +29,14 @@ describe("Channel", function() {
 
             expect( channel.connected ).toBe( true );
         });
+
+        xit("should emit the room name", function() {
+            this.socket.emit( 'connect' );
+            
+            spyOn( channel.socket, 'emit' );
+
+            expect( channel.connected ).toBe( true );
+        });
     });
 
     describe("publish socket events and data to the pubsub", function() {
@@ -67,6 +75,24 @@ describe("Channel", function() {
             this.socket.emit( 'video added', this.data );
 
             expect( $.publish ).toHaveBeenCalledWith( 'video-added', this.data );
+        });
+
+        it("should publish video started event", function() {
+            this.socket.emit( 'video started' );
+
+            expect( $.publish ).toHaveBeenCalledWith( 'video-started' );
+        });
+
+        it("should publish video play now event", function() {
+            this.socket.emit( 'play now' );
+
+            expect( $.publish ).toHaveBeenCalledWith( 'play-now' );
+        });
+
+        it("should publish video move forward event", function() {
+            this.socket.emit( 'move forward', this.data );
+
+            expect( $.publish ).toHaveBeenCalledWith( 'move-forward', this.data );
         });
 
         it("should publish video ended event", function() {
