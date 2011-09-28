@@ -1,11 +1,12 @@
 var channel = {
-    init: function () {
+    init: function ( options ) {
         var that = this;
+            roomName = options.roomName;
 
         this.socket = io.connect();
 
         this.socket.on( 'connect', function () {
-            that.connected = true;
+            that.socket.emit( 'join', roomName, 'user');
             that._bindPublishers();
             that._bindSubscribers();
         } );
@@ -63,6 +64,11 @@ var channel = {
 
         $.subscribe('tomato-thrown', function(event, message) {
             that.socket.emit('blame');
+        });
+
+        // Not tested
+        $.subscribe('user-name-changed', function(event, message) {
+            audience.users[that.socket.socket.sessionid].name = message.userName;
         });
     }
 };

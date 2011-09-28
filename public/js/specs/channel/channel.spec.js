@@ -7,7 +7,9 @@ describe("Channel", function() {
                 this[eventName] = callback;
             },
             emit: function ( eventName, data ) {
-                this[eventName](data);
+                if ( this[eventName] ) {
+                    this[eventName](data);
+                }
             }
         };
 
@@ -15,32 +17,28 @@ describe("Channel", function() {
             connect: jasmine.createSpy().andReturn( this.socket )
         };
 
-        channel.init();
+        channel.init({
+            roomName: 'room1'
+        });
     });
     
-    describe("init", function() {
-        it("should connect to socket", function() {
+    describe("init", function () {
+        it("should connect to socket", function () {
             expect( io.connect ).toHaveBeenCalled();
             expect( channel.socket ).toBe( this.socket );
         });
 
-        it("should listen to connect event", function() {
+        it("should emit the room name", function () {
+            spyOn( channel.socket, 'emit' ).andCallThrough();
+
             this.socket.emit( 'connect' );
 
-            expect( channel.connected ).toBe( true );
-        });
-
-        xit("should emit the room name", function() {
-            this.socket.emit( 'connect' );
-            
-            spyOn( channel.socket, 'emit' );
-
-            expect( channel.connected ).toBe( true );
+            expect( channel.socket.emit ).toHaveBeenCalledWith( 'join', 'room1', 'user' );
         });
     });
 
-    describe("publish socket events and data to the pubsub", function() {
-        beforeEach(function() {
+    describe("publish socket events and data to the pubsub", function () {
+        beforeEach(function () {
             spyOn( $, 'publish' );
             
             this.socket.emit( 'connect' );
