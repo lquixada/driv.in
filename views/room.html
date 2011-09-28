@@ -42,29 +42,32 @@
     logger.init();
 
     function onYouTubePlayerReady() {
-        playlist.init();
-        
-        video.init();
+        // Ensure the DOM has been fully loaded.
+        $( function () {
+            playlist.init();
+            
+            video.init();
 
-        player.init({
-            ready: true,
-            element: $('#diplayer').get(0)
+            player.init({
+                ready: true,
+                element: $('#diplayer').get(0)
+            });
+
+            logger.log('user joining room.');
+            
+            audience.init();
+
+            chat.init({
+                userName: 'user'
+            });
+            
+            channel.init({
+                roomName: '<%= room.name %>'
+            });
+
+            logger.log( 'youtube player ready: ' + player.ready );
+            //logger.log( 'socket connected: ' + socket.connected );
         });
-
-        logger.log('user joining room.');
-        
-        audience.init();
-
-        chat.init({
-            userName: 'user'
-        });
-        
-        channel.init({
-            roomName: '<%= room.name %>'
-        });
-
-        logger.log( 'youtube player ready: ' + player.ready );
-        //logger.log( 'socket connected: ' + socket.connected );
     }
     </script>
 </head>
