@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Channel Test Runner</title>
+    <title>Chat Test Runner</title>
 
     <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
 
@@ -16,16 +16,36 @@
     <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- source code -->
-    <script src="/js/sources/channel.js"></script>
+    <script src="/js/sources/chat.js"></script>
 
     <!-- specs -->
-    <script src="/js/specs/channel/channel.spec.js"></script>
+    <script src="/js/specs/chat/specs.js"></script>
 </head>
 
 <body>
 
-<div id="main"></div>
+<div id="main">
 
+    <section id="chat">
+        <header>
+            <h2>Chat</h2>
+
+            <div id="user-info">
+                <input type="text" id="user-name" maxlength="20" placeholder="enter a username">
+            </div>
+        </header>
+
+        <section id="chat-messages">
+            <ul></ul>
+        </section>
+
+        <footer>
+            <input type="text" id="user-message" maxlength="80" placeholder="send a message">
+        </footer>
+    </section>
+    
+</div>
+	
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
 jasmine.getEnv().addReporter(new jasmine.GridReporter());

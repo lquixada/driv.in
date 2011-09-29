@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Audience Test Runner</title>
+    <title>Channel Test Runner</title>
 
     <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
 
@@ -16,22 +16,15 @@
     <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- source code -->
-    <script src="/js/sources/user.js"></script>
-    <script src="/js/sources/audience.js"></script>
+    <script src="/js/sources/channel.js"></script>
 
     <!-- specs -->
-    <script src="/js/specs/audience/audience.spec.js"></script>
+    <script src="/js/specs/channel/specs.js"></script>
 </head>
 
 <body>
 
-<div id="main">
-
-    <div id="video-audience">
-        <div id="user-space"></div>
-    </div>
-    
-</div>
+<div id="main"></div>
 
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
