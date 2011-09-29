@@ -1,3 +1,5 @@
+/* player is a wrapper around youtube player's javascript api */
+
 var player = {
     init: function ( options ) {
         this.mute = false;

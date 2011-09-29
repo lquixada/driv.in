@@ -1,3 +1,5 @@
+/* channel is a wrapper around socket.io */
+
 var channel = {
     init: function ( options ) {
         var that = this;
