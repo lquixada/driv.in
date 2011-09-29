@@ -3,22 +3,14 @@ var video = {
     init: function( options ) {
         $.subscribe('video-started', function () {
             logger.log('video started');
-            player.play();
 
             player.bufferLayer.hide();
             clearInterval(player.bufferLayer.currentInterval);
         });
 
-        $.subscribe('video-ended', function() {
-            player.pause();
-        });
-
         $.subscribe('video-next', function(event, video) {
-            player.loadId(video.id);
-            player.forceBuffer();
-
-            // TODO: move bufferLayer to a better player
             var c = 10;
+
             player.bufferLayer.currentInterval = setInterval(function(){
                 c -= 1; 
                 if(c > 0){
@@ -43,7 +35,6 @@ var video = {
 
         $.subscribe('play-now', function() {
             logger.log('will play now');
-            player.play();
 
             player.bufferLayer.hide();
             clearInterval(player.bufferLayer.currentInterval);

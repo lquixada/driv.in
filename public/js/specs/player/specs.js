@@ -163,5 +163,79 @@ describe("Player", function() {
         });
     });
     
+    describe("pubsub", function() {
+        describe("video-ended", function() {
+            it("should pause", function() {
+                player.init({
+                    element: this.youtubeApiMock 
+                });
+                player.pause = jasmine.createSpy();
+
+                $.publish( 'video-ended' );
+                
+                waits(50);
+                
+                runs(function() {
+                    expect( player.pause ).toHaveBeenCalled();
+                }); 
+            });
+        });
+
+        describe("video-started", function() {
+            it("should play", function() {
+                player.init({
+                    element: this.youtubeApiMock 
+                });
+                player.play = jasmine.createSpy();
+
+                $.publish( 'video-started' );
+                
+                waits(50);
+                
+                runs(function() {
+                    expect( player.play ).toHaveBeenCalled();
+                }); 
+            });
+        });
+
+        describe("play-now", function() {
+            it("should play", function() {
+                player.init({
+                    element: this.youtubeApiMock 
+                });
+                player.play = jasmine.createSpy();
+
+                $.publish( 'play-now' );
+                
+                waits(50);
+                
+                runs(function() {
+                    expect( player.play ).toHaveBeenCalled();
+                }); 
+            });
+        });
+
+        describe("video-next", function() {
+            it("should load and buffer the next video", function() {
+                var video = { id: 123 };
+
+                player.init({
+                    element: this.youtubeApiMock 
+                });
+                player.loadId = jasmine.createSpy();
+                player.forceBuffer = jasmine.createSpy();
+
+                $.publish( 'video-next', video );
+                
+                waits(50);
+                
+                runs(function() {
+                    expect( player.loadId ).toHaveBeenCalledWith( video.id );
+                    expect( player.forceBuffer ).toHaveBeenCalled();
+                }); 
+            });
+        });
+    });
+    
 });
 

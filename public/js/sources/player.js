@@ -12,10 +12,32 @@ var player = {
         this.element.setVolume(100);
         
         this.bindEvent( 'onStateChange', 'video.stateChanged' );
+        this._bindSubscribers();
     },
 
     bindEvent: function ( event, callback ) {
         this.element.addEventListener( event, callback );
+    },
+
+    _bindSubscribers: function () {
+        var that = this;
+
+        $.subscribe('video-ended', function() {
+            that.pause();
+        });
+
+        $.subscribe('video-started', function () {
+            that.play();
+        });
+
+        $.subscribe('play-now', function () {
+            that.play();
+        });
+
+        $.subscribe('video-next', function ( event, video ) {
+            that.loadId( video.id );
+            that.forceBuffer();
+        });
     },
 
     forceBuffer: function () {
