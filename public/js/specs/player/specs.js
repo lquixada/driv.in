@@ -237,5 +237,32 @@ describe("Player", function() {
         });
     });
     
+    describe("Buffer", function() {
+        describe("init", function() {
+            it("should have a layer", function() {
+                player.buffer.init();
+                expect( player.buffer.element.is( '#buffer-overlay' ) ).toBe( true );
+            });
+        });
+
+        describe("hide", function() {
+            it("should hide layer", function() {
+                player.buffer.init();
+                player.buffer.hide();
+                expect( player.buffer.element.is( ':hidden' ) ).toBe( true );
+            });
+        });
+
+        describe("show", function() {
+            it("should show layer", function() {
+                player.buffer.init();
+                player.buffer.hide();
+                player.buffer.show();
+
+                expect( player.buffer.element.is( ':visible' ) ).toBe( true );
+            });
+        }); 
+    });
+    
 });
 

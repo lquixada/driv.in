@@ -79,4 +79,18 @@ var player = {
             this.element.mute();
         }
     }
-}
+};
+
+player.buffer = {
+    init: function () {
+        this.element = $( '#buffer-overlay' );
+    },
+
+    hide: function () {
+        this.element.hide();
+    },
+    
+    show: function () {
+        this.element.show();
+    }
+};
