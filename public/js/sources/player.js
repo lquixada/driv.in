@@ -3,7 +3,6 @@
 var player = {
     init: function ( options ) {
         this.mute = false;
-        this.ready = options.ready || false;
 
         this.bufferLayer = $('#buffer-overlay');
         this.bufferLayer.hide();

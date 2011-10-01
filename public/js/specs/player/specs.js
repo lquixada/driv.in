@@ -28,10 +28,6 @@ describe("Player", function() {
             expect( player.element ).toBe( this.youtubeApiMock );
         });
 
-        it("should not be ready", function() {
-            expect( player.ready ).toBe( false );
-        });
-        
         it("should set the video volume to the max", function() {
             expect( player.element.setVolume ).toHaveBeenCalledWith( 100 );
         });
@@ -46,19 +42,6 @@ describe("Player", function() {
 
         it("should listen to state changed event to warn video.", function() {
             expect( player.bindEvent ).toHaveBeenCalledWith( 'onStateChange', 'video.stateChanged' );
-        });
-    });
-
-    describe("init with ready", function() {
-        beforeEach(function() {
-            player.init( {
-                ready: true,
-                element: this.youtubeApiMock
-            } );
-        });
-        
-        it("should not be ready", function() {
-            expect( player.ready ).toBe( true );
         });
     });
 

@@ -49,7 +49,6 @@
             video.init();
 
             player.init({
-                ready: true,
                 element: $('#diplayer').get(0)
             });
 
@@ -65,7 +64,7 @@
                 roomName: '<%= room.name %>'
             });
 
-            logger.log( 'youtube player ready: ' + player.ready );
+            logger.log( 'youtube player ready: true' );
             //logger.log( 'socket connected: ' + socket.connected );
         });
     }
