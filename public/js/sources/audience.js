@@ -17,6 +17,10 @@ var audience = {
         
         this.users[user.id] = user;
         
+        if ( data.currentUser ) {
+            this.currentUser = user;
+        }
+
         divUser = user.render();
         divUser.css({
             bottom: bottom+'%',
@@ -43,6 +47,10 @@ var audience = {
         $.subscribe( 'user-message-received', function ( event, data ) {
             that.speak( data );
         } );
+
+        $.subscribe('user-name-changed', function(event, message) {
+            that.currentUser.name = message.userName;
+        });
     },
 
     remove: function ( data ) {
@@ -51,8 +59,12 @@ var audience = {
         // If user disconnects (ex: reloads the page) before
         // the user DOM renders, it throws an error.
         // use try ... finally instead?
-        if (user) {
+        if ( user ) {
             user.remove();
+        }
+        
+        if ( user == this.currentUser ) {
+            delete this.currentUser;
         }
 
         delete this.users[data.id];

@@ -1,8 +1,9 @@
 
 describe("Channel", function() {
     beforeEach(function() {
-        this.data = {};
+        this.data = { id: 123 };
         this.socket = {
+            socket: { sessionid: null },
             on: function ( eventName, callback ) {
                 this[eventName] = callback;
             },
@@ -61,6 +62,18 @@ describe("Channel", function() {
 
             expect( $.publish ).toHaveBeenCalledWith( 'user-added', this.data );
             expect( this.data.avatar ).toBe( '/img/avatar01.png' );
+            expect( this.data.currentUser ).not.toBeDefined();
+        });
+
+        it("should publish user join event with current user", function() {
+            console.log( this.data.id )
+            this.socket.socket.sessionid = this.data.id;
+            this.socket.emit( 'user join', this.data );
+
+            console.log( this.socket.socket.sessionid )
+            expect( $.publish ).toHaveBeenCalledWith( 'user-added', this.data );
+            expect( this.data.avatar ).toBe( '/img/avatar01.png' );
+            expect( this.data.currentUser ).toBe( true );
         });
 
         it("should publish next video event", function() {

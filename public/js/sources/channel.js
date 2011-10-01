@@ -15,12 +15,19 @@ var channel = {
     },
 
     _bindPublishers: function () {
+        var that = this;
+
         this.socket.on( 'chat message', function ( message ) {
             $.publish( 'user-message-received', message );
         });
 
         this.socket.on('user join', function(data) {
             data.avatar = '/img/avatar01.png';
+
+            if ( data.id == that.socket.socket.sessionid ) {
+                data.currentUser = true;
+            }
+
             $.publish('user-added', data);
         });
         
@@ -66,11 +73,6 @@ var channel = {
 
         $.subscribe('tomato-thrown', function(event, message) {
             that.socket.emit('blame');
-        });
-
-        // Not tested
-        $.subscribe('user-name-changed', function(event, message) {
-            audience.users[that.socket.socket.sessionid].name = message.userName;
         });
     }
 };
