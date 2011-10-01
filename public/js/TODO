@@ -1,4 +1,3 @@
 
 - Colocar todos os logger.log dentro de logger.
-- Testar user-name-changed
 - Quebrar singleton video para player, player.buffer e logger.
