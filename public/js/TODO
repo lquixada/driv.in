@@ -1,3 +1,4 @@
 
-- Colocar todos os logger.log dentro de logger.
 - Quebrar singleton video para player, player.buffer e logger.
+- Renomear eventos para o padrão video:next, user:joined, user:message
+- Colocar todos os logger.log dentro de logger.
