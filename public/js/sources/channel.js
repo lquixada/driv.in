@@ -52,6 +52,7 @@ var channel = {
         });
 
         this.socket.on('move forward', function(data) {
+            console.log('socket move forward: '+JSON.stringify(data));
             $.publish( 'move-forward', data );
         });
         

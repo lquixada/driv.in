@@ -4,8 +4,7 @@ var player = {
     init: function ( options ) {
         this.mute = false;
 
-        this.bufferLayer = $('#buffer-overlay');
-        this.bufferLayer.hide();
+        this.buffer.init();
 
         this.element = options.element;
         this.element.setVolume(100);
@@ -27,15 +26,24 @@ var player = {
 
         $.subscribe('video-started', function () {
             that.play();
+            that.buffer.stop();
         });
 
         $.subscribe('play-now', function () {
             that.play();
+            that.buffer.stop();
         });
 
         $.subscribe('video-next', function ( event, video ) {
             that.loadId( video.id );
             that.forceBuffer();
+            that.buffer.start();
+        });
+
+        $.subscribe('move-forward', function (event, data) {
+            player.loadId( data.videoId, data.seconds );
+            player.seekTo( data.seconds );
+            player.forceBuffer();
         });
     },
 
@@ -83,6 +91,7 @@ var player = {
 player.buffer = {
     init: function () {
         this.element = $( '#buffer-overlay' );
+        this.hide();
     },
 
     hide: function () {
@@ -91,5 +100,30 @@ player.buffer = {
     
     show: function () {
         this.element.show();
+    },
+
+    start: function () {
+        var that = this, secs = 10;
+
+        this.show();
+        this._setSeconds( secs );
+
+        this.timer = setInterval( function () {
+            secs--;
+            that._setSeconds( secs );
+
+            if ( secs == 0 ) {
+                that.stop();
+            }
+        }, 1000);
+    },
+
+    stop: function () {
+        clearInterval( this.timer );
+        this.hide();
+    },
+
+    _setSeconds: function ( secs ) {
+        this.element.html( '<h3>' + secs + '</h3><p>Waiting</p>' );
     }
 };

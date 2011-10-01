@@ -18,6 +18,7 @@ describe("Player", function() {
     describe("init", function() {
         beforeEach(function() {
             spyOn( player, 'bindEvent' );
+            spyOn( player.buffer, 'init' );
 
             player.init( {
                 element: this.youtubeApiMock
@@ -32,12 +33,8 @@ describe("Player", function() {
             expect( player.element.setVolume ).toHaveBeenCalledWith( 100 );
         });
 
-        it("should set the video bufferLayer", function() {
-            expect( player.bufferLayer instanceof jQuery ).toBe( true );
-        });
-
-        it("should hide the video bufferLayer", function() {
-            expect( player.bufferLayer.is( ':hidden' ) ).toBe( true );
+        it("should init buffer", function() {
+            expect( player.buffer.init ).toHaveBeenCalled();
         });
 
         it("should listen to state changed event to warn video.", function() {
@@ -152,7 +149,7 @@ describe("Player", function() {
                 player.init({
                     element: this.youtubeApiMock 
                 });
-                player.pause = jasmine.createSpy();
+                spyOn( player, 'pause' );
 
                 $.publish( 'video-ended' );
                 
@@ -169,7 +166,8 @@ describe("Player", function() {
                 player.init({
                     element: this.youtubeApiMock 
                 });
-                player.play = jasmine.createSpy();
+                spyOn( player, 'play' );
+                spyOn( player.buffer, 'stop' );
 
                 $.publish( 'video-started' );
                 
@@ -177,6 +175,7 @@ describe("Player", function() {
                 
                 runs(function() {
                     expect( player.play ).toHaveBeenCalled();
+                    expect( player.buffer.stop ).toHaveBeenCalled();
                 }); 
             });
         });
@@ -186,7 +185,8 @@ describe("Player", function() {
                 player.init({
                     element: this.youtubeApiMock 
                 });
-                player.play = jasmine.createSpy();
+                spyOn( player, 'play' );
+                spyOn( player.buffer, 'stop' );
 
                 $.publish( 'play-now' );
                 
@@ -194,6 +194,7 @@ describe("Player", function() {
                 
                 runs(function() {
                     expect( player.play ).toHaveBeenCalled();
+                    expect( player.buffer.stop ).toHaveBeenCalled();
                 }); 
             });
         });
@@ -205,8 +206,10 @@ describe("Player", function() {
                 player.init({
                     element: this.youtubeApiMock 
                 });
-                player.loadId = jasmine.createSpy();
-                player.forceBuffer = jasmine.createSpy();
+                
+                spyOn( player, 'loadId' );
+                spyOn( player, 'forceBuffer' );
+                spyOn( player.buffer, 'start' );
 
                 $.publish( 'video-next', video );
                 
@@ -215,36 +218,121 @@ describe("Player", function() {
                 runs(function() {
                     expect( player.loadId ).toHaveBeenCalledWith( video.id );
                     expect( player.forceBuffer ).toHaveBeenCalled();
+                    expect( player.buffer.start ).toHaveBeenCalled();
                 }); 
             });
         });
+
+        describe("move forward", function() {
+            it("should start video in a certain point", function() {
+                var data = { videoId: 123, seconds: 20 };
+
+                player.init({
+                    element: this.youtubeApiMock 
+                });
+                spyOn( player, 'loadId' );
+                spyOn( player, 'seekTo' );
+                spyOn( player, 'forceBuffer' );
+
+                $.publish( 'move-forward', data );
+                
+                waits(50);
+                
+                runs(function() {
+                    expect( player.loadId ).toHaveBeenCalledWith( data.videoId, data.seconds );
+                    expect( player.seekTo ).toHaveBeenCalledWith( data.seconds );
+                    expect( player.forceBuffer ).toHaveBeenCalled();
+                }); 
+            });
+            
+        });
+        
     });
     
     describe("Buffer", function() {
+        beforeEach(function() {
+            this.buffer = player.buffer;
+            this.buffer.init();
+        });
+        
         describe("init", function() {
             it("should have a layer", function() {
-                player.buffer.init();
-                expect( player.buffer.element.is( '#buffer-overlay' ) ).toBe( true );
+                expect( this.buffer.element.is( '#buffer-overlay' ) ).toBe( true );
+            });
+
+            it("should be hidden", function() {
+                expect( this.buffer.element.is( ':hidden' ) ).toBe( true );
             });
         });
 
         describe("hide", function() {
             it("should hide layer", function() {
-                player.buffer.init();
-                player.buffer.hide();
-                expect( player.buffer.element.is( ':hidden' ) ).toBe( true );
+                this.buffer.hide();
+                expect( this.buffer.element.is( ':hidden' ) ).toBe( true );
             });
         });
 
         describe("show", function() {
             it("should show layer", function() {
-                player.buffer.init();
-                player.buffer.hide();
-                player.buffer.show();
+                this.buffer.hide();
+                this.buffer.show();
 
-                expect( player.buffer.element.is( ':visible' ) ).toBe( true );
+                expect( this.buffer.element.is( ':visible' ) ).toBe( true );
             });
-        }); 
+        });
+
+        describe("start", function() {
+            it("should start buffer regressive count at 10 and visible", function() {
+                jasmine.Clock.useMock(); 
+                
+                this.buffer.start();
+                
+                expect( this.buffer.element.is( ':visible' ) ).toBe( true );
+                expect( this.buffer.element.find( 'h3' ).html() ).toBe( '10' );
+            });
+
+            it("should decrease count each second", function() {
+                jasmine.Clock.useMock(); 
+                
+                spyOn( this.buffer, 'stop' );
+
+                this.buffer.start();
+
+                jasmine.Clock.tick( 1000 );
+
+                expect( this.buffer.element.find( 'h3' ).html() ).toBe( '9' );
+
+                jasmine.Clock.tick( 1000 );
+
+                expect( this.buffer.element.find( 'h3' ).html() ).toBe( '8' );
+            });
+
+            it("should finish at 0 and be stopped", function() {
+                jasmine.Clock.useMock(); 
+                
+                spyOn( this.buffer, 'stop' );
+
+                this.buffer.start();
+
+                jasmine.Clock.tick( 10000 );
+
+                expect( this.buffer.element.find( 'h3' ).html() ).toBe( '0' );
+                expect( this.buffer.stop ).toHaveBeenCalled();
+            });
+            
+        });
+
+        describe("stop", function() {
+            it("should stop the buffer regressive count", function() {
+                spyOn( window, 'clearInterval' );
+                spyOn( this.buffer, 'hide' );
+
+                this.buffer.stop();
+
+                expect( window.clearInterval ).toHaveBeenCalledWith( this.buffer.timer );
+                expect( this.buffer.hide ).toHaveBeenCalled();
+            });
+        });
     });
     
 });
