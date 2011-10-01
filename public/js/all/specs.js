@@ -14,7 +14,7 @@ describe("Driv.in", function() {
         (function (runner) {
             describe( runner+' Runner', function() {
                 it("should have no errors", function() {
-                    var url = '/js/specs/'+runner.toLowerCase()+'/runner.html';
+                    var url = '/js/'+runner.toLowerCase()+'/runner.html';
 
                     $( 'div#main' ).html( '<iframe src="'+url+'"></iframe>' );
 

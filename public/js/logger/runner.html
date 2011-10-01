@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>User Test Runner</title>
+    <title>Logger Test Runner</title>
 
     <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
 
@@ -11,19 +11,21 @@
     <script src="/js/libs/jasmine-1.1.0/jasmine.js"></script>
     <script src="/js/libs/jasmine-1.1.0/jasmine-html.js"></script>
     <script src="/js/libs/jasmine-grid-reporter-0.1.js"></script>
+    <script src="/js/libs/jasmine-helpers.js"></script>
     <script src="/js/libs/jquery-1.6.2.min.js"></script>
     <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- source code -->
-    <script src="/js/sources/user.js"></script>
+    <script src="/js/logger/source.js"></script>
 
     <!-- specs -->
-    <script src="/js/specs/user/specs.js"></script>
+    <script src="/js/logger/specs.js"></script>
 </head>
 
 <body>
 
-<div id="main"></div>
+<div id="main">
+</div>
 
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());

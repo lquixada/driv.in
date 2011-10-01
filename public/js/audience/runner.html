@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Player Test Runner</title>
+    <title>Audience Test Runner</title>
 
     <link href="/js/libs/jasmine-1.1.0/jasmine.css" rel="stylesheet"/>
 
@@ -16,16 +16,21 @@
     <script src="/js/libs/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- source code -->
-    <script src="/js/sources/player.js"></script>
+    <script src="/js/user/source.js"></script>
+    <script src="/js/audience/source.js"></script>
 
     <!-- specs -->
-    <script src="/js/specs/player/specs.js"></script>
+    <script src="/js/audience/specs.js"></script>
 </head>
 
 <body>
 
 <div id="main">
-    <div id="buffer-overlay"></div>
+
+    <div id="video-audience">
+        <div id="user-space"></div>
+    </div>
+    
 </div>
 
 <script>
