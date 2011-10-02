@@ -127,12 +127,12 @@ describe("Audience", function() {
     });
 
     describe("pubsub events", function() {
-        it("should listen the to user-added event", function() {
+        it("should listen the to user:joined event", function() {
             spyOn( audience, 'add' );
 
             audience.init();
 
-            $.publish( 'user-added', this.newUser );
+            $.publish( 'user:joined', this.newUser );
             
             waits(50);
 
@@ -141,12 +141,12 @@ describe("Audience", function() {
             });
         });
 
-        it("should listen the to user-removed event", function() {
+        it("should listen the to user:left event", function() {
             spyOn( audience, 'remove' );
 
             audience.init();
 
-            $.publish( 'user-removed', this.newUser );
+            $.publish( 'user:left', this.newUser );
             
             waits( 50 );
 
@@ -155,12 +155,12 @@ describe("Audience", function() {
             });
         });
 
-        it("should listen the user-message-received event", function() {
+        it("should listen the user:message-received event", function() {
             spyOn( audience, 'speak' );
 
             audience.init();
 
-            $.publish( 'user-message-received', this.newUser );
+            $.publish( 'user:message-received', this.newUser );
             
             waits( 50 );
 
@@ -169,18 +169,18 @@ describe("Audience", function() {
             });
         });
 
-        it("should listen the to user-name-changed event", function() {
+        it("should listen the to user:name-changed event", function() {
             var data = { userName: 'Bill' };
 
             this.newUser.currentUser = true;
 
             audience.init();
             
-            $.publish( 'user-added', this.newUser );
+            $.publish( 'user:joined', this.newUser );
             
             waits(50);
 
-            $.publish( 'user-name-changed', data );
+            $.publish( 'user:name-changed', data );
             
             waits(50);
 

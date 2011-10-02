@@ -20,27 +20,27 @@ var player = {
     _bindSubscribers: function () {
         var that = this;
 
-        $.subscribe('video-ended', function() {
+        $.subscribe('video:ended', function() {
             that.pause();
         });
 
-        $.subscribe('video-started', function () {
+        $.subscribe('video:started', function () {
             that.play();
             that.buffer.stop();
         });
 
-        $.subscribe('play-now', function () {
+        $.subscribe('video:play', function () {
             that.play();
             that.buffer.stop();
         });
 
-        $.subscribe('video-next', function ( event, video ) {
+        $.subscribe('video:next', function ( event, video ) {
             that.loadId( video.id );
             that.forceBuffer();
             that.buffer.start();
         });
 
-        $.subscribe('move-forward', function (event, data) {
+        $.subscribe('video:forward', function (event, data) {
             player.loadId( data.videoId, data.seconds );
             player.seekTo( data.seconds );
             player.forceBuffer();

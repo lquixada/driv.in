@@ -48,19 +48,19 @@ describe("Channel", function() {
         it("should publish chat message event", function() {
             this.socket.emit( 'chat message', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'user-message-received', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'user:message-received', this.data );
         });
 
         it("should publish user leave event", function() {
             this.socket.emit( 'user leave', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'user-removed', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'user:left', this.data );
         });
 
         it("should publish user join event", function() {
             this.socket.emit( 'user join', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'user-added', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'user:joined', this.data );
             expect( this.data.avatar ).toBe( '/img/avatar01.png' );
             expect( this.data.currentUser ).not.toBeDefined();
         });
@@ -71,7 +71,7 @@ describe("Channel", function() {
             this.socket.emit( 'user join', this.data );
 
             console.log( this.socket.socket.sessionid )
-            expect( $.publish ).toHaveBeenCalledWith( 'user-added', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'user:joined', this.data );
             expect( this.data.avatar ).toBe( '/img/avatar01.png' );
             expect( this.data.currentUser ).toBe( true );
         });
@@ -79,37 +79,37 @@ describe("Channel", function() {
         it("should publish next video event", function() {
             this.socket.emit( 'next video', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'video-next', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:next', this.data );
         });
 
         it("should publish video added event", function() {
             this.socket.emit( 'video added', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'video-added', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:added', this.data );
         });
 
         it("should publish video started event", function() {
             this.socket.emit( 'video started' );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'video-started' );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:started' );
         });
 
         it("should publish video play now event", function() {
             this.socket.emit( 'play now' );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'play-now' );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:play' );
         });
 
         it("should publish video move forward event", function() {
             this.socket.emit( 'move forward', this.data );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'move-forward', this.data );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:forward', this.data );
         });
 
         it("should publish video ended event", function() {
             this.socket.emit( 'video ended' );
 
-            expect( $.publish ).toHaveBeenCalledWith( 'video-ended' );
+            expect( $.publish ).toHaveBeenCalledWith( 'video:ended' );
         });
     });
 
@@ -123,19 +123,19 @@ describe("Channel", function() {
         it("should emit chat message", function() {
             this.data = { userName: 'John', userMessage: 'hey' };
 
-            $.publish( 'user-message-sent', this.data );
+            $.publish( 'user:message-sent', this.data );
             
             expect( this.socket.emit ).toHaveBeenCalledWith( 'chat message', this.data.userName, this.data.userMessage);
         });
 
         it("should emit video sent", function() {
-            $.publish( 'video-sent', this.data );
+            $.publish( 'video:sent', this.data );
             
             expect( this.socket.emit ).toHaveBeenCalledWith( 'add video', this.data );
         });
 
         it("should emit video sent", function() {
-            $.publish( 'tomato-thrown' );
+            $.publish( 'tomato:thrown' );
             
             expect( this.socket.emit ).toHaveBeenCalledWith( 'blame' );
         });

@@ -151,7 +151,7 @@ describe("Player", function() {
                 });
                 spyOn( player, 'pause' );
 
-                $.publish( 'video-ended' );
+                $.publish( 'video:ended' );
                 
                 waits(50);
                 
@@ -169,7 +169,7 @@ describe("Player", function() {
                 spyOn( player, 'play' );
                 spyOn( player.buffer, 'stop' );
 
-                $.publish( 'video-started' );
+                $.publish( 'video:started' );
                 
                 waits(50);
                 
@@ -188,7 +188,7 @@ describe("Player", function() {
                 spyOn( player, 'play' );
                 spyOn( player.buffer, 'stop' );
 
-                $.publish( 'play-now' );
+                $.publish( 'video:play' );
                 
                 waits(50);
                 
@@ -211,7 +211,7 @@ describe("Player", function() {
                 spyOn( player, 'forceBuffer' );
                 spyOn( player.buffer, 'start' );
 
-                $.publish( 'video-next', video );
+                $.publish( 'video:next', video );
                 
                 waits(50);
                 
@@ -234,7 +234,7 @@ describe("Player", function() {
                 spyOn( player, 'seekTo' );
                 spyOn( player, 'forceBuffer' );
 
-                $.publish( 'move-forward', data );
+                $.publish( 'video:forward', data );
                 
                 waits(50);
                 

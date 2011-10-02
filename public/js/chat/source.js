@@ -24,7 +24,7 @@ var chat = {
             if (event.keyCode == 13 && userMessage) {
                 that._clearInputUserMessage();
 
-                $.publish( 'user-message-sent', { userName: that.userName, userMessage: userMessage } );
+                $.publish( 'user:message-sent', { userName: that.userName, userMessage: userMessage } );
             }
         });
         
@@ -35,7 +35,7 @@ var chat = {
                 that.userName = userName;
                 that.inputUserMessage.focus();
 
-                $.publish( 'user-name-changed', { userName: userName } );
+                $.publish( 'user:name-changed', { userName: userName } );
             }
         });
     },
@@ -43,7 +43,7 @@ var chat = {
     _bindSubscribers: function () {
         var that = this;
 
-        $.subscribe( 'user-message-received', function ( event, data ) {
+        $.subscribe( 'user:message-received', function ( event, data ) {
             that._addMessage( data.userName, data.userMessage );
         } );
     },

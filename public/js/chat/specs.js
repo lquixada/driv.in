@@ -21,7 +21,7 @@ describe("Chat", function() {
         it("should publish the user message", function() {
             var message, subscriber;
 
-            subscriber = $.subscribe( 'user-message-sent', function ( event, data ) {
+            subscriber = $.subscribe( 'user:message-sent', function ( event, data ) {
                 message = data.userMessage;
             });
 
@@ -77,7 +77,7 @@ describe("Chat", function() {
         it("should publish the new user name", function() {
             var userName, subscriber;
 
-            subscriber = $.subscribe( 'user-name-changed', function ( event, data ) {
+            subscriber = $.subscribe( 'user:name-changed', function ( event, data ) {
                 userName = data.userName;
             });
             
@@ -106,7 +106,7 @@ describe("Chat", function() {
         it("should not publish while Enter key is not pressed", function() {
             var subscriber;
             
-            subscriber = $.subscribe( 'user-name-changed', jasmine.createSpy() );
+            subscriber = $.subscribe( 'user:name-changed', jasmine.createSpy() );
 
             this.inputUserName.val( 'Jo' );
             this.inputUserName.keydown();
@@ -128,7 +128,7 @@ describe("Chat", function() {
 
             ul = chat.ulMessages; 
 
-            $.publish( 'user-message-received', { userName: 'Bill', userMessage: 'foo bar' } );
+            $.publish( 'user:message-received', { userName: 'Bill', userMessage: 'foo bar' } );
 
             expect( ul.find( 'li' ).size() ).toBe( 1 );
             expect( ul.find( 'li' ).text() ).toBe( 'Bill foo bar' );

@@ -61,7 +61,7 @@ describe("Playlist", function() {
         it("should allow user to add video through input and button", function() {
             var message, subscriber;
 
-            subscriber = $.subscribe( 'video-sent', function ( event, data ) {
+            subscriber = $.subscribe( 'video:sent', function ( event, data ) {
                 message = data;
             }); 
             
@@ -94,7 +94,7 @@ describe("Playlist", function() {
         it("should publish tomato thrown", function() {
             var tomatoThrown = false, subscriber;
 
-            subscriber = $.subscribe( 'tomato-thrown', function ( event, data ) {
+            subscriber = $.subscribe( 'tomato:thrown', function ( event, data ) {
                 tomatoThrown = true;
             });
             
@@ -118,13 +118,13 @@ describe("Playlist", function() {
     });
     
     describe("listen to the PubSub", function() {
-        it("should add video on video-added", function() {
+        it("should add video on video:added", function() {
             var video = { id: 3, title: 'Title 03', thumbUrl: 'thumb01.jpg', duration: '3:03' };
 
             playlist.init();
             playlist.addTrack = jasmine.createSpy();
 
-            $.publish( 'video-added', video );
+            $.publish( 'video:added', video );
             
             waits(50);
             
@@ -133,12 +133,12 @@ describe("Playlist", function() {
             }); 
         });
 
-        it("should clear current video on video-ended when none available", function() {
+        it("should clear current video on video:ended when none available", function() {
             playlist.init();
             playlist.setCurrentTrack = jasmine.createSpy();
             playlist.ul.html( '' );
 
-            $.publish( 'video-ended' );
+            $.publish( 'video:ended' );
             
             waits(50);
             
@@ -147,12 +147,12 @@ describe("Playlist", function() {
             }); 
         });
 
-        it("should not clear current video on video-ended when one is available", function() {
+        it("should not clear current video on video:ended when one is available", function() {
             playlist.init();
             playlist.setCurrentTrack = jasmine.createSpy();
             playlist.ul.html( '<li></li>' );
 
-            $.publish( 'video-ended' );
+            $.publish( 'video:ended' );
             
             waits(50);
             
@@ -161,13 +161,13 @@ describe("Playlist", function() {
             }); 
         });
 
-        it("should go to next video on video-next", function() {
+        it("should go to next video on video:next", function() {
             var video = { id: 1 };
 
             playlist.init();
             playlist.goToNextTrack = jasmine.createSpy();
 
-            $.publish( 'video-next', video );
+            $.publish( 'video:next', video );
             
             waits(50);
             
@@ -176,14 +176,14 @@ describe("Playlist", function() {
             }); 
         });
 
-        it("should enable tomatoes on video-next", function() {
+        it("should enable tomatoes on video:next", function() {
             var video = {};
 
             playlist.init();
             playlist.a.addClass( 'disabled' );
             playlist.goToNextTrack = jasmine.createSpy();
 
-            $.publish( 'video-next', video );
+            $.publish( 'video:next', video );
             
             waits(50);
             

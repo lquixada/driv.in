@@ -24,17 +24,17 @@ var playlist = {
     bindSubscribers: function () {
         var that = this;
 
-        $.subscribe( 'video-added', function (event, data) {
+        $.subscribe( 'video:added', function (event, data) {
             that.addTrack( data );
         } );
 
-        $.subscribe( 'video-ended', function (event, data) {
+        $.subscribe( 'video:ended', function (event, data) {
             if(that.ul.find('li').size() < 1){
                 that.setCurrentTrack('', '');
             }
         } );
 
-        $.subscribe( 'video-next', function ( event, video ) {
+        $.subscribe( 'video:next', function ( event, video ) {
             that.goToNextTrack(video);
 
             that.a.removeClass('disabled');
@@ -49,12 +49,12 @@ var playlist = {
             
             that.input.val( '' );
 
-            $.publish( 'video-sent', url );
+            $.publish( 'video:sent', url );
         } );
 
         this.a.click( function () {
             $( this ).addClass( 'disabled' );
-            $.publish( 'tomato-thrown', {} );
+            $.publish( 'tomato:thrown', {} );
         });
     },
 

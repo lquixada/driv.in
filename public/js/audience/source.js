@@ -36,19 +36,19 @@ var audience = {
     bindSubscribers: function () {
         var that = this;
 
-        $.subscribe( 'user-added', function ( event, user ) {
+        $.subscribe( 'user:joined', function ( event, user ) {
             that.add( user );
         } );
         
-        $.subscribe( 'user-removed', function ( event, user ) {
+        $.subscribe( 'user:left', function ( event, user ) {
             that.remove( user );
         } );
 
-        $.subscribe( 'user-message-received', function ( event, data ) {
+        $.subscribe( 'user:message-received', function ( event, data ) {
             that.speak( data );
         } );
 
-        $.subscribe('user-name-changed', function(event, message) {
+        $.subscribe('user:name-changed', function(event, message) {
             that.currentUser.name = message.userName;
         });
     },
