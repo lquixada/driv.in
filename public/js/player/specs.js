@@ -144,7 +144,7 @@ describe("Player", function() {
     });
     
     describe("pubsub", function() {
-        describe("video-ended", function() {
+        describe("video:ended", function() {
             it("should pause", function() {
                 player.init({
                     element: this.youtubeApiMock 
@@ -161,7 +161,7 @@ describe("Player", function() {
             });
         });
 
-        describe("video-started", function() {
+        describe("video:started", function() {
             it("should play", function() {
                 player.init({
                     element: this.youtubeApiMock 
@@ -180,7 +180,7 @@ describe("Player", function() {
             });
         });
 
-        describe("play-now", function() {
+        describe("video:play", function() {
             it("should play", function() {
                 player.init({
                     element: this.youtubeApiMock 
@@ -199,7 +199,7 @@ describe("Player", function() {
             });
         });
 
-        describe("video-next", function() {
+        describe("video:next", function() {
             it("should load and buffer the next video", function() {
                 var video = { id: 123 };
 
@@ -223,7 +223,7 @@ describe("Player", function() {
             });
         });
 
-        describe("move forward", function() {
+        describe("video:forward", function() {
             it("should start video in a certain point", function() {
                 var data = { videoId: 123, seconds: 20 };
 
