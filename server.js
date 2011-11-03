@@ -1,11 +1,3 @@
-//Just beacuse nodeko needs this
-if (process.env.NODE_ENV == 'production') {
-  require('nko')('YJfSFoK4/CL4kLGY', function(err, res) {
-    if (err) throw err;
-    res.on('data', function(d) { console.log(d.toString()); });
-  });
-}
-
 process.on('uncaughtException', function (err) {
   console.log('Caught exception: ' + err);
   process.exit(1);
