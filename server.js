@@ -25,7 +25,7 @@ app = RoomsHelper.all(app);
 
 app.redisClient = redis.createClient( 6379, 'localhost');
 app.io = require('socket.io').listen(app);
-io.configure('production', function(){
+app.io.configure('production', function(){
   io.enable('browser client minification');
   io.set('log level', 1);
 });
