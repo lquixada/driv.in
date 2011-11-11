@@ -20,22 +20,23 @@
     <link rel="canonical" href="http://driv.in/<%= room.name %>" />
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito" type="text/css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/drivin.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/room.css">
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- libs -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="js/jquery-1.6.2.min.js"></script>
+    <script src="/js/libs/jquery-1.6.2/jquery-1.6.2.min.js"></script>
+    <script src="/js/libs/jquery-simple-pubsub-0.2/jquery-simple-pubsub-0.2.js"></script>
 
     <!-- divin code -->
-    <script src="js/drivin.js"></script>
-    <script src="js/drivin-chat.js"></script>
-    <script src="js/drivin-player.js"></script>
-    <script src="js/drivin-playlist.js"></script>
-    <script src="js/drivin-video.js"></script>
-    <script src="js/drivin-room.js"></script>
-    <script src="js/drivin-user.js"></script>
+    <script src="/js/drivin.js"></script>
+    <script src="/js/sources/drivin-chat.js"></script>
+    <script src="/js/drivin-player.js"></script>
+    <script src="/js/drivin-playlist.js"></script>
+    <script src="/js/drivin-video.js"></script>
+    <script src="/js/drivin-audience.js"></script>
+    <script src="/js/drivin-user.js"></script>
 </head>
 
 <body>
@@ -48,7 +49,6 @@
         <div id="social">
             <a href="http://www.facebook.com/share.php?u=http://driv.in/<%= room.name %>" target="_blank"><img src="img/button-social-facebook.png" /></a>
             <a href="http://twitter.com/share?url=http://driv.in/<%= room.name %>&text=Join%20me%20on%20driv.in" target="_blank"><img src="img/button-social-twitter.png" /></a>
-            <!--<a href="http://plus.google.com"><img src="img/button-social-gplus.png" /></a>-->
         </div>
 
         <a id="button-mute" href="#mute">mute sound</a>
@@ -65,22 +65,12 @@
         <div id="video-player">
             <input type="text" id="room-title" name="" value="<%= room.name %>" readonly>
 
-            <!--<script>-->
-                <!--$( 'input#room-title' ).dblclick(function () {-->
-                    <!--$( this ).addClass('edit-mode').removeAttr( 'readonly' );-->
-                <!--});-->
-
-                <!--$( 'input#room-title' ).blur(function () {-->
-                    <!--$( this ).removeClass('edit-mode').attr( 'readonly', 'readonly' );-->
-                <!--});-->
-            <!--</script>-->
-
             <object type="application/x-shockwave-flash" id="diplayer" data="http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player1" width="600" height="340">
                 <param name="allowScriptAccess" value="always">
                 <param name="wmode" value="transparent">
             </object>
 
-            <div id="buffer-overlay" ></div>
+            <div id="buffer-overlay"></div>
         </div>
 
         <div id="video-audience">
@@ -88,26 +78,16 @@
         </div>
 
         <script>
-            var currentUser = null;
-//            currentUser = new User( {name:'lquixada', avatar:'img/avatar01.png'} );
+          var currentUser = null;
+          var playerReady = false;
+          var socket = io.connect();
+          var roomName = '<%= room.name %>'
 
-              var playerReady = false;
-              var socket = io.connect();
-              var roomName = '<%= room.name %>'
+          joinRoom();
 
-              joinRoom();
-
-              socket.on('connect', function() {
-                socket.connected = true;
-              });
-
-
-
-            room.init();
-//            room.add( currentUser );
-//            room.add( new User( {name:'cainanunes', avatar:'img/avatar01.png'} ) );
-//            room.add( new User( {name:'emerleite', avatar:'img/avatar01.png'} ) );
-//          room.add( new User( {name:'everton', avatar:'img/avatar01.png'} ) );
+          socket.on('connect', function() {
+            socket.connected = true;
+          });
         </script>
 
     </section>
@@ -129,7 +109,6 @@
                 </marquee>
                 <span class="video-duration"></span>
                 <a class="button-tomatoes" href="#tomato">throw tomatoes</a>
-                <!--<button style="margin:0; width:100%; height:60px;"></button>-->
             </section>
 
             <section id="playlist-queue">
@@ -151,36 +130,18 @@
             </footer>
         </section>
 
-        <section id="chat">
-            <header>
-                <h2>Chat</h2>
+        <%- partial('partials/chat') %>
 
-                <div id="user-info">
-                    <input type="text" id="user-name" maxlength="20" placeholder="enter a username">
-                </div>
-            </header>
+        <script>
+          playlist.init();
 
-            <section id="chat-messages">
-                <ul></ul>
-            </section>
-
-            <footer>
-                <input type="text" id="message" name="message" maxlength="80" placeholder="send a message">
-            </footer>
-
-            <script>
-
-                  playlist.init();
-
-                  video.init();
-            </script>
-        </section>
+          video.init();
+        </script>
     </aside>
 
 </div>
 
 <script type="text/javascript">
-
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-25382569-1']);
   _gaq.push(['_trackPageview']);
@@ -190,7 +151,6 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
 </script>
 
 </body>

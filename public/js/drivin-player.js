@@ -1,3 +1,4 @@
+/* This singleton aims to be a wrapper around youtube's api */
 
 var player = {
     muted: false,
@@ -27,6 +28,12 @@ var player = {
         if (this.element) {
             this.element.addEventListener( event, callback );
         }
+    },
+
+    forceBuffer: function () {
+        //Play and pause to force buffer
+        this.play();
+        this.pause();
     },
 
     loadId: function ( id, seconds ) {

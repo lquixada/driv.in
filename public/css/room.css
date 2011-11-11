@@ -334,7 +334,7 @@ section#chat footer {
     border-top:1px solid #ddd;
 }
 
-section#chat input#message {
+section#chat input#user-message {
     width:86%;
 }
 

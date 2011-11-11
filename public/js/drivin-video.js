@@ -22,9 +22,7 @@ var video = {
             debugInfo('received next video ' + video.id);
             player.loadId(video.id);
 
-            //Play and pause to force buffer
-            player.play();
-            player.pause();
+            player.forceBuffer();
 
             // TODO: move bufferLayer to a better player
             var c = 10;
@@ -47,9 +45,7 @@ var video = {
             debugInfo('will seek to ' + seconds + ' seconds');
             player.seekTo( seconds );
 
-            //Play and pause to force buffer
-            player.play();
-            player.pause();
+            player.forceBuffer();
         });
 
         socket.on('play now', function() {
@@ -62,9 +58,7 @@ var video = {
     },
     stateChanged: function(newState) {
       if (newState == 5) {
-            //Play and pause to force buffer
-            // player.play();
-            // player.pause();
+        // player.forceBuffer();
       }
       debugInfo('video state:' + newState);
     }

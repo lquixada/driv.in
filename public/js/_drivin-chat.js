@@ -1,10 +1,12 @@
 
 var chat = {
     init: function ( options ) {
+        var self = this;
+
         this.section = $( 'section#chat' );
         this.sectionChatMessages = this.section.find( 'section#chat-messages' );
         this.ul = this.section.find( 'ul' );
-        this.inputMessage = this.section.find( 'input#message' );
+        this.inputUserMessage = this.section.find( 'input#user-message' );
         this.inputUserName = this.section.find( 'input#user-name' );
 
         this.onMessageSent = options.onMessageSent || $.noop();
@@ -13,19 +15,10 @@ var chat = {
         this.scrollToBottom();
         this.bindEvents();
 
-        var self = this;
+
         socket.on('chat message', function(message) {
           self.addMessage(message.userName, message.userMessage);
-          room.users[message.userId].speak(message.userName, message.userMessage);
-        });
-
-        socket.on('user join', function(user) {
-          room.add(new User( {id: user.id, name: user.name, avatar:'img/avatar01.png'}));
-        });
-
-        socket.on('user leave', function(user) {
-          debugInfo('user leave:' + user.id);
-          room.remove(new User({id: user.id}));
+          audience.users[message.userId].speak(message.userName, message.userMessage);
         });
     },
 
@@ -39,13 +32,13 @@ var chat = {
     },
 
     clearInput: function () {
-        this.inputMessage.val( '' );
+        this.inputUserMessage.val( '' );
     },
 
     bindEvents: function () {
         var that = this;
         
-        this.inputMessage.keydown(function ( event ) {
+        this.inputUserMessage.keydown(function ( event ) {
             var message = $( this ).val();
 
             if (event.keyCode === 13 && message) {
