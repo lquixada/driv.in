@@ -25,6 +25,11 @@ app = RoomsHelper.all(app);
 
 app.redisClient = redis.createClient( 6379, 'localhost');
 app.io = require('socket.io').listen(app);
+io.configure('production', function(){
+  io.enable('browser client minification');
+  io.set('log level', 1);
+});
+
 app.Timer = require('./lib/timer');
 app.Room = require('./lib/room');
 app.rooms = {
