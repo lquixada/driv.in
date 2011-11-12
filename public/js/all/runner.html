@@ -10,7 +10,6 @@
     <!-- dependencies -->
     <script src="/js/_libs/jasmine-1.1.0/jasmine.js"></script>
     <script src="/js/_libs/jasmine-1.1.0/jasmine-html.js"></script>
-    <script src="/js/_libs/jasmine-grid-reporter-0.1.js"></script>
     <script src="/js/_libs/jquery-1.6.2.min.js"></script>
 
     <!-- specs -->
@@ -19,11 +18,8 @@
 
 <body>
 
-<div id="main"></div>
-
 <script>
 jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-jasmine.getEnv().addReporter(new jasmine.GridReporter());
 jasmine.getEnv().execute();
 </script>
 

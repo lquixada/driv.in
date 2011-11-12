@@ -6,17 +6,15 @@ describe("Driv.in", function() {
         window.tests = { done: false, success: false };        
     });
 
-    afterEach(function() { 
-        $( 'div#main' ).html( '' );
+    afterEach(function() {
+        removeIframe();
     });
     
     for ( var i=0; i<runners.length; i++) {
         (function (runner) {
             describe( runner+' Runner', function() {
                 it("should have no errors", function() {
-                    var url = '/js/'+runner.toLowerCase()+'/runner.html';
-
-                    $( 'div#main' ).html( '<iframe src="'+url+'"></iframe>' );
+                    createIframe( '/js/'+runner.toLowerCase()+'/runner.html' );
 
                     waitsFor(function() {
                         return window.tests.done;
@@ -29,4 +27,19 @@ describe("Driv.in", function() {
             });
         })(runners[i]);
     };
-}); 
+});
+
+
+function createIframe( url ) {
+    var iframe = document.createElement( 'iframe' );
+
+    iframe.src = url;
+
+    document.body.insertBefore( iframe, document.body.firstChild );
+}
+
+
+function removeIframe() {
+    var iframe = document.getElementsByTagName( 'iframe' )[0];
+    iframe.parentNode.removeChild( iframe );
+}
