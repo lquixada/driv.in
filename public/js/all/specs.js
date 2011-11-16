@@ -1,6 +1,4 @@
 
-var runners = [ 'Player', 'Playlist', 'Audience', 'Chat', 'User', 'Channel', 'Logger' ];
-
 describe("Driv.in", function() {
     beforeEach(function() {
         window.tests = { done: false, success: false };        
@@ -10,25 +8,61 @@ describe("Driv.in", function() {
         removeIframe();
     });
     
-    for ( var i=0; i<runners.length; i++) {
-        (function (runner) {
-            describe( runner+' Runner', function() {
-                it("should have no errors", function() {
-                    createIframe( '/js/'+runner.toLowerCase()+'/runner.html' );
+    describe( 'Player Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Player' );
+        });
+    });
 
-                    waitsFor(function() {
-                        return window.tests.done;
-                    }, "Tests suite never never completed", 10000 );
+    describe( 'Playlist Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Playlist' );
+        });
+    });
 
-                    runs(function () {
-                        expect( window.tests.success ).toBe( true );
-                    });
-                });
-            });
-        })(runners[i]);
-    };
+    describe( 'Audience Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Audience' );
+        });
+    });
+
+    describe( 'Chat Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Chat' );
+        });
+    });
+
+    describe( 'User Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'User' );
+        });
+    });
+
+    describe( 'Channel Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Channel' );
+        });
+    });
+
+    describe( 'Logger Runner', function() {
+        it("should have no errors", function() {
+            testRunner( 'Logger' );
+        });
+    });
 });
 
+
+function testRunner(runner) {
+    createIframe( '/js/'+runner.toLowerCase()+'/runner.html' );
+
+    waitsFor(function() {
+        return window.tests.done;
+    }, "Tests suite never never completed", 10000 );
+
+    runs(function () {
+        expect( window.tests.success ).toBe( true );
+    });
+}
 
 function createIframe( url ) {
     var iframe = document.createElement( 'iframe' );
